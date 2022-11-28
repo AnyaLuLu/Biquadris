@@ -5,16 +5,12 @@
 
 class oBlock : public Block
 {
-    oBlock();
+    oBlock(const std::vector<std::vector<char>> &boardPtr);
     ~oBlock();
-    bool left() override;
-    bool right() override;
-    bool down() override;
     bool clockwise() override;
     bool counterClockwise() override;
-    bool drop() override;
     bool canCreate() override;
-    bool addBlock() override;
+    void addBlock() override;
 };
 
 #endif

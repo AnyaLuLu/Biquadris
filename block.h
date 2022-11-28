@@ -6,18 +6,19 @@
 class Block
 {
 protected:
-    std::vector<std::pair<int, int>> blockPos;
-    const std::vector<std::vector<char>> &boardPtr;
+    std::vector<std::pair<int, int>> blockPos;      // row, col
+    const std::vector<std::vector<char>> &boardPtr; // col row, since it is a vector of vectors
 
 public:
-    virtual bool left();
-    virtual bool right();
-    virtual bool down();
+    Block(const std::vector<std::vector<char>> &boardPtr);
+    bool left();
+    bool right();
+    bool down();
     virtual bool clockwise();
     virtual bool counterClockwise();
-    virtual bool drop();
+    bool drop();
     virtual bool canCreate();
-    virtual bool addBlock();
+    virtual void addBlock();
     virtual ~Block();
 };
 
