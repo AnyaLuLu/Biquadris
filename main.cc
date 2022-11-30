@@ -3,8 +3,8 @@
 #include <string>
 #include <vector>
 #include "board.h"
-#include "block.h"
-#include "level.h"
+#include "Blocks/block.h"
+#include "Levels/level.h"
 
 using namespace std;
 
