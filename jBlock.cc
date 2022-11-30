@@ -137,7 +137,7 @@ bool jBlock::clockwise()
     return true;
 };
 
-bool jBlock::clockwise()
+bool jBlock::counterClockwise()
 {
     // getting lower left corner
     int llcRow = blockPos[0].first;
@@ -283,7 +283,7 @@ bool jBlock::canCreate()
 {
     for (int i = 0; i < blockPos.size(); ++i)
     {
-        if (boardPtr.playingBoard[0][3] != ' ' || boardPtr.playingBoard[1][3] != ' ' || boardPtr.playingBoard[2][3] != ' ' || boardPtr.playingBoard[0][2] != ' ' ||)
+        if (boardPtr.playingBoard[0][3] != ' ' || boardPtr.playingBoard[1][3] != ' ' || boardPtr.playingBoard[2][3] != ' ' || boardPtr.playingBoard[0][2] != ' ')
         {
             return false;
         }
