@@ -101,6 +101,7 @@ int main (int argc, char *argv[]) {
         Op op = convertOp(command);
 
         switch( op ) {
+            /*
             case LEFT: 
 
                 break;
@@ -119,6 +120,7 @@ int main (int argc, char *argv[]) {
             case DROP: 
 
                 break;
+            */
             case LEVEL_UP: 
 
                 break;

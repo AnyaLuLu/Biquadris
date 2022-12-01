@@ -10,10 +10,15 @@ class Board{
     int width, height;
     bool blind, heavy, force;
     int score;
-    Level lvl;
+    Level* lvl;
+    string file;
+
+    int singleCount;
+    bool lost;
 
     protected:
-        char playingBoard [width] [height];
+        vector<vector<char>> playingBoard (height, vector<char> (width, ' '));
+
     
     private:
         int clearlines();
@@ -29,7 +34,7 @@ class Board{
         void levelup();
         void leveldown();
 
-        Board(int width, int height, int newLvl)();
+        Board(int width, int height, int newLvl, string file)();
 
 }
 
