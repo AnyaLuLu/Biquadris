@@ -14,7 +14,7 @@ Op convertOp(string opStr) {
     vector<string> commands = {left, right, down, clockwise, counterclockwise, drop, levelup, leveldown, norandom, random, block, restart, sequence};
 
     for (int i = 0; i < commands.size(); ++i) {
-        if (opStr == commands[i].substr(0, opStr.size())) {
+        if (opStr.size() <= commands[i].size() && opStr == commands[i].substr(0, opStr.size())) {
             return i;
         }
     }
@@ -23,31 +23,80 @@ Op convertOp(string opStr) {
 int main (int argc, char *argv[]) {
 
     size_t player1 = 1, player2 = 2;
-	size_t startingLevel = 0;
+	size_t startLevel = 0;
+    size_t maxLevel = 4;
 	size_t board1counter = 1, board2counter = 1;
 	size_t hiscore = 0;
-	string p1LevelZero = "sequence1.txt";
-	string p2LevelZero = "sequence2.txt";
+	string p1blocks = "sequence1.txt";
+	string p2blocks = "sequence2.txt";
+
+    // create boards, displays, etc. here
+
     bool graphicsOn = true;
 
     for (int i = 1; i < argc; i++) {
-        string cmd = argv[i];
-        if (cmd == "-text") {
+        string command = argv[i];
+        if (command == "-text") {
 		    graphicsOn = false;
+
         } else {
-			if (cmd != "-seed" && cmd != "-scriptfile1" && cmd != "-scriptfile2" && cmd != "-startlevel") {
-				cerr << "Error: Unknown Argument: " << cmd << endl;
+			if (command != "-seed" && command != "-scriptfile1" && command != "-scriptfile2" && command != "-startlevel") {
+				cerr << "Invalid Argument: " << command << endl;
 				return 1;
 			}
+
+            string extra = argv[i+1]
+            i += 1;
+
+            if (command == "-seed") {
+                try {
+                    srand(stoi(extra));
+                } catch (...) {
+                    cerr << "Invalid seed: " << extra << endl;
+                }
+
+            } else if (command == "-scriptfile1") {
+                ifstream testfile(extra);
+
+                if (!testfile.good()) {
+                    cerr << "Invalid file: " << extra << endl;
+                    return 1;
+                }
+
+                p1blocks = extra;
+
+            } else if (command == "-scriptfile2") {
+                ifstream testfile(extra);
+
+                if (!testfile.good()) {
+                    cerr << "Invalid file: " << extra << endl;
+                    return 1;
+                }
+
+                p2blocks = extra;
+
+            } else if (command == "-startlevel") {
+                try {
+                    startLevel = stoi(extra);
+                } catch (...) {
+                    cerr << "Invalid level (not an integer): " << extra << endl;
+                    return 1;
+                }
+
+                if (!(0 <= startLevel && startLevel <= maxLevel)) {
+                    cerr << "Invalid level (out of bounds): " << extra << endl;
+                    return 1;
+                }
+            } 
         }
     }
 
-    for (;;) {
+    while (true) {
         cerr << "Command: ";
         string command;
         cin >> command;
 
-      if ( cin.eof() ) break;
+        if ( cin.eof() ) break;
 
         Op op = convertOp(command);
 
