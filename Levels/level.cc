@@ -1,11 +1,11 @@
-#include level.h
+#include "level.h"
 #include <vector>
 #include <iostream>
 #include <string>
 #include <fstream>
 using namespace std;
 
-level : level(string file = "", bool random = false) : file{file}, random{random}{
+Level : Level(string file = "", bool random = false) : file{file}, random{random}{
     blockSequence = {};
 
     if(!random){
@@ -21,5 +21,3 @@ level : level(string file = "", bool random = false) : file{file}, random{random
         }
     }
 }
-
-void level : createlvl

@@ -1,9 +1,9 @@
-#ifndef BLOCK_H
-#define BLOCK_H
-#include <vector>
+#ifndef LEVEL_H
+#define LEVEL_H
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <vector>
 using namespace std;
 
 
@@ -14,8 +14,8 @@ class Level{
         vector <string> blockSequence;
     
     public:
-        virtual string blockType(bool isRandom) = 0;
-        level(string file = "", bool random = false);
+        virtual char blockType(bool isRandom) = 0;
+        Level(string file = "", bool random = false);
 
 }
 
