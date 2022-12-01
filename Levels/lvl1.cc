@@ -9,3 +9,5 @@ lvl1 : blockType(bool isRandom){
 
     return blockGen[index];
 }
+
+lvl1: int lvlNum(){return 1;}

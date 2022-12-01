@@ -14,8 +14,9 @@ class Level{
         vector <string> blockSequence;
     
     public:
-        virtual char blockType(bool isRandom) = 0;
         Level(string file = "", bool random = false);
+        virtual char blockType(bool isRandom) = 0;
+        virtual int lvlNum() = 0;
 
 }
 

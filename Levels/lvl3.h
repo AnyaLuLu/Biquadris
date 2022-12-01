@@ -7,6 +7,7 @@ using namespace std;
 
 class lvl3 : public Level{
     char blockType(bool isRandom) override;
+    int lvlNum();
 }
 
 

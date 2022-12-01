@@ -6,6 +6,7 @@ using namespace std;
 
 class lvl4 : public Level{
     char blockType(bool isRandom) override;
+    int lvlNum();
 }
 
 
