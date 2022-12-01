@@ -1,4 +1,4 @@
-#ifndef Lvl1_H
+#ifndef Lvl2_H
 #define Lvl1_H
 #include "level.h"
 using namespace std;
