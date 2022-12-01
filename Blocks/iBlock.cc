@@ -194,7 +194,7 @@ bool iBlock::canCreate()
 {
     for (int i = 0; i < blockPos.size(); ++i)
     {
-        if (boardPtr.playingBoard[0][3] != ' ' || boardPtr.playingBoard[1][3] != ' ' || boardPtr.playingBoard[2][3] != ' ' || boardPtr.playingBoard[3][3] != ' ' ||)
+        if (boardPtr.playingBoard[0][3] != ' ' || boardPtr.playingBoard[1][3] != ' ' || boardPtr.playingBoard[2][3] != ' ' || boardPtr.playingBoard[3][3] != ' ')
         {
             return false;
         }
