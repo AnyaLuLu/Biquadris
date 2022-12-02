@@ -172,6 +172,7 @@ void Block : newBlock(){
     else if(type == 't'){
         b = new tBlock(this);
     }
+    
     // notify observers here to change display
     if(!b.canCreate()){
         lost = true;
