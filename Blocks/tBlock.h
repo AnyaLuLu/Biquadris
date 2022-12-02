@@ -6,7 +6,7 @@
 class tBlock : public Block
 {
     public:
-    tBlock(const std::vector<std::vector<char>> &boardPtr);
+    tBlock(std::vector<std::vector<char>> &playingBoard);
     ~tBlock();
     bool clockwise() override;
     bool counterClockwise() override;

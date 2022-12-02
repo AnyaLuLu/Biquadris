@@ -6,7 +6,7 @@
 class oBlock : public Block
 {
     public:
-    oBlock(const std::vector<std::vector<char>> &boardPtr);
+    oBlock(std::vector<std::vector<char>> &playingBoard);
     ~oBlock();
     bool clockwise() override;
     bool counterClockwise() override;

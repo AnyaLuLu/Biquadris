@@ -5,13 +5,13 @@
 
 class iBlock : public Block
 {
-    public:
-        iBlock(const std::vector<std::vector<char>> &boardPtr);
-        ~iBlock();
-        bool clockwise() override;
-        bool counterClockwise() override;
-        bool canCreate() override;
-        void addBlock() override;
+public:
+    iBlock(std::vector<std::vector<char>> &playingBoard);
+    ~iBlock();
+    bool clockwise() override;
+    bool counterClockwise() override;
+    bool canCreate() override;
+    void addBlock() override;
 };
 
 #endif

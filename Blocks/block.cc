@@ -1,5 +1,5 @@
 #include "block.h"
-Block::Block(const std::vector<std::vector<char>> &boardPtr) : boardPtr(boardPtr){};
+Block::Block(std::vector<std::vector<char>> &playingBoard) : playingBoard(playingBoard){};
 
 Block::~Block(){};
 
@@ -10,7 +10,7 @@ bool Block::left()
     {
         int curcol = blockPos[i].first;
         int nextrow = blockPos[i].second - 1;
-        if (boardPtr.playingBoard[curcol][nextrow] != ' ')
+        if (playingBoard[curcol][nextrow] != ' ')
         {
             return false;
         }
@@ -34,7 +34,7 @@ bool Block::right()
     {
         int curcol = blockPos[i].first;
         int nextrow = blockPos[i].second + 1;
-        if (boardPtr.playingBoard[curcol][nextrow] != ' ')
+        if (playingBoard[curcol][nextrow] != ' ')
         {
             return false;
         }
@@ -58,7 +58,7 @@ bool Block::down()
     {
         int nextcol = blockPos[i].first + 1;
         int currow = blockPos[i].second;
-        if (boardPtr.playingBoard[nextcol][currow] != ' ')
+        if (playingBoard[nextcol][currow] != ' ')
         {
             return false;
         }
@@ -84,7 +84,7 @@ bool Block::drop()
         {
             int nextcol = blockPos[i].first + 1;
             int currow = blockPos[i].second;
-            if (boardPtr.playingBoard[nextcol][currow] != ' ')
+            if (playingBoard[nextcol][currow] != ' ')
             {
                 break;
             }
