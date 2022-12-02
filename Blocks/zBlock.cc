@@ -1,7 +1,7 @@
 #include "zBlock.h"
 using namespace std;
 
-zBlock::zBlock(const vector<vector<char>> &boardPtr) : Block(boardPtr)
+zBlock::zBlock(vector<vector<char>> &playingBoard) : Block(playingBoard)
 {
     blockPos = {pair(2, 0), pair(2, 1), pair(3, 1), pair(3, 2)}; // starts on row 3 cuz the rows 0-2 are reserve rows
 };
@@ -36,14 +36,14 @@ bool zBlock::clockwise()
     // checking if it can be rotated. note that playingboard is col, row since it is a vector of vectors
     if (isVert)
     {
-        if (boardPtr.playingBoard[llcCol + 1][llcRow] != ' ' || boardPtr.playingBoard[llcCol + 2][llcRow] != ' ')
+        if (playingBoard[llcCol + 1][llcRow] != ' ' || playingBoard[llcCol + 2][llcRow] != ' ')
         {
             return false;
         }
     }
     else
     {
-        if (boardPtr.playingBoard[llcCol][llcRow] != ' ' || boardPtr.playingBoard[llcCol + 1][llcRow - 2] != ' ')
+        if (playingBoard[llcCol][llcRow] != ' ' || playingBoard[llcCol + 1][llcRow - 2] != ' ')
         {
             return false;
         }
@@ -144,14 +144,14 @@ bool zBlock::counterClockwise() // code is the exact same as clockwise cuz it do
     // checking if it can be rotated. note that playingboard is col, row since it is a vector of vectors
     if (isVert)
     {
-        if (boardPtr.playingBoard[llcCol + 1][llcRow] != ' ' || boardPtr.playingBoard[llcCol + 2][llcRow] != ' ')
+        if (playingBoard[llcCol + 1][llcRow] != ' ' || playingBoard[llcCol + 2][llcRow] != ' ')
         {
             return false;
         }
     }
     else
     {
-        if (boardPtr.playingBoard[llcCol][llcRow] != ' ' || boardPtr.playingBoard[llcCol + 1][llcRow - 2] != ' ')
+        if (playingBoard[llcCol][llcRow] != ' ' || playingBoard[llcCol + 1][llcRow - 2] != ' ')
         {
             return false;
         }
@@ -228,14 +228,14 @@ void zBlock::addBlock()
     {
         int row = blockPos[i].first;
         int col = blockPos[i].second;
-        boardPtr.playingBoard[col][row] = 'Z';
+        playingBoard[col][row] = 'Z';
     }
 };
 bool zBlock::canCreate()
 {
     for (int i = 0; i < blockPos.size(); ++i)
     {
-        if (boardPtr.playingBoard[0][2] != ' ' || boardPtr.playingBoard[1][2] != ' ' || boardPtr.playingBoard[1][3] != ' ' || boardPtr.playingBoard[2][3] != ' ')
+        if (playingBoard[0][2] != ' ' || playingBoard[1][2] != ' ' || playingBoard[1][3] != ' ' || playingBoard[2][3] != ' ')
         {
             return false;
         }

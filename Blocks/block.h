@@ -7,10 +7,10 @@ class Block
 {
 protected:
     std::vector<std::pair<int, int>> blockPos;      // row, col
-    const std::vector<std::vector<char>> &boardPtr; // col row, since it is a vector of vectors
+    std::vector<std::vector<char>> &playingBoard; // col row, since it is a vector of vectors
 
 public:
-    Block(const std::vector<std::vector<char>> &boardPtr);
+    Block(std::vector<std::vector<char>> &playingBoard);
     bool left();
     bool right();
     bool down();

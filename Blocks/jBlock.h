@@ -7,7 +7,7 @@ class jBlock : public Block
 {
     public:
     
-    jBlock(const std::vector<std::vector<char>> &boardPtr);
+    jBlock(std::vector<std::vector<char>> &playingBoard);
     ~jBlock();
     bool clockwise() override;
     bool counterClockwise() override;

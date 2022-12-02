@@ -1,7 +1,7 @@
 #include "jBlock.h"
 using namespace std;
 
-jBlock::jBlock(const vector<vector<char>> &boardPtr) : Block(boardPtr)
+jBlock::jBlock(vector<vector<char>> &playingBoard) : Block(playingBoard)
 {
     blockPos = {pair(3, 0), pair(2, 0), pair(3, 1), pair(3, 2)}; // starts on row 3 cuz the rows 0-2 are reserve rows
 };
@@ -45,28 +45,28 @@ bool jBlock::clockwise()
     // checking if it can be rotated. note that playingboard is col, row since it is a vector of vectors
     if (isVert && topCorn)
     {
-        if (boardPtr.playingBoard[llcCol + 1][llcRow - 1] != ' ' || boardPtr.playingBoard[llcCol + 2][llcRow - 1] != ' ' || boardPtr.playingBoard[llcCol + 2][llcRow] != ' ')
+        if (playingBoard[llcCol + 1][llcRow - 1] != ' ' || playingBoard[llcCol + 2][llcRow - 1] != ' ' || playingBoard[llcCol + 2][llcRow] != ' ')
         {
             return false;
         }
     }
     else if (isVert && !topCorn)
     {
-        if (boardPtr.playingBoard[llcCol][llcRow - 1] != ' ' || boardPtr.playingBoard[llcCol + 2][llcRow] != ' ')
+        if (playingBoard[llcCol][llcRow - 1] != ' ' || playingBoard[llcCol + 2][llcRow] != ' ')
         {
             return false;
         }
     }
     else if (!isVert && topCorn)
     {
-        if (boardPtr.playingBoard[llcCol][llcRow - 2] != ' ' || boardPtr.playingBoard[llcCol + 1][llcRow - 2] != ' ')
+        if (playingBoard[llcCol][llcRow - 2] != ' ' || playingBoard[llcCol + 1][llcRow - 2] != ' ')
         {
             return false;
         }
     }
     else if (!isVert && !topCorn)
     {
-        if (boardPtr.playingBoard[llcCol][llcRow] != ' ' || boardPtr.playingBoard[llcCol + 1][llcRow] != ' ' || boardPtr.playingBoard[llcCol + 1][llcRow - 2] != ' ')
+        if (playingBoard[llcCol][llcRow] != ' ' || playingBoard[llcCol + 1][llcRow] != ' ' || playingBoard[llcCol + 1][llcRow - 2] != ' ')
         {
             return false;
         }
@@ -176,28 +176,28 @@ bool jBlock::counterClockwise()
     // checking if it can be rotated. note that playingboard is col, row since it is a vector of vectors
     if (isVert && topCorn)
     {
-        if (boardPtr.playingBoard[llcCol + 1][llcRow] != ' ' || boardPtr.playingBoard[llcCol + 2][llcRow] != ' ')
+        if (playingBoard[llcCol + 1][llcRow] != ' ' || playingBoard[llcCol + 2][llcRow] != ' ')
         {
             return false;
         }
     }
     else if (isVert && !topCorn)
     {
-        if (boardPtr.playingBoard[llcCol][llcRow - 1] != ' ' || boardPtr.playingBoard[llcCol + 2][llcRow] != ' ' || boardPtr.playingBoard[llcCol + 2][llcRow - 1] != ' ')
+        if (playingBoard[llcCol][llcRow - 1] != ' ' || playingBoard[llcCol + 2][llcRow] != ' ' || playingBoard[llcCol + 2][llcRow - 1] != ' ')
         {
             return false;
         }
     }
     else if (!isVert && topCorn)
     {
-        if (boardPtr.playingBoard[llcCol][llcRow] != ' ' || boardPtr.playingBoard[llcCol][llcRow - 2] != ' ' || boardPtr.playingBoard[llcCol + 1][llcRow - 2] != ' ')
+        if (playingBoard[llcCol][llcRow] != ' ' || playingBoard[llcCol][llcRow - 2] != ' ' || playingBoard[llcCol + 1][llcRow - 2] != ' ')
         {
             return false;
         }
     }
     else if (!isVert && !topCorn)
     {
-        if (boardPtr.playingBoard[llcCol + 1][llcRow = 1] != ' ' || boardPtr.playingBoard[llcCol + 1][llcRow - 2] != ' ')
+        if (playingBoard[llcCol + 1][llcRow = 1] != ' ' || playingBoard[llcCol + 1][llcRow - 2] != ' ')
         {
             return false;
         }
@@ -276,14 +276,14 @@ void jBlock::addBlock()
     {
         int row = blockPos[i].first;
         int col = blockPos[i].second;
-        boardPtr.playingBoard[col][row] = 'J';
+        playingBoard[col][row] = 'J';
     }
 };
 bool jBlock::canCreate()
 {
     for (int i = 0; i < blockPos.size(); ++i)
     {
-        if (boardPtr.playingBoard[0][3] != ' ' || boardPtr.playingBoard[1][3] != ' ' || boardPtr.playingBoard[2][3] != ' ' || boardPtr.playingBoard[0][2] != ' ')
+        if (playingBoard[0][3] != ' ' || playingBoard[1][3] != ' ' || playingBoard[2][3] != ' ' || playingBoard[0][2] != ' ')
         {
             return false;
         }

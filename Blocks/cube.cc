@@ -1,6 +1,6 @@
 #include "cube.h"
 
-cube::cube(const std::vector<std::vector<char>> &boardPtr) : boardPtr(boardPtr){};
+cube::cube(std::vector<std::vector<char>> &playingBoard) : playingBoard(playingBoard){};
 
 cube::~cube(){};
 
@@ -10,7 +10,7 @@ bool cube::drop()
     {
         int nextcol = blockPos[0].first + 1;
         int currow = blockPos[0].second;
-        if (boardPtr.playingBoard[nextcol][currow] != ' ')
+        if (playingBoard[nextcol][currow] != ' ')
         {
             break;
         }
@@ -25,7 +25,7 @@ bool cube::drop()
 
 bool cube::canCreate()
 {
-    if (boardPtr.playingBoard[8][3] != ' ')
+    if (playingBoard[8][3] != ' ')
     {
         return false;
     }
@@ -36,5 +36,5 @@ void cube::addBlock()
 {
     int row = blockPos[0].first;
     int col = blockPos[0].second;
-    boardPtr.playingBoard[col][row] = '*';
+    playingBoard[col][row] = '*';
 };

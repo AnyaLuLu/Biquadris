@@ -6,7 +6,7 @@
 class zBlock : public Block
 {
     public:
-    zBlock(const std::vector<std::vector<char>> &boardPtr);
+    zBlock(std::vector<std::vector<char>> &playingBoard);
     ~zBlock();
     bool clockwise() override;
     bool counterClockwise() override;
