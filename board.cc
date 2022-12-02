@@ -51,7 +51,7 @@ Op convertOp(string opStr)
 
 } // convertOp
 
-Board :: Board(int width, int height, int newLvl, string file, vector<vector<char>> playingBoard) : width{width}, height{height}, blind{false}, heavy{false}, force{false}, score{0}, file{file}, singleCount{0}, lost{false}, playingBoard{playingBoard}
+Board :: Board(int width, int height, int newLvl, string file, vector<vector<char>> playingBoard) : width{width}, height{height}, blind{false}, heavy{false}, force{false}, score{0}, file{file}, singleCount{0}, lost{false}, playingBoard{playingBoard}, playingBlocks{}
 {
     if (newLvl <= 0)
     {
@@ -90,11 +90,15 @@ Board :: Board(int width, int height, int newLvl, string file, vector<vector<cha
         heavy = true;
     }
 }
+int Board ::getScore() { return score; };
 
 bool Board ::getBlind() { return blind; };
 bool Board ::getForce() { return force; };
-bool Board::getHeavy() { return heavy; };
-int Board ::getScore() { return score; };
+bool Board :: getHeavy() { return heavy; };
+void Board :: setBlind(bool set){blind = set;}
+void Board :: setForce(bool set){force = set;}
+void Board :: setHeavy(bool set){heavy = set;}
+
 
 bool Board ::checkLose()
 {

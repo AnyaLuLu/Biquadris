@@ -21,6 +21,7 @@ class Board : public Subject{
 
     public:
         vector<vector<char>> playingBoard;
+        vector<Block> playingBlocks;
         // Should be vector<vector<char>> playingBoard (height, vector<char> (width, ' '))
 
     
@@ -30,11 +31,15 @@ class Board : public Subject{
     public:
         Board (int width, int height, int newLvl, string file, vector<vector<char>> playingBoard);
         void newBlock();
+        int getScore();
+        bool checkLose();
+
         bool getBlind();
         bool getHeavy();
         bool getForce();
-        int getScore();
-        bool checkLose();
+        void setBlind(bool set);
+        void setHeavy(bool set);
+        void setForce(bool set);
 
         void levelup();
         void leveldown();
