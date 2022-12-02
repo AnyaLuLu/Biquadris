@@ -29,12 +29,14 @@ Op convertOp(string opStr) {
             return i;
         }
     }
+
+    
 } // convertOp
 
 
 
 
-Board : Board(int width, int height, int newLvl, string file)() : width{width}, height{height}, blind{false}, heavy{false}, force{false}, score{0}, file{file}, singleCount{0}, lost{false}{
+Board : Board(int width, int height, int newLvl, string file, vector<vector<char>> playingBoard)() : width{width}, height{height}, blind{false}, heavy{false}, force{false}, score{0}, file{file}, singleCount{0}, lost{false}, playingBoard{playingBoard}{
     if(newLvl <= 0){
         lvl = new lvl0{file, false};
     }

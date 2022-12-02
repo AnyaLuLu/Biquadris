@@ -19,13 +19,15 @@ class Board{
     bool lost;
 
     protected:
-        vector<vector<char>> playingBoard (height, vector<char> (width, ' '));
+        vector<vector<char>> playingBoard;
+        // Should be vector<vector<char>> playingBoard (height, vector<char> (width, ' '))
 
     
     private:
         int clearlines();
     
     public:
+        Board (int width, int height, int newLvl, string file, vector<vector<char>> playingBoard);
         void newBlock();
         bool getBlind();
         bool getHeavy();
@@ -35,8 +37,6 @@ class Board{
 
         void levelup();
         void leveldown();
-
-        Board(int width, int height, int newLvl, string file)();
 
 };
 
