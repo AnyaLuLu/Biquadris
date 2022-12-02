@@ -36,6 +36,6 @@ class Board{
 
         Board(int width, int height, int newLvl, string file)();
 
-}
+};
 
 #endif
