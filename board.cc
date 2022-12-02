@@ -45,7 +45,7 @@ Op convertOp(string opStr)
     {
         if (opStr.size() <= commands[i].size() && opStr == commands[i].substr(0, opStr.size()))
         {
-            return i;
+            return Op(i);
         }
     }
 
