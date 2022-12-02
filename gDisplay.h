@@ -7,7 +7,7 @@
 
 class GDisplay : public Observer
 {
-    Board *myStudio;
+    Board *myBoard;
     Xwindow *myXwindow;
 
 public:

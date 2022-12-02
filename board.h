@@ -6,9 +6,10 @@
 #include <vector>
 #include "Levels/level.h"
 #include "Blocks/block.h"
+#include "subject.h"
 using namespace std;
 
-class Board{
+class Board : public Subject{
     int width, height;
     bool blind, heavy, force;
     int score;
@@ -38,6 +39,10 @@ class Board{
         void levelup();
         void leveldown();
 
+        int getWidth();
+        int getHeight();
+
+        char getState(int row, int col) const override;
 };
 
 #endif

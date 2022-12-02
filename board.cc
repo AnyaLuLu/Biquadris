@@ -20,88 +20,124 @@
 #include <vector>
 using namespace std;
 
-enum Op {LEFT, RIGHT, DOWN, CLOCKWISE, COUNTERCLOCKWISE, DROP, LEVEL_UP, LEVEL_DOWN, NO_RANDOM, RANDOM, BLOCK, RESTART, SEQUENCE};
+enum Op
+{
+    LEFT,
+    RIGHT,
+    DOWN,
+    CLOCKWISE,
+    COUNTERCLOCKWISE,
+    DROP,
+    LEVEL_UP,
+    LEVEL_DOWN,
+    NO_RANDOM,
+    RANDOM,
+    BLOCK,
+    RESTART,
+    SEQUENCE
+};
 
-Op convertOp(string opStr) {
+Op convertOp(string opStr)
+{
     vector<string> commands = {"left", "right", "down", "clockwise", "counterclockwise", "drop", "levelup", "leveldown", "norandom", "random", "block", "restart", "sequence"};
 
-    for (int i = 0; i < commands.size(); ++i) {
-        if (opStr.size() <= commands[i].size() && opStr == commands[i].substr(0, opStr.size())) {
+    for (int i = 0; i < commands.size(); ++i)
+    {
+        if (opStr.size() <= commands[i].size() && opStr == commands[i].substr(0, opStr.size()))
+        {
             return i;
         }
     }
 
-    
 } // convertOp
 
-
-
-
-Board : Board(int width, int height, int newLvl, string file, vector<vector<char>> playingBoard)() : width{width}, height{height}, blind{false}, heavy{false}, force{false}, score{0}, file{file}, singleCount{0}, lost{false}, playingBoard{playingBoard}{
-    if(newLvl <= 0){
+Board : Board(int width, int height, int newLvl, string file, vector<vector<char>> playingBoard)() : width{width}, height{height}, blind{false}, heavy{false}, force{false}, score{0}, file{file}, singleCount{0}, lost{false}, playingBoard{playingBoard}
+{
+    if (newLvl <= 0)
+    {
         lvl = new lvl0{file, false};
     }
-    else if(newLvl == 1){
+    else if (newLvl == 1)
+    {
         lvl = new lvl1{true};
     }
-    else if(newLvl == 2){
+    else if (newLvl == 2)
+    {
         lvl = new lvl2{true};
     }
-    else if(newLvl == 3){
-        if(file == ""){
+    else if (newLvl == 3)
+    {
+        if (file == "")
+        {
             lvl = new lvl3{true};
         }
-        else{
+        else
+        {
             lvl = new lvl3{file, false};
         }
     }
-    else{
-        if(file == ""){
+    else
+    {
+        if (file == "")
+        {
             lvl = new lvl4{true};
         }
-        else{
+        else
+        {
             lvl = new lvl4{file, false};
         }
     }
 }
 
+bool Board ::getBlind() { return blind; };
+bool Board ::getForce() { return force; };
+bool Board::getHeavy() { return heavy; };
+int Board ::getScore() { return score; };
 
-bool Board :: getBlind(){return blind;};
-bool Board :: getForce(){return force;};
-bool Board:: getHeavy(){return heavy;};
-int Board :: getScore(){return score;};
+bool Board ::checkLose()
+{
+    if (lost)
+    {
+        return true
+    };
 
-bool Board :: checkLose(){
-    if(lost){return true};
-
-    for(int i = 0; i < width; i++){
-        if(playingBoard[0][i] != ' '){
+    for (int i = 0; i < width; i++)
+    {
+        if (playingBoard[0][i] != ' ')
+        {
             return true;
         }
     }
-
 };
 
-void Board :: leveldown(){
-    Level* tmp;
-    if(lvl -> lvlNum() == 0){
+void Board ::leveldown()
+{
+    Level *tmp;
+    if (lvl->lvlNum() == 0)
+    {
         cout << "Minimum level is 0, you cannot go any lower";
         return;
     }
-    else if(lvl -> lvlNum() == 1){
+    else if (lvl->lvlNum() == 1)
+    {
         tmp = new lvl0{file, false};
     }
-    else if(lvl -> lvlNum() == 2){
+    else if (lvl->lvlNum() == 2)
+    {
         tmp = new lvl1{true};
     }
-    else if(lvl -> lvlNum() == 3){
+    else if (lvl->lvlNum() == 3)
+    {
         tmp = new lvl2{true};
     }
-    else if(lvl -> lvlNum() == 4){
-        if(file == ""){
+    else if (lvl->lvlNum() == 4)
+    {
+        if (file == "")
+        {
             tmp = new lvl3{true};
         }
-        else{
+        else
+        {
             tmp = new lvl3{file, false};
         }
     }
@@ -110,35 +146,44 @@ void Board :: leveldown(){
     delete tmp;
 }
 
-
-void Board :: levelup(){
-    Level* tmp;
-    if(lvl -> lvlNum() == 4){
+void Board ::levelup()
+{
+    Level *tmp;
+    if (lvl->lvlNum() == 4)
+    {
         cout << "Max level is 4, you cannot go any higher";
         return;
     }
-    else if(lvl -> lvlNum() == 0){
+    else if (lvl->lvlNum() == 0)
+    {
         tmp = new lvl1{true};
     }
-    else if(lvl -> lvlNum() == 1){
-        Level* tmp = new lvl2{true};
+    else if (lvl->lvlNum() == 1)
+    {
+        Level *tmp = new lvl2{true};
     }
-    else if(lvl -> lvlNum() == 2){
-        Level* tmp;
-        if(file == ""){
-            Level* tmp = new lvl3{true};
+    else if (lvl->lvlNum() == 2)
+    {
+        Level *tmp;
+        if (file == "")
+        {
+            Level *tmp = new lvl3{true};
         }
-        else{
-            Level* tmp = new lvl3{file, false};
+        else
+        {
+            Level *tmp = new lvl3{file, false};
         }
     }
-    else{
-        Level* tmp;
-        if(file == ""){
-            Level* tmp = new lvl4{true};
+    else
+    {
+        Level *tmp;
+        if (file == "")
+        {
+            Level *tmp = new lvl4{true};
         }
-        else{
-            Level* tmp = new lvl4{file, false};
+        else
+        {
+            Level *tmp = new lvl4{file, false};
         }
     }
 
@@ -146,40 +191,50 @@ void Board :: levelup(){
     delete tmp;
 }
 
-void Block :: newBlock(){
+void Block ::newBlock()
+{
     char type = lvl.blockType();
     Block *b;
 
-    if(singleCount % 5 == 0 && singleCount != 0){
+    if (singleCount % 5 == 0 && singleCount != 0)
+    {
         b = new cube(this); // ig we need a new block to be *
-        b -> drop();
+        b->drop();
         // notify observers here to change display
         delete b;
     }
-    else if(type == 'i'){
+    else if (type == 'i')
+    {
         b = new iBlock(this);
     }
-    else if(type == 'j'){
+    else if (type == 'j')
+    {
         b = new jBlock(this);
     }
-    else if(type == 'l'){
+    else if (type == 'l')
+    {
         b = new lBlock(this);
     }
-    else if(type == 'o'){
+    else if (type == 'o')
+    {
         b = new oBlock(this);
     }
-    else if(type == 's'){
+    else if (type == 's')
+    {
         b = new sBlock(this);
     }
-    else if(type == 'z'){
+    else if (type == 'z')
+    {
         b = new zBlock(this);
     }
-    else if(type == 't'){
+    else if (type == 't')
+    {
         b = new tBlock(this);
     }
-    
+
     // notify observers here to change display
-    if(!b.canCreate()){
+    if (!b.canCreate())
+    {
         lost = true;
         return;
     }
@@ -187,29 +242,30 @@ void Block :: newBlock(){
     cout << "Command: ";
     string command;
 
-    while(cin >> command){
+    while (cin >> command)
+    {
         Op op = convertOp(command);
 
-        switch( op ) {
-            case LEFT: 
-                b -> left();
-                break;
-            case RIGHT:
-                b -> right();
-            	break;
-            case DOWN: 
-                b -> down();
-                break;
-            case CLOCKWISE: 
-                b -> clockwise();
-                break;				
-            case COUNTERCLOCKWISE:
-                b -> counterClockwise();
-                break;
-            case DROP: 
-                b -> drop();
-                break;
-            
+        switch (op)
+        {
+        case LEFT:
+            b->left();
+            break;
+        case RIGHT:
+            b->right();
+            break;
+        case DOWN:
+            b->down();
+            break;
+        case CLOCKWISE:
+            b->clockwise();
+            break;
+        case COUNTERCLOCKWISE:
+            b->counterClockwise();
+            break;
+        case DROP:
+            b->drop();
+            break;
         }
         // notify observers here to change display
         // does block mutate playingBoard as it moves?
@@ -218,19 +274,23 @@ void Block :: newBlock(){
     delete b;
 }
 
-
-int Board :: clearlines(){
+int Board ::clearlines()
+{
     int clearedlines = 0;
 
-    for(int i = 0; i < height; i++){
+    for (int i = 0; i < height; i++)
+    {
         bool fullLine = true;
-        for(int j = 0; j < width; j++){
-            if(playingBoard[i][j] == ' '){
+        for (int j = 0; j < width; j++)
+        {
+            if (playingBoard[i][j] == ' ')
+            {
                 fullLine = false;
             }
         }
 
-        if(lineclear){
+        if (lineclear)
+        {
             clearedlines++;
             playingBoard.erase(i);
             vector<char> blankLine(width, ' ');
@@ -239,4 +299,18 @@ int Board :: clearlines(){
             // notify observers to change display
         }
     }
+}
+
+int Board::getWidth()
+{
+    return width;
+};
+int Board::getHeight()
+{
+    return height;
+};
+
+char Board::getState(int row, int col) const
+{
+    return playingBoard[col][row];
 }
