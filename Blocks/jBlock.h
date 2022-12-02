@@ -5,6 +5,8 @@
 
 class jBlock : public Block
 {
+    public:
+    
     jBlock(const std::vector<std::vector<char>> &boardPtr);
     ~jBlock();
     bool clockwise() override;

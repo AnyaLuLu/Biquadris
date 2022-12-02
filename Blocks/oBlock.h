@@ -5,6 +5,7 @@
 
 class oBlock : public Block
 {
+    public:
     oBlock(const std::vector<std::vector<char>> &boardPtr);
     ~oBlock();
     bool clockwise() override;

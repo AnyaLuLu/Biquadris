@@ -19,7 +19,7 @@ class Board : public Subject{
     int singleCount;
     bool lost;
 
-    protected:
+    public:
         vector<vector<char>> playingBoard;
         // Should be vector<vector<char>> playingBoard (height, vector<char> (width, ' '))
 

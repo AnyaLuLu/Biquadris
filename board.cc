@@ -51,7 +51,7 @@ Op convertOp(string opStr)
 
 } // convertOp
 
-Board : Board(int width, int height, int newLvl, string file, vector<vector<char>> playingBoard)() : width{width}, height{height}, blind{false}, heavy{false}, force{false}, score{0}, file{file}, singleCount{0}, lost{false}, playingBoard{playingBoard}
+Board :: Board(int width, int height, int newLvl, string file, vector<vector<char>> playingBoard) : width{width}, height{height}, blind{false}, heavy{false}, force{false}, score{0}, file{file}, singleCount{0}, lost{false}, playingBoard{playingBoard}
 {
     if (newLvl <= 0)
     {
@@ -73,8 +73,9 @@ Board : Board(int width, int height, int newLvl, string file, vector<vector<char
         }
         else
         {
-            lvl = new lvl3{file, false};
+            lvl = new lvl3{false, file};
         }
+        heavy = true;
     }
     else
     {
@@ -84,8 +85,9 @@ Board : Board(int width, int height, int newLvl, string file, vector<vector<char
         }
         else
         {
-            lvl = new lvl4{file, false};
+            lvl = new lvl4{false, file};
         }
+        heavy = true;
     }
 }
 
@@ -98,16 +100,17 @@ bool Board ::checkLose()
 {
     if (lost)
     {
-        return true
-    };
+        return true;
+    }
 
     for (int i = 0; i < width; i++)
     {
-        if (playingBoard[0][i] != ' ')
+        if (playingBoard[2][i] != ' ')
         {
             return true;
         }
     }
+    return false;
 };
 
 void Board ::leveldown()
@@ -187,9 +190,17 @@ void Board ::levelup()
     delete tmp;
 }
 
-void Block ::newBlock()
+void Board :: newBlock()
 {
-    char type = lvl.blockType();
+    char type;
+
+    if(file == ""){
+        type = lvl -> blockType(true);
+    }
+    else{
+        type = lvl -> blockType(false);
+    }
+    
     Block *b;
 
     if(singleCount % 5 == 0 && singleCount != 0){
@@ -200,31 +211,31 @@ void Block ::newBlock()
     }
     else if (type == 'i')
     {
-        b = new iBlock(this);
+        b = new iBlock(playingBoard);
     }
     else if (type == 'j')
     {
-        b = new jBlock(this);
+        b = new jBlock(playingBoard);
     }
     else if (type == 'l')
     {
-        b = new lBlock(this);
+        b = new lBlock(playingBoard);
     }
     else if (type == 'o')
     {
-        b = new oBlock(this);
+        b = new oBlock(playingBoard);
     }
     else if (type == 's')
     {
-        b = new sBlock(this);
+        b = new sBlock(playingBoard);
     }
     else if (type == 'z')
     {
-        b = new zBlock(this);
+        b = new zBlock(playingBoard);
     }
     else if (type == 't')
     {
-        b = new tBlock(this);
+        b = new tBlock(playingBoard);
     }
 
     // notify observers here to change display
@@ -266,10 +277,12 @@ void Block ::newBlock()
     }
 
     delete b;
+    
 }
 
 int Board ::clearlines()
 {
+        // change score
     int clearedlines = 0;
 
     for (int i = 0; i < height; i++)
@@ -285,9 +298,9 @@ int Board ::clearlines()
 
         if(fullLine){
             clearedlines++;
-            playingBoard.erase(i);
+            playingBoard.erase(playingBoard.begin() + (i - 1));
             vector<char> blankLine(width, ' ');
-            playingBoard.push_front(blankLine);
+            playingBoard.insert(playingBoard.begin(), blankLine);
 
             // notify observers to change display
         }

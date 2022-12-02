@@ -33,14 +33,14 @@ bool iBlock::clockwise()
     // checking if it can be rotated. note that playingboard is col, row since it is a vector of vectors
     if (isVert)
     {
-        if (boardPtr.playingBoard[llcCol + 1][llcRow] != ' ' || boardPtr.playingBoard[llcCol + 2][llcRow] != ' ' || boardPtr.playingBoard[llcCol + 3][llcRow] != ' ')
+        if (boardPtr[llcCol + 1][llcRow] != ' ' || boardPtr[llcCol + 2][llcRow] != ' ' || boardPtr[llcCol + 3][llcRow] != ' ')
         {
             return false;
         }
     }
     else
     {
-        if (boardPtr.playingBoard[llcCol][llcRow - 1] != ' ' || boardPtr.playingBoard[llcCol][llcRow - 2] != ' ' || boardPtr.playingBoard[llcCol][llcRow + 3] != ' ')
+        if (boardPtr[llcCol][llcRow - 1] != ' ' || boardPtr[llcCol][llcRow - 2] != ' ' || boardPtr[llcCol][llcRow + 3] != ' ')
         {
             return false;
         }
@@ -124,7 +124,7 @@ bool iBlock::counterClockwise()
     // checking if it can be rotated. note that playingboard is col, row since it is a vector of vectors
     if (isVert)
     {
-        if (boardPtr.playingBoard[llcCol + 1][llcRow + 1] != ' ' || boardPtr.playingBoard[llcCol + 2][llcRow + 2] != ' ' || boardPtr.playingBoard[llcCol + 3][llcRow + 3] != ' ')
+        if (boardPtr[llcCol + 1][llcRow + 1] != ' ' || boardPtr[llcCol + 2][llcRow + 2] != ' ' || boardPtr[llcCol + 3][llcRow + 3] != ' ')
         {
             return false;
         }
@@ -187,14 +187,14 @@ void iBlock::addBlock()
     {
         int row = blockPos[i].first;
         int col = blockPos[i].second;
-        boardPtr.playingBoard[col][row] = 'I';
+        boardPtr[col][row] = 'I';
     }
 };
 bool iBlock::canCreate()
 {
     for (int i = 0; i < blockPos.size(); ++i)
     {
-        if (boardPtr.playingBoard[0][3] != ' ' || boardPtr.playingBoard[1][3] != ' ' || boardPtr.playingBoard[2][3] != ' ' || boardPtr.playingBoard[3][3] != ' ')
+        if (boardPtr[0][3] != ' ' || boardPtr[1][3] != ' ' || boardPtr[2][3] != ' ' || boardPtr[3][3] != ' ')
         {
             return false;
         }

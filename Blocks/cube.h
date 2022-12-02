@@ -3,7 +3,7 @@
 
 #include <vector>
 
-class cube
+class cube : public Block
 {
 private:
     std::vector<std::pair<int, int>> blockPos;      // row, col

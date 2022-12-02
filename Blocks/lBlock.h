@@ -5,6 +5,7 @@
 
 class lBlock : public Block
 {
+    public:
     lBlock(const std::vector<std::vector<char>> &boardPtr);
     ~lBlock();
     bool clockwise() override;
