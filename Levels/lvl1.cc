@@ -2,7 +2,7 @@
 #include <time.h>
 using namespace std;
 
-lvl1 : blockType(bool isRandom){
+char lvl1 :: blockType(bool isRandom){
     char blockGen[12] = {'i', 'i', 'j', 'j', 'l', 'l', 'o', 'o', 's', 'z', 't', 't'};
     srand (time(NULL));
     int index = rand() % 12;
@@ -10,4 +10,6 @@ lvl1 : blockType(bool isRandom){
     return blockGen[index];
 }
 
-lvl1: int lvlNum(){return 1;}
+int lvl1 :: lvlNum(){return 1;}
+
+lvl1 :: lvl1 (bool isRandom = true) : Level(isRandom){};

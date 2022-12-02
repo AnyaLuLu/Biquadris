@@ -5,14 +5,14 @@
 #include <fstream>
 using namespace std;
 
-Level : Level(string file = "", bool random = false) : file{file}, random{random}{
+Level :: Level(bool random = false, string file = "") : random{random}, file{file}{
     blockSequence = {};
 
     if(!random){
         ifstream myfile;
         myfile.open(file);
 
-        string newBlock;
+        char newBlock;
         if(myfile.is_open()){
             while(myfile.good()){
                 myfile >> newBlock;

@@ -8,17 +8,17 @@ using namespace std;
 
 
 class Level{
-    string file;
     bool random;
+    string file;
     protected:
-        vector <string> blockSequence;
+        vector <char> blockSequence;
     
     public:
-        Level(string file = "", bool random = false);
+        Level(bool random = false, string file = "");
         virtual char blockType(bool isRandom) = 0;
         virtual int lvlNum() = 0;
 
-}
+};
 
 
 #endif

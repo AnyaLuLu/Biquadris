@@ -1,18 +1,21 @@
-#include "lvl3.h"
+#include "lvl0.h"
 #include <time.h>
 #include <vector>
+#include <string>
 using namespace std;
 
-lvl3 : blockType(bool isRandom){
+char lvl0 :: blockType(bool isRandom){
     if(!isRandom){
         if(blockSequence.size() > 0){
             char b = blockSequence[0];
-            blockSequence.erase(0);
+            blockSequence.erase(blockSequence.begin());
             return b;
         }
     }
-    return '';
+    return ' ';
 }
 
-lvl1 : int lvlNum(){return 0};
+int lvl0 :: lvlNum(){return 0;};
+
+lvl0 :: lvl0 (string file, bool isRandom = false) : Level(isRandom, file){};
     
