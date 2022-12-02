@@ -3,7 +3,7 @@
 #include <vector>
 using namespace std;
 
-lvl4 : blockType(bool isRandom){
+char lvl4 :: blockType(bool isRandom){
     if(isRandom){
         char blockGen[9] = {'i', 'j', 'l', 'o', 's', 's', 'z', 'z', 't'};
         srand (time(NULL));
@@ -14,11 +14,13 @@ lvl4 : blockType(bool isRandom){
     else{
         if(blockSequence.size() > 0){
             char b = blockSequence[0];
-            blockSequence.erase(0);
+            blockSequence.erase(blockSequence.begin());
             return b;
         }
     }
 }
 
-lvl4 : int lvlNum(){return 4};
+int lvl4 :: lvlNum(){return 4;};
+
+lvl4 :: lvl4 (bool isRandom, string file = "") : Level(isRandom, file){}
     

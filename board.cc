@@ -102,7 +102,7 @@ void Board :: leveldown(){
             tmp = new lvl3{true};
         }
         else{
-            tmp = new lvl3{file, false};
+            tmp = new lvl3{false, file};
         }
     }
 
@@ -121,7 +121,7 @@ void Board :: levelup(){
         tmp = new lvl1{true};
     }
     else if(lvl -> lvlNum() == 1){
-        Level* tmp = new lvl2{true};
+        tmp = new lvl2{true};
     }
     else if(lvl -> lvlNum() == 2){
         Level* tmp;
@@ -129,7 +129,7 @@ void Board :: levelup(){
             Level* tmp = new lvl3{true};
         }
         else{
-            Level* tmp = new lvl3{file, false};
+            Level* tmp = new lvl3{false, file};
         }
     }
     else{
@@ -138,7 +138,7 @@ void Board :: levelup(){
             Level* tmp = new lvl4{true};
         }
         else{
-            Level* tmp = new lvl4{file, false};
+            Level* tmp = new lvl4{false, file};
         }
     }
 
@@ -151,7 +151,7 @@ void Block :: newBlock(){
     Block *b;
 
     if(singleCount % 5 == 0 && singleCount != 0){
-        b = new cube(this); // ig we need a new block to be *
+        b = new cube(playingBoard); // ig we need a new block to be *
         b -> drop();
         // notify observers here to change display
         delete b;
@@ -179,7 +179,7 @@ void Block :: newBlock(){
     }
     
     // notify observers here to change display
-    if(!b.canCreate()){
+    if(!b -> canCreate()){
         lost = true;
         return;
     }
@@ -230,7 +230,7 @@ int Board :: clearlines(){
             }
         }
 
-        if(lineclear){
+        if(fullLine){
             clearedlines++;
             playingBoard.erase(i);
             vector<char> blankLine(width, ' ');
