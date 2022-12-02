@@ -13,6 +13,7 @@
 #include "Blocks/sBlock.h"
 #include "Blocks/tBlock.h"
 #include "Blocks/zBlock.h"
+#include "Blocks/cube.h"
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -82,26 +83,26 @@ bool Board :: checkLose(){
 };
 
 void Board :: leveldown(){
-    if(lvl.lvlNum == 0){
+    Level* tmp;
+    if(lvl -> lvlNum() == 0){
         cout << "Minimum level is 0, you cannot go any lower";
         return;
     }
-    else if(lvl.lvlNum == 1){
-        Level* tmp = new lvl0{file, false};
+    else if(lvl -> lvlNum() == 1){
+        tmp = new lvl0{file, false};
     }
-    else if(lvl.lvlNum == 2){
-        Level* tmp = new lvl1{true};
+    else if(lvl -> lvlNum() == 2){
+        tmp = new lvl1{true};
     }
-    else if(lvl.lvlNum == 3){
-        Level* tmp = new lvl2{true};
+    else if(lvl -> lvlNum() == 3){
+        tmp = new lvl2{true};
     }
-    else if(lvl.lvlNum == 4){
-        Level* tmp;
+    else if(lvl -> lvlNum() == 4){
         if(file == ""){
-            Level* tmp = new lvl3{true};
+            tmp = new lvl3{true};
         }
         else{
-            Level* tmp = new lvl3{file, false};
+            tmp = new lvl3{file, false};
         }
     }
 
@@ -111,17 +112,18 @@ void Board :: leveldown(){
 
 
 void Board :: levelup(){
-    if(lvl.lvlNum == 4){
+    Level* tmp;
+    if(lvl -> lvlNum() == 4){
         cout << "Max level is 4, you cannot go any higher";
         return;
     }
-    else if(lvl.lvlNum == 0){
-        Level* tmp = new lvl1{true};
+    else if(lvl -> lvlNum() == 0){
+        tmp = new lvl1{true};
     }
-    else if(lvl.lvlNum == 1){
+    else if(lvl -> lvlNum() == 1){
         Level* tmp = new lvl2{true};
     }
-    else if(lvl.lvlNum == 2){
+    else if(lvl -> lvlNum() == 2){
         Level* tmp;
         if(file == ""){
             Level* tmp = new lvl3{true};
@@ -147,9 +149,10 @@ void Board :: levelup(){
 void Block :: newBlock(){
     char type = lvl.blockType();
     Block *b;
+
     if(singleCount % 5 == 0 && singleCount != 0){
-        b = new starBlock(this); // ig we need a new block to be *
-        b.drop();
+        b = new cube(this); // ig we need a new block to be *
+        b -> drop();
         // notify observers here to change display
         delete b;
     }
