@@ -4,6 +4,8 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include "Levels/level.h"
+#include "Blocks/block.h"
 using namespace std;
 
 class Board{
@@ -36,6 +38,6 @@ class Board{
 
         Board(int width, int height, int newLvl, string file)();
 
-}
+};
 
 #endif
