@@ -65,12 +65,12 @@ Board : Board(int width, int height, int newLvl, string file, vector<vector<char
 }
 
 
-bool Board : getBlind(){return blind;};
-bool Board : getForce(){return force;};
-bool Board: getHeavy(){return heavy;};
-int Board : getScore(){return score;};
+bool Board :: getBlind(){return blind;};
+bool Board :: getForce(){return force;};
+bool Board:: getHeavy(){return heavy;};
+int Board :: getScore(){return score;};
 
-bool Board : checkLose(){
+bool Board :: checkLose(){
     if(lost){return true};
 
     for(int i = 0; i < width; i++){
@@ -81,7 +81,7 @@ bool Board : checkLose(){
 
 };
 
-void Board : leveldown(){
+void Board :: leveldown(){
     if(lvl.lvlNum == 0){
         cout << "Minimum level is 0, you cannot go any lower";
         return;
@@ -110,7 +110,7 @@ void Board : leveldown(){
 }
 
 
-void Board : levelup(){
+void Board :: levelup(){
     if(lvl.lvlNum == 4){
         cout << "Max level is 4, you cannot go any higher";
         return;
@@ -144,7 +144,7 @@ void Board : levelup(){
     delete tmp;
 }
 
-void Block : newBlock(){
+void Block :: newBlock(){
     char type = lvl.blockType();
     Block *b;
     if(singleCount % 5 == 0 && singleCount != 0){
@@ -216,7 +216,7 @@ void Block : newBlock(){
 }
 
 
-int Board : clearlines(){
+int Board :: clearlines(){
     int clearedlines = 0;
 
     for(int i = 0; i < height; i++){
