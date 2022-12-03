@@ -1,7 +1,7 @@
 #include "tBlock.h"
 using namespace std;
 
-tBlock::tBlock(vector<vector<char>> &playingBoard) : Block(playingBoard)
+tBlock::tBlock(vector<vector<char>> &playingBoard, int level) : Block(playingBoard, level)
 {
     blockPos = {pair(3, 1), pair(2, 0), pair(2, 1), pair(2, 2)}; // starts on row 3 cuz the rows 0-2 are reserve rows
 };

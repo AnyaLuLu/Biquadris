@@ -1,6 +1,6 @@
 #include "cube.h"
 
-cube::cube(std::vector<std::vector<char>> &playingBoard) : playingBoard(playingBoard){};
+cube::cube(std::vector<std::vector<char>> &playingBoard, int level) : Block(playingBoard, level){};
 
 cube::~cube(){};
 

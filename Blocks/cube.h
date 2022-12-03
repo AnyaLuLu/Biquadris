@@ -6,7 +6,7 @@
 class cube : public Block
 {
 public:
-    cube(std::vector<std::vector<char>> &boardPtr);
+    cube(std::vector<std::vector<char>> &boardPtr, int level);
     bool drop();
     bool canCreate();
     void addBlock();
