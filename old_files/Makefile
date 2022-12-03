@@ -1,14 +1,15 @@
 CXX = g++
-CXXFLAGS = -std=c++14 -Wall -MMD -Werror=vla
+CXXFLAGS = -Wall -std=c++14 -MMD -Werror=vla
+EXEC = BIQUARDIS
 OBJECTS = txtDisplay.o subject.o observer.o main.o board.o level.o lvl0.o lvl1.o lvl2.o lvl3.o lvl4.o block.o cube.o iBlock.o jBlock.o lBlock.o oBlock.o sBlock.o tBlock.o zBlock.o
 DEPENDS = ${OBJECTS:.o=.d}
-EXEC = a4q3
 
-${EXEC} : ${OBJECTS}
-	${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC}
-
-.PHONY: clean
-clean:
-	rm ${OBJECTS} ${EXEC} ${DEPENDS}
+${EXEC}: ${OBJECTS}
+	${CXX} ${CXXFLAGS} ${OBJECTS} -lX11 -o ${EXEC}
 
 -include ${DEPENDS}
+
+.PHONY: clean
+
+clean:
+	rm ${OBJECTS} ${EXEC} ${DEPENDS}
