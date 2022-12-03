@@ -58,19 +58,19 @@ Board :: Board(int width, int height, int newLvl, string file, vector<vector<cha
     if (newLvl <= 0)
     {
         lvl = new lvl0{file, false};
-        currentBlock = this->assignBlock(false);
+        currentBlock = this -> assignBlock(false);
         nextBlock = this -> assignBlock(false);
     }
     else if (newLvl == 1)
     {
         lvl = new lvl1{true};
-        currentBlock = this->assignBlock(true);
+        currentBlock = this -> assignBlock(true);
         nextBlock = this -> assignBlock(true);
     }
     else if (newLvl == 2)
     {
         lvl = new lvl2{true};
-        currentBlock = this->assignBlock(true);
+        currentBlock = this -> assignBlock(true);
         nextBlock = this -> assignBlock(true);
     }
     else if (newLvl == 3)
@@ -78,13 +78,13 @@ Board :: Board(int width, int height, int newLvl, string file, vector<vector<cha
         if (file == "")
         {
             lvl = new lvl3{true};
-            currentBlock = this->assignBlock(true);
+            currentBlock = this -> assignBlock(true);
             nextBlock = this -> assignBlock(true);
         }
         else
         {
             lvl = new lvl3{false, file};
-            currentBlock = this->assignBlock(false);
+            currentBlock = this -> assignBlock(false);
             nextBlock = this -> assignBlock(false);
         }
         heavy = true;
@@ -301,6 +301,8 @@ void Board :: newBlock()
         // does block mutate playingBoard as it moves?
     }
 
+    playingBlocks.emplace_back(currentBlock);
+    currentBlock -> addBlock();
     currentBlock = nextBlock;
     if(file == ""){
         nextBlock = this -> assignBlock(true);
