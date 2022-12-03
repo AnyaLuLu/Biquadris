@@ -8,6 +8,7 @@
 
 using namespace std;
 
+/*
 enum Op {LEFT, RIGHT, DOWN, CLOCKWISE, COUNTERCLOCKWISE, DROP, LEVEL_UP, LEVEL_DOWN, NO_RANDOM, RANDOM, BLOCK, RESTART, SEQUENCE};
 
 Op convertOp(string opStr) {
@@ -19,6 +20,7 @@ Op convertOp(string opStr) {
         }
     }
 } // convertOp
+*/
 
 int main (int argc, char *argv[]) {
 

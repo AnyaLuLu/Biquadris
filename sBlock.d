@@ -1,1 +1,1 @@
-sBlock: sBlock.cc sBlock.h block.h
+sBlock.o: sBlock.cc sBlock.h block.h
