@@ -5,7 +5,7 @@
 class Heavy: public Decorator {
 	public:
 		Heavy(Board *next);
-		void notify(Board &b) override; // not sure what this does
+		void newBlock() override;
 		~Heavy();
 };
 

@@ -10,17 +10,19 @@
 using namespace std;
 
 class Board : public Subject{
-    int width, height;
-    bool blind, heavy, force;
-    int score;
-    Level* lvl;
-    string file;
+    protected:
 
-    int singleCount;
-    bool lost;
+        int width, height;
+        bool blind, heavy, force;
+        int score;
+        Level* lvl;
+        string file;
 
-    Block* currentBlock;
-    Block* nextBlock;
+        int singleCount;
+        bool lost;
+
+        Block* currentBlock;
+        Block* nextBlock;
 
     public:
         vector<vector<char>> playingBoard;
@@ -33,13 +35,14 @@ class Board : public Subject{
     
     public:
         Board (int width, int height, int newLvl, string file, vector<vector<char>> playingBoard);
-        void newBlock();
+        virtual void newBlock();
         int getScore();
         bool checkLose();
 
         bool getBlind();
         bool getHeavy();
         bool getForce();
+        int getLvl();
         void setBlind(bool set);
         void setHeavy(bool set);
         void setForce(bool set);

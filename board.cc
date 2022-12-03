@@ -153,6 +153,7 @@ int Board ::getScore() { return score; };
 bool Board ::getBlind() { return blind; };
 bool Board ::getForce() { return force; };
 bool Board :: getHeavy() { return heavy; };
+int Board :: getLvl(){ return lvl->lvlNum(); };
 void Board :: setBlind(bool set){blind = set;}
 void Board :: setForce(bool set){force = set;}
 void Board :: setHeavy(bool set){heavy = set;}
@@ -311,7 +312,6 @@ void Board :: newBlock()
     else{
         nextBlock = this -> assignBlock(false);
     }
-    
     
 }
 

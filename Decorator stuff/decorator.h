@@ -3,7 +3,7 @@
 #include "board.h"
 
 
-class Decorator: public AbsBoard {
+class Decorator: public Board {
         protected:
 		Board *next;
 
