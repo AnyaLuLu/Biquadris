@@ -11,6 +11,8 @@ class Level{
     bool random;
     string file;
     protected:
+        int counter;
+        int length;
         vector <char> blockSequence;
     
     public:
