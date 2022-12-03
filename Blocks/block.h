@@ -21,6 +21,11 @@ public:
     virtual bool canCreate();
     virtual void addBlock();
     virtual ~Block();
+
+
+    /**** Ethan's functions to do ****/
+    virtual bool deletePos(int row); // = 0 delete all the pairs in this row, return true if its all gone, otherwise false
+    int worth(); // return how many points this block is worth
 };
 
 #endif
