@@ -20,17 +20,46 @@ Op convertOp(string opStr) {
     }
 } // convertOp
 
+int getNum(string command) {
+    stringstream ss;
+    ss << command;
+    int retNum;
+
+    if (!(ss >> retNum)) {
+        return 1;
+    } else {
+        return retNum;
+    }
+}
+
+string removeNum(string command) {
+    stringstream ss;
+    ss << command;
+
+    int tempNum;
+    ss >> tempNum;
+    string retString;
+    ss >> retString;
+    return retString;
+    
+}
+
 int main (int argc, char *argv[]) {
 
-    size_t player1 = 1, player2 = 2;
-	size_t startLevel = 0;
-    size_t maxLevel = 4;
-	size_t board1counter = 1, board2counter = 1;
-	size_t hiscore = 0;
+    int player1 = 1, player2 = 2;
+	int startLevel = 0;
+    int maxLevel = 4;
+	int board1counter = 1, board2counter = 1;
+	int hiscore = 0;
 	string p1blocks = "sequence1.txt";
 	string p2blocks = "sequence2.txt";
+    int turnCount = 0;
+    int curPlayer = 1;
 
     // create boards, displays, etc. here
+    Board *Board1;
+    Board *Board2;
+    Board *curBoard;
 
     bool graphicsOn = true;
 
@@ -96,39 +125,47 @@ int main (int argc, char *argv[]) {
         string command;
         cin >> command;
 
+        int num = getNum(command);
+        command = removeNum(command);
+
         if ( cin.eof() ) break;
+
+        curPlayer = (turnCount % 2) + 1;
+        if (curPlayer == 1) {
+            curBoard = Board1;
+        } else {
+            curBoard = Board2;
+        }
 
         Op op = convertOp(command);
 
         switch( op ) {
-            /*
             case LEFT: 
-
+                curBoard->left();
                 break;
             case RIGHT:
-
+                curBoard->right();
             	break;
             case DOWN: 
-
+                curBoard->down();
                 break;
             case CLOCKWISE: 
-
+                curBoard->cw();
                 break;				
             case COUNTERCLOCKWISE:
-
+                curBoard->ccw();
                 break;
             case DROP: 
-
+                curBoard->drop();
                 break;
-            */
             case LEVEL_UP: 
-
+                curBoard->levelup();
                 break;
             case LEVEL_DOWN: 
-
+                curBoard->leveldown();
                 break;
             case NO_RANDOM:
-
+                
                 break;
             case RANDOM:
 
@@ -146,5 +183,10 @@ int main (int argc, char *argv[]) {
                 cerr << "Invalid command." << endl;
                 break;
         } // switch
-    } // for
+
+        curBoard->addBlock();
+
+        turnCount += 1;
+    } // infinite while
 } // main
+
