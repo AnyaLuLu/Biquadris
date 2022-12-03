@@ -8,10 +8,11 @@ class Block
 protected:
     std::vector<std::pair<int, int>> blockPos;      // row, col
     std::vector<std::vector<char>> &playingBoard; // col row, since it is a vector of vectors
+    int boardWidth;
     int level;
 
 public:
-    Block(std::vector<std::vector<char>> &playingBoard, int level);
+    Block(std::vector<std::vector<char>> &playingBoard, int level, int boardWidth);
     bool left();
     bool right();
     bool down();

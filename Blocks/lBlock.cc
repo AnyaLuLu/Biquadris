@@ -1,7 +1,7 @@
 #include "lBlock.h"
 using namespace std;
 
-lBlock::lBlock(vector<vector<char>> &playingBoard, int level) : Block(playingBoard, level)
+lBlock::lBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : Block(playingBoard, level, boardWidth)
 {
     blockPos = {pair(3, 0), pair(3, 1), pair(3, 2), pair(2, 2)}; // starts on row 3 cuz the rows 0-2 are reserve rows
 };
@@ -39,6 +39,13 @@ bool lBlock::clockwise()
         if (blockPos[i].first == llcRow && blockPos[i].second - 2 == llcCol)
         {
             rightCorn = true;
+        }
+    }
+
+    //checking that itll rotate in bounds
+    if (isVert){
+        if (llcCol > (boardWidth - 3)){
+            return false;
         }
     }
 
@@ -170,6 +177,13 @@ bool lBlock::counterClockwise()
         if (blockPos[i].first == llcRow && blockPos[i].second - 2 == llcCol)
         {
             rightCorn = true;
+        }
+    }
+
+    //checking that itll rotate in bounds
+    if (isVert){
+        if (llcCol > (boardWidth - 3)){
+            return false;
         }
     }
 

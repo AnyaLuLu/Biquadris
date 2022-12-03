@@ -1,27 +1,8 @@
 #include "cube.h"
 
-cube::cube(std::vector<std::vector<char>> &playingBoard, int level) : Block(playingBoard, level){};
+cube::cube(std::vector<std::vector<char>> &playingBoard, int level, int boardWidth) : Block(playingBoard, level, boardWidth){};
 
 cube::~cube(){};
-
-bool cube::drop()
-{
-    while (true)
-    {
-        int nextcol = blockPos[0].first + 1;
-        int currow = blockPos[0].second;
-        if (playingBoard[nextcol][currow] != ' ')
-        {
-            break;
-        }
-        if (nextcol > 17)
-        {
-            break;
-        }
-        blockPos[0].first++;
-    }
-    return true; // drop always returns true. the case in which a block cant be dropped means the game ends, and canCreate would be the function to return false
-};
 
 bool cube::canCreate()
 {
@@ -38,3 +19,11 @@ void cube::addBlock()
     int col = blockPos[0].second;
     playingBoard[col][row] = '*';
 };
+
+bool cube::clockwise(){
+    return true;
+}
+
+bool cube::counterClockwise(){
+    return true;
+}

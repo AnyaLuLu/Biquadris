@@ -1,5 +1,5 @@
 #include "block.h"
-Block::Block(std::vector<std::vector<char>> &playingBoard, int level) : playingBoard(playingBoard), level(level){};
+Block::Block(std::vector<std::vector<char>> &playingBoard, int level, int boardWidth) : playingBoard(playingBoard), level(level), boardWidth(boardWidth) {};
 
 Block::~Block(){};
 

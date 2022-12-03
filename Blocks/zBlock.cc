@@ -1,7 +1,7 @@
 #include "zBlock.h"
 using namespace std;
 
-zBlock::zBlock(vector<vector<char>> &playingBoard, int level) : Block(playingBoard, level)
+zBlock::zBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : Block(playingBoard, level, boardWidth)
 {
     blockPos = {pair(2, 0), pair(2, 1), pair(3, 1), pair(3, 2)}; // starts on row 3 cuz the rows 0-2 are reserve rows
 };
@@ -30,6 +30,13 @@ bool zBlock::clockwise()
         if (blockPos[i].first == llcRow && blockPos[i].second == llcCol)
         {
             isVert = true;
+        }
+    }
+
+    //checking that itll rotate in bounds
+    if (isVert){
+        if (llcCol > (boardWidth - 3)){
+            return false;
         }
     }
 
@@ -138,6 +145,13 @@ bool zBlock::counterClockwise() // code is the exact same as clockwise cuz it do
         if (blockPos[i].first == llcRow && blockPos[i].second == llcCol)
         {
             isVert = true;
+        }
+    }
+
+    //checking that itll rotate in bounds
+    if (isVert){
+        if (llcCol > (boardWidth - 3)){
+            return false;
         }
     }
 

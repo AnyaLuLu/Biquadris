@@ -1,7 +1,7 @@
 #include "iBlock.h"
 using namespace std;
 
-iBlock::iBlock(vector<vector<char>> &playingBoard, int level) : Block(playingBoard, level)
+iBlock::iBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : Block(playingBoard, level, boardWidth)
 {
     blockPos = {pair(3, 0), pair(3, 1), pair(3, 2), pair(3, 3)}; // starts on row 3 cuz the rows 0-2 are reserve rows
 };
@@ -28,6 +28,13 @@ bool iBlock::clockwise()
     if (blockPos[0].first == blockPos[1].first)
     {
         isVert = false;
+    }
+
+    // checking that rotating the block would be in bounds
+    if (isVert){
+        if (llcCol > (boardWidth - 4)){
+            return false;
+        }
     }
 
     // checking if it can be rotated. note that playingboard is col, row since it is a vector of vectors
@@ -119,6 +126,13 @@ bool iBlock::counterClockwise()
     if (blockPos[0].first == blockPos[1].first)
     {
         isVert = false;
+    }
+
+    // checking that rotating the block would be in bounds
+    if (isVert){
+        if (llcCol > (boardWidth - 4)){
+            return false;
+        }
     }
 
     // checking if it can be rotated. note that playingboard is col, row since it is a vector of vectors

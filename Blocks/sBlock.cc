@@ -1,7 +1,7 @@
 #include "sBlock.h"
 using namespace std;
 
-sBlock::sBlock(vector<vector<char>> &playingBoard, int level) : Block(playingBoard, level)
+sBlock::sBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : Block(playingBoard, level, boardWidth)
 {
     blockPos = {pair(3, 0), pair(3, 1), pair(2, 1), pair(2, 2)}; // starts on row 3 cuz the rows 0-2 are reserve rows
 };
@@ -30,6 +30,13 @@ bool sBlock::clockwise()
         if (blockPos[i].first == llcRow && blockPos[i].second == llcCol)
         {
             isVert = false;
+        }
+    }
+
+    //checking that itll rotate in bounds
+    if (isVert){
+        if (llcCol > (boardWidth - 3)){
+            return false;
         }
     }
 
@@ -138,6 +145,13 @@ bool sBlock::counterClockwise() // code is the exact same for clockwise cuz it d
         if (blockPos[i].first == llcRow && blockPos[i].second == llcCol)
         {
             isVert = false;
+        }
+    }
+
+    //checking that itll rotate in bounds
+    if (isVert){
+        if (llcCol > (boardWidth - 3)){
+            return false;
         }
     }
 

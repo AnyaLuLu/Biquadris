@@ -112,38 +112,38 @@ Block* Board :: assignBlock(bool isRandom){
     char type = lvl -> blockType(isRandom);
 
     if(lvl -> lvlNum() == 4 && singleCount % 5 == 0 && singleCount != 0){
-        b = new cube(playingBoard, lvl -> lvlNum()); // ig we need a new block to be *
+        b = new cube(playingBoard, lvl -> lvlNum(), width); // ig we need a new block to be *
         b -> drop();
         // notify observers here to change display
         delete b;
     }
     else if (type == 'i')
     {
-        b = new iBlock(playingBoard, lvl -> lvlNum());
+        b = new iBlock(playingBoard, lvl -> lvlNum(), width);
     }
     else if (type == 'j')
     {
-        b = new jBlock(playingBoard, lvl -> lvlNum());
+        b = new jBlock(playingBoard, lvl -> lvlNum(), width);
     }
     else if (type == 'l')
     {
-        b = new lBlock(playingBoard, lvl -> lvlNum());
+        b = new lBlock(playingBoard, lvl -> lvlNum(), width);
     }
     else if (type == 'o')
     {
-        b = new oBlock(playingBoard, lvl -> lvlNum());
+        b = new oBlock(playingBoard, lvl -> lvlNum(), width);
     }
     else if (type == 's')
     {
-        b = new sBlock(playingBoard, lvl -> lvlNum());
+        b = new sBlock(playingBoard, lvl -> lvlNum(), width);
     }
     else if (type == 'z')
     {
-        b = new zBlock(playingBoard, lvl -> lvlNum());
+        b = new zBlock(playingBoard, lvl -> lvlNum(), width);
     }
     else if (type == 't')
     {
-        b = new tBlock(playingBoard, lvl -> lvlNum());
+        b = new tBlock(playingBoard, lvl -> lvlNum(), width);
     }
     
 }

@@ -1,7 +1,7 @@
 #include "jBlock.h"
 using namespace std;
 
-jBlock::jBlock(vector<vector<char>> &playingBoard, int level) : Block(playingBoard, level)
+jBlock::jBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : Block(playingBoard, level, boardWidth)
 {
     blockPos = {pair(3, 0), pair(2, 0), pair(3, 1), pair(3, 2)}; // starts on row 3 cuz the rows 0-2 are reserve rows
 };
@@ -39,6 +39,13 @@ bool jBlock::clockwise()
         if (blockPos[i].first + 1 == llcRow && blockPos[i].second - 2 == llcCol)
         {
             topCorn = true;
+        }
+    }
+
+    //checking that itll rotate in bounds
+    if (isVert){
+        if (llcCol > (boardWidth - 3)){
+            return false;
         }
     }
 
@@ -170,6 +177,13 @@ bool jBlock::counterClockwise()
         if (blockPos[i].first + 1 == llcRow && blockPos[i].second - 2 == llcCol)
         {
             topCorn = true;
+        }
+    }
+
+    //checking that itll rotate in bounds
+    if (isVert){
+        if (llcCol > (boardWidth - 3)){
+            return false;
         }
     }
 
