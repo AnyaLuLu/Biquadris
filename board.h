@@ -42,6 +42,7 @@ class Board : public Subject{
         bool getBlind();
         bool getHeavy();
         bool getForce();
+        int getLvl();
         void setBlind(bool set);
         void setHeavy(bool set);
         void setForce(bool set);

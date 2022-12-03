@@ -7,12 +7,13 @@
 
 class txtDisplay : public Observer
 {
-    Board *myBoard;
+    Board *Board1;
+    Board *Board2;
     std::ostream &out = std::cout;
 
 public:
     void notify() override;
-    txtDisplay(Board *myBoard);
+    txtDisplay(Board *Board1, Board *Board2);
 };
 
 #endif
