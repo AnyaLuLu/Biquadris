@@ -267,12 +267,12 @@ void Board :: newBlock(){
 }
 */
 
-void Board :: left_norm(){currentBlock -> left();}
-void Board :: right_norm(){currentBlock -> right();}
-void Board :: down_norm(){currentBlock -> down();}
-void Board :: drop_norm(){currentBlock -> drop();}
-void Board :: cw_norm(){currentBlock -> clockwise();}
-void Board :: ccw_norm(){currentBlock -> counterClockwise();}
+void Board :: left(){currentBlock -> left();}
+void Board :: right(){currentBlock -> right();}
+void Board :: down(){currentBlock -> down();}
+void Board :: drop(){currentBlock -> drop();}
+void Board :: cw(){currentBlock -> clockwise();}
+void Board :: ccw(){currentBlock -> counterClockwise();}
 
 void Board :: addBlock(){ // main calls this to add block on to board
     playingBlocks.emplace_back(currentBlock);
@@ -284,6 +284,11 @@ void Board :: addBlock(){ // main calls this to add block on to board
     }
     else{
         nextBlock = this -> assignBlock(false);
+    }
+
+    if(!currentBlock -> canCreate()){
+        lost = true;
+        return;
     }
 }
 

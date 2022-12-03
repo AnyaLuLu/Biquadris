@@ -64,12 +64,9 @@ class Board : public Subject{
 
 
     private:
-        void left_norm();
-        void right_norm();
-        void down_norm();
-        void drop_norm();
-        void cw_norm();
-        void ccw_norm();
+
+        //Ethan Liu's stuffs
+        void force_set();
         /*
         void newBlock_normal();
         void newBlock_heavy();
