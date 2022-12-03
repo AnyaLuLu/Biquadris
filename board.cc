@@ -51,29 +51,41 @@ Op convertOp(string opStr)
 
 } // convertOp
 
-Board :: Board(int width, int height, int newLvl, string file, vector<vector<char>> playingBoard) : width{width}, height{height}, blind{false}, heavy{false}, force{false}, score{0}, file{file}, singleCount{0}, lost{false}, playingBoard{playingBoard}, playingBlocks{}
-{
+Board :: Board(int width, int height, int newLvl, string file, vector<vector<char>> playingBoard) : width{width}, height{height}, blind{false}, heavy{false}, force{false}, score{0}, file{file}, singleCount{0}, lost{false}, playingBoard{playingBoard}, playingBlocks{}{
+    
+    /**** If there is no file associated with the lvl, please input empty string for file *****/
+    
     if (newLvl <= 0)
     {
         lvl = new lvl0{file, false};
+        currentBlock = this->assignBlock(false);
+        nextBlock = this -> assignBlock(false);
     }
     else if (newLvl == 1)
     {
         lvl = new lvl1{true};
+        currentBlock = this->assignBlock(true);
+        nextBlock = this -> assignBlock(true);
     }
     else if (newLvl == 2)
     {
         lvl = new lvl2{true};
+        currentBlock = this->assignBlock(true);
+        nextBlock = this -> assignBlock(true);
     }
     else if (newLvl == 3)
     {
         if (file == "")
         {
             lvl = new lvl3{true};
+            currentBlock = this->assignBlock(true);
+            nextBlock = this -> assignBlock(true);
         }
         else
         {
             lvl = new lvl3{false, file};
+            currentBlock = this->assignBlock(false);
+            nextBlock = this -> assignBlock(false);
         }
         heavy = true;
     }
@@ -82,14 +94,60 @@ Board :: Board(int width, int height, int newLvl, string file, vector<vector<cha
         if (file == "")
         {
             lvl = new lvl4{true};
+            currentBlock = this->assignBlock(true);
+            nextBlock = this -> assignBlock(true);
         }
         else
         {
             lvl = new lvl4{false, file};
+            currentBlock = this->assignBlock(false);
+            nextBlock = this -> assignBlock(false);
         }
         heavy = true;
     }
 }
+
+Block* Board :: assignBlock(bool isRandom){
+    Block* b;
+    char type = lvl -> blockType(isRandom);
+
+    if(lvl -> lvlNum() == 4 && singleCount % 5 == 0 && singleCount != 0){
+        b = new cube(playingBoard, lvl -> lvlNum()); // ig we need a new block to be *
+        b -> drop();
+        // notify observers here to change display
+        delete b;
+    }
+    else if (type == 'i')
+    {
+        b = new iBlock(playingBoard, lvl -> lvlNum());
+    }
+    else if (type == 'j')
+    {
+        b = new jBlock(playingBoard, lvl -> lvlNum());
+    }
+    else if (type == 'l')
+    {
+        b = new lBlock(playingBoard, lvl -> lvlNum());
+    }
+    else if (type == 'o')
+    {
+        b = new oBlock(playingBoard, lvl -> lvlNum());
+    }
+    else if (type == 's')
+    {
+        b = new sBlock(playingBoard, lvl -> lvlNum());
+    }
+    else if (type == 'z')
+    {
+        b = new zBlock(playingBoard, lvl -> lvlNum());
+    }
+    else if (type == 't')
+    {
+        b = new tBlock(playingBoard, lvl -> lvlNum());
+    }
+    
+}
+
 int Board ::getScore() { return score; };
 
 bool Board ::getBlind() { return blind; };
@@ -204,46 +262,9 @@ void Board :: newBlock()
     else{
         type = lvl -> blockType(false);
     }
-    
-    Block *b;
-
-    if(singleCount % 5 == 0 && singleCount != 0){
-        b = new cube(playingBoard); // ig we need a new block to be *
-        b -> drop();
-        // notify observers here to change display
-        delete b;
-    }
-    else if (type == 'i')
-    {
-        b = new iBlock(playingBoard);
-    }
-    else if (type == 'j')
-    {
-        b = new jBlock(playingBoard);
-    }
-    else if (type == 'l')
-    {
-        b = new lBlock(playingBoard);
-    }
-    else if (type == 'o')
-    {
-        b = new oBlock(playingBoard);
-    }
-    else if (type == 's')
-    {
-        b = new sBlock(playingBoard);
-    }
-    else if (type == 'z')
-    {
-        b = new zBlock(playingBoard);
-    }
-    else if (type == 't')
-    {
-        b = new tBlock(playingBoard);
-    }
 
     // notify observers here to change display
-    if(!b -> canCreate()){
+    if(!currentBlock -> canCreate()){
         lost = true;
         return;
     }
@@ -258,29 +279,36 @@ void Board :: newBlock()
         switch (op)
         {
         case LEFT:
-            b->left();
+            currentBlock -> left();
             break;
         case RIGHT:
-            b->right();
+            currentBlock -> right();
             break;
         case DOWN:
-            b->down();
+            currentBlock -> down();
             break;
         case CLOCKWISE:
-            b->clockwise();
+            currentBlock -> clockwise();
             break;
         case COUNTERCLOCKWISE:
-            b->counterClockwise();
+            currentBlock -> counterClockwise();
             break;
         case DROP:
-            b->drop();
+            currentBlock -> drop();
             break;
         }
         // notify observers here to change display
         // does block mutate playingBoard as it moves?
     }
 
-    delete b;
+    currentBlock = nextBlock;
+    if(file == ""){
+        nextBlock = this -> assignBlock(true);
+    }
+    else{
+        nextBlock = this -> assignBlock(false);
+    }
+    
     
 }
 

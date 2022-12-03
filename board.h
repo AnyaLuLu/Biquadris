@@ -19,6 +19,9 @@ class Board : public Subject{
     int singleCount;
     bool lost;
 
+    Block* currentBlock;
+    Block* nextBlock;
+
     public:
         vector<vector<char>> playingBoard;
         vector<Block> playingBlocks;
@@ -27,6 +30,7 @@ class Board : public Subject{
     
     private:
         int clearlines();
+        Block* assignBlock(bool isRandom);
     
     public:
         Board (int width, int height, int newLvl, string file, vector<vector<char>> playingBoard);
