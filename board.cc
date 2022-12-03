@@ -303,6 +303,7 @@ void Board :: newBlock()
 
     playingBlocks.emplace_back(currentBlock);
     currentBlock -> addBlock();
+
     currentBlock = nextBlock;
     if(file == ""){
         nextBlock = this -> assignBlock(true);
@@ -316,7 +317,7 @@ void Board :: newBlock()
 
 int Board ::clearlines()
 {
-        // change score
+    // change score
     int clearedlines = 0;
 
     for (int i = 0; i < height; i++)
@@ -332,9 +333,22 @@ int Board ::clearlines()
 
         if(fullLine){
             clearedlines++;
+            int l = lvl -> lvlNum();
+            score += (++l) * (++l);
+
             playingBoard.erase(playingBoard.begin() + (i - 1));
             vector<char> blankLine(width, ' ');
             playingBoard.insert(playingBoard.begin(), blankLine);
+
+            for(int k = 0; k < playingBlocks.size(); k++){
+                if(playingBlocks[k] -> deletePos(i)){
+                    Block* tmp = playingBlocks[k];
+                    score += tmp -> worth();
+                    playingBlocks.erase(playingBlocks.begin() + (k - 1));
+                    delete tmp;
+                    k--;
+                }
+            }
 
             // notify observers to change display
         }

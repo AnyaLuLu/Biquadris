@@ -24,12 +24,11 @@ class Board : public Subject{
 
     public:
         vector<vector<char>> playingBoard;
-        vector<Block> playingBlocks;
+        vector<Block*> playingBlocks;
         // Should be vector<vector<char>> playingBoard (height, vector<char> (width, ' '))
 
     
     private:
-        int clearlines();
         Block* assignBlock(bool isRandom);
     
     public:
@@ -52,6 +51,8 @@ class Board : public Subject{
         int getHeight();
 
         char getState(int row, int col) const override;
+
+        int clearlines();
 };
 
 #endif
