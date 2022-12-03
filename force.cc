@@ -1,12 +1,12 @@
 #include "force.h"
-#include "Blocks/block.h"
-#include "Blocks/iBlock.h"
-#include "Blocks/jBlock.h"
-#include "Blocks/lBlock.h"
-#include "Blocks/oBlock.h"
-#include "Blocks/sBlock.h"
-#include "Blocks/tBlock.h"
-#include "Blocks/zBlock.h"
+#include "block.h"
+#include "iBlock.h"
+#include "jBlock.h"
+#include "lBlock.h"
+#include "oBlock.h"
+#include "sBlock.h"
+#include "tBlock.h"
+#include "zBlock.h"
 using namespace std;
 
 
