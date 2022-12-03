@@ -5,7 +5,7 @@
 class Blind: public Decorator {
 	public:
 		Blind(Board *next);
-		void notify(Board &b) override; // not sure what this does
+		void newBlock() override;
 		~Blind();
 };
 

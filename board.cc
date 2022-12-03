@@ -312,7 +312,6 @@ void Board :: newBlock()
         nextBlock = this -> assignBlock(false);
     }
     
-    
 }
 
 int Board ::clearlines()
