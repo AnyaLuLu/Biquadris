@@ -19,5 +19,7 @@ Level :: Level(bool random = false, string file = "") : random{random}, file{fil
                 blockSequence.emplace_back(newBlock);
             }
         }
+
+        length = blockSequence.size();
     }
 }

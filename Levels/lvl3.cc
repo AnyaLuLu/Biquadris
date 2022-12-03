@@ -12,11 +12,12 @@ char lvl3 :: blockType(bool isRandom){
         return blockGen[index];
     }
     else{
-        if(blockSequence.size() > 0){
-            char b = blockSequence[0];
-            blockSequence.erase(blockSequence.begin());
-            return b;
+        char b = blockSequence[counter];
+        counter += 1;
+        if (counter == length) {
+            counter = 0;
         }
+        return b;
     }
 }
 
