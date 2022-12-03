@@ -32,7 +32,7 @@ class Board : public Subject{
     public:
         Block* assignBlock(bool isRandom);
         Board (int width, int height, int newLvl, string file, vector<vector<char>> playingBoard);
-        virtual void newBlock();
+        void newBlock();
         int getScore();
         bool checkLose();
 
@@ -53,6 +53,11 @@ class Board : public Subject{
         char getState(int row, int col) const override;
 
         int clearlines();
+
+    private:
+        void newBlock_normal();
+        void newBlock_heavy();
+        void newBlock_force();
 };
 
 #endif

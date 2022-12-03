@@ -1,9 +1,10 @@
 #include "tBlock.h"
+#include <utility>
 using namespace std;
 
 tBlock::tBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : Block(playingBoard, level, boardWidth)
 {
-    blockPos = {pair(3, 1), pair(2, 0), pair(2, 1), pair(2, 2)}; // starts on row 3 cuz the rows 0-2 are reserve rows
+    blockPos = {{3, 1}, {2, 0}, {2, 1}, {2, 2}}; // starts on row 3 cuz the rows 0-2 are reserve rows
 };
 tBlock::~tBlock(){};
 bool tBlock::clockwise()

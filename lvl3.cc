@@ -23,5 +23,5 @@ char lvl3 :: blockType(bool isRandom){
 
 int lvl3 :: lvlNum(){return 3;};
 
-lvl3 :: lvl3 (bool isRandom, string file = "") : Level(isRandom, file){}
+lvl3 :: lvl3 (bool isRandom, string file) : Level(isRandom, file){}
     

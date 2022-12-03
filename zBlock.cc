@@ -3,7 +3,7 @@ using namespace std;
 
 zBlock::zBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : Block(playingBoard, level, boardWidth)
 {
-    blockPos = {pair(2, 0), pair(2, 1), pair(3, 1), pair(3, 2)}; // starts on row 3 cuz the rows 0-2 are reserve rows
+    blockPos = {{2, 0}, {2, 1}, {3, 1}, {3, 2}}; // starts on row 3 cuz the rows 0-2 are reserve rows
 };
 zBlock::~zBlock(){};
 bool zBlock::clockwise()

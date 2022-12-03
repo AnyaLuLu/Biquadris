@@ -5,7 +5,7 @@
 #include <fstream>
 using namespace std;
 
-Level :: Level(bool random = false, string file = "") : random{random}, file{file}{
+Level :: Level(bool random, string file) : random{random}, file{file}{
     blockSequence = {};
 
     if(!random){

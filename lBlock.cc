@@ -3,7 +3,7 @@ using namespace std;
 
 lBlock::lBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : Block(playingBoard, level, boardWidth)
 {
-    blockPos = {pair(3, 0), pair(3, 1), pair(3, 2), pair(2, 2)}; // starts on row 3 cuz the rows 0-2 are reserve rows
+    blockPos = {{3, 0}, {3, 1}, {3, 2}, {2, 2}}; // starts on row 3 cuz the rows 0-2 are reserve rows
 };
 lBlock::~lBlock(){};
 bool lBlock::clockwise()

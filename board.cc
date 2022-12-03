@@ -253,7 +253,19 @@ void Board ::levelup()
     delete tmp;
 }
 
-void Board :: newBlock()
+void Board :: newBlock(){
+    if(heavy){
+        this -> newBlock_heavy();
+    }
+    else if(force){
+        this -> newBlock_force();
+    }
+    else{
+        this -> newBlock_normal();
+    }
+}
+
+void Board :: newBlock_normal()
 {
     char type;
 
@@ -313,6 +325,157 @@ void Board :: newBlock()
         nextBlock = this -> assignBlock(false);
     }
     
+}
+
+void Board :: newBlock_heavy(){
+    char type;
+
+    if(file == ""){
+        type = lvl -> blockType(true);
+    }
+    else{
+        type = lvl -> blockType(false);
+    }
+
+    // notify observers here to change display
+    if(!currentBlock -> canCreate()){
+        lost = true;
+        return;
+    }
+
+    cout << "Command: ";
+    string command;
+
+    while (cin >> command)
+    {
+        Op op = convertOp(command);
+
+        switch (op)
+        {
+        case LEFT:
+            currentBlock -> left();
+            break;
+        case RIGHT:
+            currentBlock -> right();
+            break;
+        case DOWN:
+            currentBlock -> down();
+            break;
+        case CLOCKWISE:
+            currentBlock -> clockwise();
+            break;
+        case COUNTERCLOCKWISE:
+            currentBlock -> counterClockwise();
+            break;
+        case DROP:
+            currentBlock -> drop();
+            break;
+        }
+        // notify observers here to change display
+        // does block mutate playingBoard as it moves?
+
+		currentBlock -> down();
+    }
+
+    playingBlocks.emplace_back(currentBlock);
+    currentBlock -> addBlock();
+
+    currentBlock = nextBlock;
+    if(file == ""){
+        nextBlock = this -> assignBlock(true);
+    }
+    else{
+        nextBlock = this -> assignBlock(false);
+    }
+}
+
+void Board :: newBlock_force() {
+	char type;
+
+    cout << "Choose a Block type: i/j/l/o/s/t/z" << endl;
+
+	cin >> type;
+
+	Block* b;
+
+	if (type == 'i')
+    {
+        b = new iBlock(playingBoard, lvl -> lvlNum(), width);
+    }
+    else if (type == 'j')
+    {
+        b = new jBlock(playingBoard, lvl -> lvlNum(), width);
+    }
+    else if (type == 'l')
+    {
+        b = new lBlock(playingBoard, lvl -> lvlNum(), width);
+    }
+    else if (type == 'o')
+    {
+        b = new oBlock(playingBoard, lvl -> lvlNum(), width);
+    }
+    else if (type == 's')
+    {
+        b = new sBlock(playingBoard, lvl -> lvlNum(), width);
+    }
+    else if (type == 'z')
+    {
+        b = new zBlock(playingBoard, lvl -> lvlNum(), width);
+    }
+    else if (type == 't')
+    {
+        b = new tBlock(playingBoard, lvl -> lvlNum(), width);
+    }
+    // notify observers here to change display
+    if(!currentBlock -> canCreate()){
+        lost = true;
+        return;
+    }
+
+    cout << "Command: ";
+    string command;
+
+    while (cin >> command)
+    {
+        Op op = convertOp(command);
+
+        switch (op)
+        {
+        case LEFT:
+            currentBlock -> left();
+            break;
+        case RIGHT:
+            currentBlock -> right();
+            break;
+        case DOWN:
+            currentBlock -> down();
+            break;
+        case CLOCKWISE:
+            currentBlock -> clockwise();
+            break;
+        case COUNTERCLOCKWISE:
+            currentBlock -> counterClockwise();
+            break;
+        case DROP:
+            currentBlock -> drop();
+            break;
+        }
+        // notify observers here to change display
+        // does block mutate playingBoard as it moves?
+
+		currentBlock -> down();
+    }
+
+    playingBlocks.emplace_back(currentBlock);
+    currentBlock -> addBlock();
+
+    currentBlock = nextBlock;
+    if(file == ""){
+        nextBlock = this -> assignBlock(true);
+    }
+    else{
+        nextBlock = this -> assignBlock(false);
+    }
 }
 
 int Board ::clearlines()

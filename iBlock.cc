@@ -3,7 +3,7 @@ using namespace std;
 
 iBlock::iBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : Block(playingBoard, level, boardWidth)
 {
-    blockPos = {pair(3, 0), pair(3, 1), pair(3, 2), pair(3, 3)}; // starts on row 3 cuz the rows 0-2 are reserve rows
+    blockPos = {{3, 0}, {3, 1}, {3, 2}, {3, 3}}; // starts on row 3 cuz the rows 0-2 are reserve rows
 };
 iBlock::~iBlock(){};
 bool iBlock::clockwise()

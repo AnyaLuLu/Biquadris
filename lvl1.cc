@@ -12,4 +12,4 @@ char lvl1 :: blockType(bool isRandom){
 
 int lvl1 :: lvlNum(){return 1;}
 
-lvl1 :: lvl1 (bool isRandom = true) : Level(isRandom){};
+lvl1 :: lvl1 (bool isRandom) : Level(isRandom){};
