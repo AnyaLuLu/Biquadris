@@ -32,6 +32,7 @@ class Board : public Subject{
     public:
         Block* assignBlock(bool isRandom);
         Board (int width, int height, int newLvl, string file, vector<vector<char>> playingBoard);
+        void newBlock();
         int getScore();
         bool checkLose();
 
@@ -53,28 +54,10 @@ class Board : public Subject{
 
         int clearlines();
 
-        void left();
-        void right();
-        void down();
-        void drop();
-        void cw();
-        void ccw();
-
-        void addBlock();
-
-
     private:
-        void left_norm();
-        void right_norm();
-        void down_norm();
-        void drop_norm();
-        void cw_norm();
-        void ccw_norm();
-        /*
         void newBlock_normal();
         void newBlock_heavy();
         void newBlock_force();
-        */
 };
 
 #endif

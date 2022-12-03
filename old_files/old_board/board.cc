@@ -253,7 +253,6 @@ void Board ::levelup()
     delete tmp;
 }
 
-/*
 void Board :: newBlock(){
     if(heavy){
         this -> newBlock_heavy();
@@ -265,31 +264,17 @@ void Board :: newBlock(){
         this -> newBlock_normal();
     }
 }
-*/
 
-void Board :: left_norm(){currentBlock -> left();}
-void Board :: right_norm(){currentBlock -> right();}
-void Board :: down_norm(){currentBlock -> down();}
-void Board :: drop_norm(){currentBlock -> drop();}
-void Board :: cw_norm(){currentBlock -> clockwise();}
-void Board :: ccw_norm(){currentBlock -> counterClockwise();}
-
-void Board :: addBlock(){ // main calls this to add block on to board
-    playingBlocks.emplace_back(currentBlock);
-    currentBlock -> addBlock();
-
-    currentBlock = nextBlock;
-    if(file == ""){
-        nextBlock = this -> assignBlock(true);
-    }
-    else{
-        nextBlock = this -> assignBlock(false);
-    }
-}
-
-/*
 void Board :: newBlock_normal()
 {
+    char type;
+
+    if(file == ""){
+        type = lvl -> blockType(true);
+    }
+    else{
+        type = lvl -> blockType(false);
+    }
 
     // notify observers here to change display
     if(!currentBlock -> canCreate()){
@@ -492,7 +477,6 @@ void Board :: newBlock_force() {
         nextBlock = this -> assignBlock(false);
     }
 }
-*/
 
 int Board ::clearlines()
 {
