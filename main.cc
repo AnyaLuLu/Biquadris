@@ -15,7 +15,7 @@ Op convertOp(string opStr) {
 
     for (int i = 0; i < commands.size(); ++i) {
         if (opStr.size() <= commands[i].size() && opStr == commands[i].substr(0, opStr.size())) {
-            return i;
+            return Op(i);
         }
     }
 } // convertOp
@@ -45,7 +45,7 @@ int main (int argc, char *argv[]) {
 				return 1;
 			}
 
-            string extra = argv[i+1]
+            string extra = argv[i+1];
             i += 1;
 
             if (command == "-seed") {
