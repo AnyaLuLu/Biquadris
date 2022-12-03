@@ -17,4 +17,16 @@ Fixed scoring
 :DDDDDDDDDDDD
 
 (ig we can use currentBlock* to help with the display)
-(btw Ethan, i left u another function to make that Ethan prolly needs. Put some notes there for ya)
+
+
+
+
+
+
+
+2022-12-02 Update (Ethan)
+1. i had to change the board ctor to take in the width of the board in order to check for seg faults. but dw i updated this everywhere that needed to be updated, including in board
+
+2. implemented worth and deletepos functions in block. Anya, u initially put these as virtual functions but i didnt really see a point of doing that so i defined it in block.cc
+
+3. implemented getPos. it just makes a copy of the blockPos vector and returns that copy. I wasnt really sure thats what you guys wanted it to do, so i will clarify tmrw

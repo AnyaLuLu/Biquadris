@@ -1,5 +1,5 @@
 #include "block.h"
-Block::Block(std::vector<std::vector<char>> &playingBoard, int level, int boardWidth) : playingBoard(playingBoard), level(level), boardWidth(boardWidth) {};
+Block::Block(std::vector<std::vector<char>> &playingBoard, int level, int boardWidth) : playingBoard(playingBoard), level(level), boardWidth(boardWidth){};
 
 Block::~Block(){};
 
@@ -100,4 +100,31 @@ bool Block::drop()
         }
     }
     return true; // drop always returns true. the case in which a block cant be dropped means the game ends, and canCreate would be the function to return false
+};
+
+int Block::worth()
+{
+    return ((level + 1) * (level + 1));
+};
+
+bool Block::deletePos(int row)
+{
+    for (int i = 0; i < blockPos.size(); ++i)
+    {
+        if (blockPos[i].first == row)
+        {
+            blockPos.erase(blockPos.begin() + i);
+            --i;
+        }
+    }
+    if (blockPos.size() == 0)
+    {
+        return true;
+    }
+    return false;
+};
+
+std::vector<std::pair<int, int>> Block::getPos(){
+    std::vector<std::pair<int, int>> retPos = blockPos;
+    return retPos;
 };
