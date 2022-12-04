@@ -98,12 +98,10 @@ int main(int argc, char *argv[])
     vector<vector<char>> p2board(height, vector<char>(width, ' '));
     
     Board *Board1 = new Board{width, height, 0, p1blocks, p1board};
-    /*
     Board *Board2 = new Board{width, height, 0, p2blocks, p2board};
     Board *curBoard = Board1;
 
     bool graphicsOn = true;
-
     for (int i = 1; i < argc; i++)
     {
         string command = argv[i];
@@ -180,19 +178,20 @@ int main(int argc, char *argv[])
 
     while (true)
     {
-        cerr << "Command: ";
+        cout << "Command: ";
         string command;
-
+        
         if (commandSequence.empty())
         {
             cin >> command;
         }
+        
         else
         {
             command = commandSequence.front();
             commandSequence.erase(commandSequence.begin());
         }
-
+        
         int num = getNum(command);
         command = removeNum(command);
 
@@ -200,6 +199,7 @@ int main(int argc, char *argv[])
             break;
 
         curPlayer = (turnCount % 2) + 1;
+        
         if (curPlayer == 1)
         {
             curBoard = Board1;
@@ -224,54 +224,48 @@ int main(int argc, char *argv[])
 
         if (op == LEFT){
             curBoard->left();
-            break;
         }
         else if (op == RIGHT){
             curBoard->right();
-            break;
         }
         else if (op == DOWN){
             curBoard->down();
-            break;
         }
+        
         else if (op == CLOCKWISE){
             curBoard->cw();
-            break;
         }
         else if (op == COUNTERCLOCKWISE){
             curBoard->ccw();
-            break;
         }
+        
         else if (op == DROP){
             curBoard->drop();
             curBoard->addBlock();
             turnCount += 1;
-            break;
         }
+        
         else if (op == LEVEL_UP){
             curBoard->levelup();
-            break;
         }
         else if (op == LEVEL_DOWN){
             curBoard->leveldown();
-            break;
         }
+        
         else if (op == NO_RANDOM){
             string inputfile;
             cin >> inputfile;
             curBoard->setFile(inputfile);
-            break;
         }
         else if (op == RANDOM)
         {
             curBoard->setFile("");
-            break;
         }
         else if (op == BLOCK)
         {
             curBoard->force_set(blockType);
-            break;
         }
+        
         else if(op == SEQUENCE)
         {
             string file;
@@ -299,7 +293,6 @@ int main(int argc, char *argv[])
             {
                 commandSequence.emplace_back(fileCommand);
             }
-            break;
         }
         else if (op == RESTART)
         {
@@ -315,12 +308,10 @@ int main(int argc, char *argv[])
 
             Board1 = new Board{width, height, level1, file1, newBoard1};
             Board2 = new Board{width, height, level2, file2, newBoard2};
-            break;
         }
         else
         {
             cerr << "Invalid command." << endl;
-            break;
         }
 
 
@@ -329,6 +320,7 @@ int main(int argc, char *argv[])
         {
             hiscore = curBoard->getScore();
         }
+
     } // infinite while
-    */
+    
 } // main

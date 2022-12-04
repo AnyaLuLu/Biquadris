@@ -86,31 +86,31 @@ Block* Board :: assignBlock(bool isRandom){
         // notify observers here to change display
         delete b;
     }
-    else if (type == 'i')
+    else if (type == 'i' || type == 'I')
     {
         b = new iBlock(playingBoard, lvl -> lvlNum(), width);
     }
-    else if (type == 'j')
+    else if (type == 'j'|| type == 'J')
     {
         b = new jBlock(playingBoard, lvl -> lvlNum(), width);
     }
-    else if (type == 'l')
+    else if (type == 'l'|| type == 'L')
     {
         b = new lBlock(playingBoard, lvl -> lvlNum(), width);
     }
-    else if (type == 'o')
+    else if (type == 'o'|| type == 'O')
     {
         b = new oBlock(playingBoard, lvl -> lvlNum(), width);
     }
-    else if (type == 's')
+    else if (type == 's'|| type == 'S')
     {
         b = new sBlock(playingBoard, lvl -> lvlNum(), width);
     }
-    else if (type == 'z')
+    else if (type == 'z'|| type == 'Z')
     {
         b = new zBlock(playingBoard, lvl -> lvlNum(), width);
     }
-    else if (type == 't')
+    else if (type == 't'|| type == 'T')
     {
         b = new tBlock(playingBoard, lvl -> lvlNum(), width);
     }

@@ -1,4 +1,5 @@
 #include "block.h"
+#include <iostream>
 Block::Block(std::vector<std::vector<char>> &playingBoard, int level, int boardWidth) : playingBoard(playingBoard), level(level), boardWidth(boardWidth){};
 
 Block::~Block(){};
@@ -8,6 +9,12 @@ bool Block::left()
     // checking for validity
     for (int i = 0; i < blockPos.size(); ++i)
     {
+        std::cerr << "2" << std::endl;
+        if (blockPos[i].second == 0)
+        {
+            return false;
+        }
+        std::cerr << "3" << std::endl;
         int curcol = blockPos[i].first;
         int nextrow = blockPos[i].second - 1;
         if (playingBoard[curcol][nextrow] != ' ')
@@ -32,6 +39,10 @@ bool Block::right()
     // checking for validity
     for (int i = 0; i < blockPos.size(); ++i)
     {
+        if (blockPos[i].second == boardWidth - 1)
+        {
+            return false;
+        }
         int curcol = blockPos[i].first;
         int nextrow = blockPos[i].second + 1;
         if (playingBoard[curcol][nextrow] != ' ')
@@ -124,7 +135,8 @@ bool Block::deletePos(int row)
     return false;
 };
 
-std::vector<std::pair<int, int>> Block::getPos(){
+std::vector<std::pair<int, int>> Block::getPos()
+{
     std::vector<std::pair<int, int>> retPos = blockPos;
     return retPos;
 };
