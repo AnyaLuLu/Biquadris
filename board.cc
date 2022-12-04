@@ -20,37 +20,6 @@
 #include <vector>
 using namespace std;
 
-enum Op
-{
-    LEFT,
-    RIGHT,
-    DOWN,
-    CLOCKWISE,
-    COUNTERCLOCKWISE,
-    DROP,
-    LEVEL_UP,
-    LEVEL_DOWN,
-    NO_RANDOM,
-    RANDOM,
-    BLOCK,
-    RESTART,
-    SEQUENCE
-};
-
-Op convertOp(string opStr)
-{
-    vector<string> commands = {"left", "right", "down", "clockwise", "counterclockwise", "drop", "levelup", "leveldown", "norandom", "random", "block", "restart", "sequence"};
-
-    for (int i = 0; i < commands.size(); ++i)
-    {
-        if (opStr.size() <= commands[i].size() && opStr == commands[i].substr(0, opStr.size()))
-        {
-            return Op(i);
-        }
-    }
-
-} // convertOp
-
 Board :: Board(int width, int height, int newLvl, string file, vector<vector<char>> playingBoard) : width{width}, height{height}, blind{false}, heavy{false}, force{false}, score{0}, file{file}, singleCount{0}, lost{false}, playingBoard{playingBoard}, playingBlocks{}{
     
     /**** If there is no file associated with the lvl, please input empty string for file *****/

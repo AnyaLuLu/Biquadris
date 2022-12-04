@@ -16,11 +16,11 @@ public:
     bool left();
     bool right();
     bool down();
-    virtual bool clockwise();
-    virtual bool counterClockwise();
+    virtual bool clockwise() = 0;
+    virtual bool counterClockwise() = 0;
     bool drop();
-    virtual bool canCreate();
-    virtual void addBlock();
+    virtual bool canCreate() = 0;
+    virtual void addBlock() = 0;
     virtual ~Block();
 
     int worth(); // return how many points this block is worth
