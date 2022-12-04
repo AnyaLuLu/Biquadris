@@ -81,6 +81,7 @@ bool tBlock::clockwise()
     }
 
     // rotating the block
+    this->unset();
     for (int i = 0; i < blockPos.size(); ++i)
     {
         if (facing == 'r' || facing == 'l')
@@ -142,6 +143,7 @@ bool tBlock::clockwise()
             }
         }
     }
+    this->addBlock();
     return true;
 };
 bool tBlock::counterClockwise()
@@ -217,6 +219,7 @@ bool tBlock::counterClockwise()
     }
 
     // rotating the block
+    this->unset();
     for (int i = 0; i < blockPos.size(); ++i)
     {
         if (facing == 'r' || facing == 'l')
@@ -280,6 +283,7 @@ bool tBlock::counterClockwise()
             }
         }
     }
+    this->addBlock();
     return true;
 };
 /*
