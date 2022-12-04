@@ -3,6 +3,7 @@ using namespace std;
 
 sBlock::sBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : Block(playingBoard, level, boardWidth)
 {
+    type = 'S';
     blockPos = {{3, 0}, {3, 1}, {2, 1}, {2, 2}}; // starts on row 3 cuz the rows 0-2 are reserve rows
 };
 sBlock::~sBlock(){};
@@ -57,6 +58,7 @@ bool sBlock::clockwise()
     }
 
     // rotating the block
+    this->unset();
     for (int i = 0; i < blockPos.size(); ++i)
     {
         if (isVert)
@@ -118,6 +120,7 @@ bool sBlock::clockwise()
             }
         }
     }
+    this->addBlock();
     return true;
 };
 
@@ -172,6 +175,7 @@ bool sBlock::counterClockwise() // code is the exact same for clockwise cuz it d
     }
 
     // rotating the block
+    this->unset();
     for (int i = 0; i < blockPos.size(); ++i)
     {
         if (isVert)
@@ -233,9 +237,10 @@ bool sBlock::counterClockwise() // code is the exact same for clockwise cuz it d
             }
         }
     }
+    this->addBlock();
     return true;
 };
-
+/*
 void sBlock::addBlock()
 {
     for (int i = 0; i < blockPos.size(); ++i)
@@ -244,7 +249,7 @@ void sBlock::addBlock()
         int col = blockPos[i].second;
         playingBoard[col][row] = 'S';
     }
-};
+};*/
 bool sBlock::canCreate()
 {
     for (int i = 0; i < blockPos.size(); ++i)

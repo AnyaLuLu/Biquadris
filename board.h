@@ -66,15 +66,8 @@ class Board : public Subject{
 
         void force_set(char type);
 
-    private:
-
-        //Ethan Liu's stuffs
-        
-        /*
-        void newBlock_normal();
-        void newBlock_heavy();
-        void newBlock_force();
-        */
+        Block *getCurrBlock();
+        Block *getNextBlock();
 };
 
 #endif

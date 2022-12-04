@@ -3,6 +3,7 @@ using namespace std;
 
 lBlock::lBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : Block(playingBoard, level, boardWidth)
 {
+    type = 'L';
     blockPos = {{3, 0}, {3, 1}, {3, 2}, {2, 2}}; // starts on row 3 cuz the rows 0-2 are reserve rows
 };
 lBlock::~lBlock(){};
@@ -79,6 +80,7 @@ bool lBlock::clockwise()
         }
     }
 
+    this->unset();
     // rotating the block
     for (int i = 0; i < blockPos.size(); ++i)
     {
@@ -141,6 +143,7 @@ bool lBlock::clockwise()
             }
         }
     }
+    this->addBlock();
     return true;
 };
 
@@ -217,6 +220,7 @@ bool lBlock::counterClockwise()
         }
     }
 
+    this->unset();
     // rotating the block
     for (int i = 0; i < blockPos.size(); ++i)
     {
@@ -281,18 +285,10 @@ bool lBlock::counterClockwise()
             }
         }
     }
+    this->addBlock();
     return true;
 };
 
-void lBlock::addBlock()
-{
-    for (int i = 0; i < blockPos.size(); ++i)
-    {
-        int row = blockPos[i].first;
-        int col = blockPos[i].second;
-        playingBoard[col][row] = 'L';
-    }
-};
 bool lBlock::canCreate()
 {
     for (int i = 0; i < blockPos.size(); ++i)
