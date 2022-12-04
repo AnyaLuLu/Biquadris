@@ -304,3 +304,5 @@ bool jBlock::canCreate()
     }
     return true;
 };
+
+char jBlock :: getType(){return 'J';}

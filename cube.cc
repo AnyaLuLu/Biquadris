@@ -29,3 +29,5 @@ bool cube::clockwise(){
 bool cube::counterClockwise(){
     return true;
 }
+
+char cube :: getType(){return '*';}

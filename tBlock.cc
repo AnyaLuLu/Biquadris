@@ -301,3 +301,5 @@ bool tBlock::canCreate()
     }
     return true;
 };
+
+char tBlock :: getType(){return 'T';}

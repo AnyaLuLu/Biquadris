@@ -12,6 +12,7 @@ public:
     ~cube();
     bool clockwise() override;
     bool counterClockwise() override;
+    char getType() override;
 };
 
 #endif

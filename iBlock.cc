@@ -215,3 +215,5 @@ bool iBlock::canCreate()
     }
     return true;
 };
+
+char iBlock :: getType(){return 'I';}

@@ -304,3 +304,5 @@ bool lBlock::canCreate()
     }
     return true;
 };
+
+char lBlock :: getType(){return 'L';}

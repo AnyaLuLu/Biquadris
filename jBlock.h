@@ -13,6 +13,7 @@ class jBlock : public Block
     bool counterClockwise() override;
     bool canCreate() override;
     void addBlock() override;
+    char getType() override;
 };
 
 #endif

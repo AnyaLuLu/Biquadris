@@ -256,3 +256,6 @@ bool sBlock::canCreate()
     }
     return true;
 };
+
+
+char sBlock :: getType(){return 'S';}

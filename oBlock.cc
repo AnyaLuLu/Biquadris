@@ -36,3 +36,7 @@ bool oBlock::canCreate()
     }
     return true;
 };
+
+
+char oBlock :: getType(){return 'O';}
+
