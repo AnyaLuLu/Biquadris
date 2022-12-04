@@ -5,6 +5,7 @@ sBlock::sBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : 
 {
     type = 'S';
     blockPos = {{3, 0}, {3, 1}, {2, 1}, {2, 2}}; // starts on row 3 cuz the rows 0-2 are reserve rows
+    this->addBlock();
 };
 sBlock::~sBlock(){};
 bool sBlock::clockwise()

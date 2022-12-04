@@ -5,6 +5,7 @@ lBlock::lBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : 
 {
     type = 'L';
     blockPos = {{3, 0}, {3, 1}, {3, 2}, {2, 2}}; // starts on row 3 cuz the rows 0-2 are reserve rows
+    this->addBlock();
 };
 lBlock::~lBlock(){};
 bool lBlock::clockwise()

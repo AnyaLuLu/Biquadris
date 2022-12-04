@@ -5,6 +5,7 @@ zBlock::zBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : 
 {
     type = 'Z';
     blockPos = {{2, 0}, {2, 1}, {3, 1}, {3, 2}}; // starts on row 3 cuz the rows 0-2 are reserve rows
+    this->addBlock();
 };
 zBlock::~zBlock(){};
 bool zBlock::clockwise()

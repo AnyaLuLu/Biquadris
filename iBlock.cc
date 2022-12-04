@@ -5,11 +5,11 @@ iBlock::iBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : 
 {
     blockPos = {{3, 0}, {3, 1}, {3, 2}, {3, 3}}; // starts on row 3 cuz the rows 0-2 are reserve rows
     type = 'I';
+    this->addBlock();
 };
 iBlock::~iBlock(){};
 bool iBlock::clockwise()
 {
-    this->unset();
     // getting lower left corner
     int llcRow = blockPos[0].first;
     int llcCol = blockPos[0].second;
@@ -35,7 +35,6 @@ bool iBlock::clockwise()
     // checking that rotating the block would be in bounds
     if (isVert){
         if (llcCol > (boardWidth - 4)){
-            this->addBlock();
             return false;
         }
     }
@@ -45,7 +44,6 @@ bool iBlock::clockwise()
     {
         if (playingBoard[llcCol + 1][llcRow] != ' ' || playingBoard[llcCol + 2][llcRow] != ' ' || playingBoard[llcCol + 3][llcRow] != ' ')
         {
-            this->addBlock();
             return false;
         }
     }
@@ -53,11 +51,11 @@ bool iBlock::clockwise()
     {
         if (playingBoard[llcCol][llcRow - 1] != ' ' || playingBoard[llcCol][llcRow - 2] != ' ' || playingBoard[llcCol][llcRow + 3] != ' ')
         {
-            this->addBlock();
             return false;
         }
     }
 
+    this->unset();
     // rotating the block
     for (int i = 0; i < blockPos.size(); ++i)
     {
