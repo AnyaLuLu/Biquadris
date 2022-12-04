@@ -196,7 +196,7 @@ int main (int argc, char *argv[]) {
                 curBoard->force_set(blockType);
                 break;
             case SEQUENCE:
-
+                
                 break;
             case RESTART:
                 int level1 = Board1->getLvl();
