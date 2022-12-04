@@ -5,7 +5,6 @@ iBlock::iBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : 
 {
     blockPos = {{3, 0}, {3, 1}, {3, 2}, {3, 3}}; // starts on row 3 cuz the rows 0-2 are reserve rows
     type = 'I';
-    this->addBlock();
 };
 iBlock::~iBlock(){};
 bool iBlock::clockwise()
