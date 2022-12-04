@@ -67,10 +67,10 @@ int main (int argc, char *argv[]) {
     vector<string> commandSequence;
 
     // create boards, displays, etc. here
-    vector<vector<char>> p1board = (height, vector<char> (width, ' '));
-    vector<vector<char>> p2board = (height, vector<char> (width, ' '));
-    Board *Board1{width, height, 0, p1blocks, p1board};
-    Board *Board2{width, height, 0, p2blocks, p2board};
+    vector<vector<char>> p1board (height, vector<char> (width, ' '));
+    vector<vector<char>> p2board (height, vector<char> (width, ' '));
+    Board *Board1 = new Board{width, height, 0, p1blocks, p1board};
+    Board *Board2 = new Board{width, height, 0, p2blocks, p2board};
     Board *curBoard = Board1;
 
     bool graphicsOn = true;
@@ -195,9 +195,9 @@ int main (int argc, char *argv[]) {
                 curBoard->leveldown();
                 break;
             case NO_RANDOM:
-                string file;
-                cin >> file;
-                curBoard->setFile(file);
+                string inputfile;
+                cin >> inputfile;
+                curBoard->setFile(inputfile);
                 break;
             case RANDOM:
                 curBoard->setFile("");
@@ -235,8 +235,8 @@ int main (int argc, char *argv[]) {
                 delete Board1;
                 delete Board2;
 
-                vector<vector<char>> newBoard1  = (height, vector<char> (width, ' '));
-                vector<vector<char>> newBoard2  = (height, vector<char> (width, ' '));
+                vector<vector<char>> newBoard1 (height, vector<char> (width, ' '));
+                vector<vector<char>> newBoard2 (height, vector<char> (width, ' '));
 
                 Board1 = new Board{width, height, level1, file1, newBoard1};
                 Board2 = new Board{width, height, level2, file2, newBoard2};
