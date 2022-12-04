@@ -20,6 +20,14 @@ Op convertOp(string opStr) {
     }
 } // convertOp
 
+bool isBlock(string command) {
+    if (command == "I" || command == "J" || command == "L" || command == "O" || command == "S" || command == "T" || command == "Z") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 int getNum(string command) {
     stringstream ss;
     ss << command;
@@ -49,17 +57,20 @@ int main (int argc, char *argv[]) {
     int player1 = 1, player2 = 2;
 	int startLevel = 0;
     int maxLevel = 4;
-	int board1counter = 1, board2counter = 1;
 	int hiscore = 0;
 	string p1blocks = "sequence1.txt";
 	string p2blocks = "sequence2.txt";
     int turnCount = 0;
     int curPlayer = 1;
+    int width = 11;
+    int height 18;
 
     // create boards, displays, etc. here
-    Board *Board1;
-    Board *Board2;
-    Board *curBoard;
+    vector<vector<char>> p1board = (height, vector<char> (width, ' '));
+    vector<vector<char>> p2board = (height, vector<char> (width, ' '));
+    Board *Board1{width, height, 0, p1blocks, p1board};
+    Board *Board2{width, height, 0, p2blocks, p2board};
+    Board *curBoard = Board1;
 
     bool graphicsOn = true;
 
@@ -137,7 +148,16 @@ int main (int argc, char *argv[]) {
             curBoard = Board2;
         }
 
-        Op op = convertOp(command);
+        char blockType;
+        Op op;
+
+        if (isBlock(command)) {
+            blockType = command[0];
+            op = BLOCK;
+        } else {
+            op = convertOp(command);
+        }
+       
 
         switch( op ) {
             case LEFT: 
@@ -165,24 +185,41 @@ int main (int argc, char *argv[]) {
                 curBoard->leveldown();
                 break;
             case NO_RANDOM:
-                
+                string file;
+                cin >> file;
+                curBoard->setFile(file);
                 break;
             case RANDOM:
-
+                curBoard->setFile("");
                 break;
             case BLOCK:
-
+                curBoard->force_set(blockType);
                 break;
             case SEQUENCE:
 
                 break;
             case RESTART:
+                int level1 = Board1->getLvl();
+                string file1 = Board1->getFile();
+                int level2 = Board2->getLvl();
+                string file2 = Board1->getFile();
+                delete Board1;
+                delete Board2;
 
+                vector<vector<char>> newBoard1  = (height, vector<char> (width, ' '));
+                vector<vector<char>> newBoard2  = (height, vector<char> (width, ' '));
+
+                Board1 = new Board{width, height, level1, file1, newBoard1};
+                Board2 = new Board{width, height, level2, file2, newBoard2};
                 break;
             default: 
                 cerr << "Invalid command." << endl;
                 break;
         } // switch
+
+        if (curBoard->getScore() >= hiscore) {
+            hiscore = curBoard->getScore();
+        }
 
         curBoard->addBlock();
 

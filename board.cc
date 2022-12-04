@@ -154,9 +154,11 @@ bool Board ::getBlind() { return blind; };
 bool Board ::getForce() { return force; };
 bool Board :: getHeavy() { return heavy; };
 int Board :: getLvl(){ return lvl->lvlNum(); };
+string Board :: getFile(){return file;};
 void Board :: setBlind(bool set){blind = set;}
 void Board :: setForce(bool set){force = set;}
 void Board :: setHeavy(bool set){heavy = set;}
+void Board :: setFile(string newFile){file = newFile;};
 
 
 bool Board ::checkLose()
@@ -551,4 +553,38 @@ int Board::getHeight()
 char Board::getState(int row, int col) const
 {
     return playingBoard[col][row];
+}
+
+void Board::force_set(char type) {
+    Block *b;
+    if (type == 'I')
+    {
+        b = new iBlock(playingBoard, lvl -> lvlNum(), width);
+    }
+    else if (type == 'J')
+    {
+        b = new jBlock(playingBoard, lvl -> lvlNum(), width);
+    }
+    else if (type == 'L')
+    {
+        b = new lBlock(playingBoard, lvl -> lvlNum(), width);
+    }
+    else if (type == 'O')
+    {
+        b = new oBlock(playingBoard, lvl -> lvlNum(), width);
+    }
+    else if (type == 'S')
+    {
+        b = new sBlock(playingBoard, lvl -> lvlNum(), width);
+    }
+    else if (type == 'Z')
+    {
+        b = new zBlock(playingBoard, lvl -> lvlNum(), width);
+    }
+    else if (type == 'T')
+    {
+        b = new tBlock(playingBoard, lvl -> lvlNum(), width);
+    }
+
+    currentBlock = b;
 }

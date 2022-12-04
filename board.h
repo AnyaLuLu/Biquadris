@@ -7,7 +7,6 @@
 #include "level.h"
 #include "block.h"
 #include "subject.h"
-using namespace std;
 
 class Board : public Subject{
     protected:
@@ -16,7 +15,7 @@ class Board : public Subject{
         bool blind, heavy, force;
         int score;
         Level* lvl;
-        string file;
+        std::string file;
 
         int singleCount;
         bool lost;
@@ -25,13 +24,13 @@ class Board : public Subject{
         Block* nextBlock;
 
     public:
-        vector<vector<char>> playingBoard;
-        vector<Block*> playingBlocks;
+        std::vector<std::vector<char>> playingBoard;
+        std::vector<Block*> playingBlocks;
         // Should be vector<vector<char>> playingBoard (height, vector<char> (width, ' '))
     
     public:
         Block* assignBlock(bool isRandom);
-        Board (int width, int height, int newLvl, string file, vector<vector<char>> playingBoard);
+        Board (int width, int height, int newLvl, std::string file, std::vector<std::vector<char>> playingBoard);
         int getScore();
         bool checkLose();
 
@@ -39,9 +38,11 @@ class Board : public Subject{
         bool getHeavy();
         bool getForce();
         int getLvl();
+        std::string getFile();
         void setBlind(bool set);
         void setHeavy(bool set);
         void setForce(bool set);
+        void setFile(std::string newFile);
 
         void levelup();
         void leveldown();
@@ -62,11 +63,13 @@ class Board : public Subject{
 
         void addBlock();
 
+        void force_set(char type);
+
 
     private:
 
         //Ethan Liu's stuffs
-        void force_set();
+        
         /*
         void newBlock_normal();
         void newBlock_heavy();
