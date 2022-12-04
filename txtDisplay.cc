@@ -26,7 +26,7 @@ void txtDisplay::notify()
         for (int j = 0; j < Board1->getWidth(); ++j){
             out << Board1 -> getState(i, j);
         }
-        out << '|' << std::endl;
+        out << '|';
 
         out << "      ";
 
