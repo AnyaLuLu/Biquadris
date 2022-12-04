@@ -262,4 +262,4 @@ bool zBlock::canCreate()
     return true;
 };
 
-char getType(){return 'Z';}
+char zBlock::getType(){return 'Z';}

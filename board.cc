@@ -265,7 +265,7 @@ void Board ::ccw() { currentBlock->counterClockwise(); }
 void Board ::addBlock()
 { // main calls this to add block on to board
     playingBlocks.emplace_back(currentBlock);
-    //currentBlock->addBlock();
+    // currentBlock->addBlock();
 
     currentBlock = nextBlock;
     if (file == "")
@@ -545,7 +545,7 @@ int Board::getHeight()
 
 char Board::getState(int row, int col) const
 {
-    return playingBoard[row][col];
+    return playingBoard[row][col]; 
 }
 
 void Board::force_set(char type)
@@ -582,10 +582,12 @@ void Board::force_set(char type)
 
     currentBlock = b;
 }
-
-Block *Board::getCurrBlock(){
+/*
+Block *Board::getCurrBlock()
+{
     return currentBlock;
-}
-Block *Board::getNextBlock(){
-    return nextBlock;
+}*/
+char Board::getNextBlockChar()
+{
+    return nextBlock->getType();
 }

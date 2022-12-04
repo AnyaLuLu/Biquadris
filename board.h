@@ -66,8 +66,8 @@ class Board : public Subject{
 
         void force_set(char type);
 
-        Block *getCurrBlock();
-        Block *getNextBlock();
+        //Block *getCurrBlock();
+        char getNextBlockChar();
 };
 
 #endif

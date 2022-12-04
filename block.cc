@@ -10,13 +10,11 @@ bool Block::left()
     // checking for validity
     for (int i = 0; i < blockPos.size(); ++i)
     {
-        std::cerr << "2" << std::endl;
         if (blockPos[i].second == 0)
         {
             this->addBlock();
             return false;
         }
-        std::cerr << "3" << std::endl;
         int curcol = blockPos[i].first;
         int nextrow = blockPos[i].second - 1;
         if (playingBoard[curcol][nextrow] != ' ')
