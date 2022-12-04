@@ -5,7 +5,7 @@
 using namespace std;
 
 char lvl0 :: blockType(bool isRandom){
-    if(!isRandom){
+    if(!isRandom && blockSequence.size() != 0){
         char b = blockSequence[counter];
         counter += 1;
         if (counter == length) {

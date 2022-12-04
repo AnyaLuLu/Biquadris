@@ -23,7 +23,6 @@ using namespace std;
 Board :: Board(int width, int height, int newLvl, string file, vector<vector<char>> playingBoard) : width{width}, height{height}, blind{false}, heavy{false}, force{false}, score{0}, file{file}, singleCount{0}, lost{false}, playingBoard{playingBoard}, playingBlocks{}{
     
     /**** If there is no file associated with the lvl, please input empty string for file *****/
-    
     if (newLvl <= 0)
     {
         lvl = new lvl0{file, false};
@@ -77,6 +76,7 @@ Board :: Board(int width, int height, int newLvl, string file, vector<vector<cha
 }
 
 Block* Board :: assignBlock(bool isRandom){
+    
     Block* b;
     char type = lvl -> blockType(isRandom);
 

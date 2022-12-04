@@ -3,14 +3,14 @@
 using namespace std;
 
 char lvl1 :: blockType(bool isRandom){
-    if(isRandom){
+    if(isRandom && blockSequence.size() != 0){
         char blockGen[12] = {'i', 'i', 'j', 'j', 'l', 'l', 'o', 'o', 's', 'z', 't', 't'};
         srand (time(NULL));
         int index = rand() % 12;
 
         return blockGen[index];
     }
-    else{
+    else if (blockSequence.size() != 0){
         char b = blockSequence[counter];
         counter += 1;
         if (counter == length) {

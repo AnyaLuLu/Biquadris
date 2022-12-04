@@ -11,7 +11,7 @@ char lvl2 :: blockType(bool isRandom){
 
         return blockGen[index];
     }
-    else{
+    else if (blockSequence.size() != 0){
         char b = blockSequence[counter];
         counter += 1;
         if (counter == length) {

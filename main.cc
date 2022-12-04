@@ -96,7 +96,9 @@ int main(int argc, char *argv[])
     // create boards, displays, etc. here
     vector<vector<char>> p1board(height, vector<char>(width, ' '));
     vector<vector<char>> p2board(height, vector<char>(width, ' '));
+    
     Board *Board1 = new Board{width, height, 0, p1blocks, p1board};
+    /*
     Board *Board2 = new Board{width, height, 0, p2blocks, p2board};
     Board *curBoard = Board1;
 
@@ -328,4 +330,5 @@ int main(int argc, char *argv[])
             hiscore = curBoard->getScore();
         }
     } // infinite while
+    */
 } // main
