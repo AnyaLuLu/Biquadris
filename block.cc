@@ -160,7 +160,7 @@ void Block::addBlock(){
     {
         int row = blockPos[i].first;
         int col = blockPos[i].second;
-        playingBoard[col][row] = type;
+        playingBoard[row][col] = type;
     }
 };
 void Block::unset(){

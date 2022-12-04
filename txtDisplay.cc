@@ -47,6 +47,8 @@ void txtDisplay::notify()
     }
     out << std::endl;
     out << std::endl;
+
+    //out << Board2->getNextBlockChar()<<endl;
     
     std::string newblockb1s1;
     std::string newblockb1s2;
@@ -114,5 +116,4 @@ void txtDisplay::notify()
 
     out << newblockb1s1 << "      " << newblockb2s1 << std::endl;
     out << newblockb1s2 << "      " << newblockb2s2 << std::endl;
-    
 }

@@ -34,9 +34,11 @@ bool sBlock::clockwise()
         }
     }
 
-    //checking that itll rotate in bounds
-    if (isVert){
-        if (llcCol > (boardWidth - 3)){
+    // checking that itll rotate in bounds
+    if (isVert)
+    {
+        if (llcCol > (boardWidth - 3))
+        {
             return false;
         }
     }
@@ -151,9 +153,11 @@ bool sBlock::counterClockwise() // code is the exact same for clockwise cuz it d
         }
     }
 
-    //checking that itll rotate in bounds
-    if (isVert){
-        if (llcCol > (boardWidth - 3)){
+    // checking that itll rotate in bounds
+    if (isVert)
+    {
+        if (llcCol > (boardWidth - 3))
+        {
             return false;
         }
     }
@@ -262,5 +266,7 @@ bool sBlock::canCreate()
     return true;
 };
 
-
-char sBlock :: getType(){return 'S';}
+char sBlock ::getType()
+{
+    return type;
+}
