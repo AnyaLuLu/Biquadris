@@ -5,6 +5,7 @@
 #include "board.h"
 #include "block.h"
 #include "level.h"
+#include "txtDisplay.h"
 
 using namespace std;
 
@@ -100,6 +101,8 @@ int main(int argc, char *argv[])
     Board *Board1 = new Board{width, height, 0, p1blocks, p1board};
     Board *Board2 = new Board{width, height, 0, p2blocks, p2board};
     Board *curBoard = Board1;
+
+    txtDisplay *tDisplay = new txtDisplay{Board1, Board2};
 
     bool graphicsOn = true;
     for (int i = 1; i < argc; i++)
@@ -320,6 +323,9 @@ int main(int argc, char *argv[])
         {
             hiscore = curBoard->getScore();
         }
+
+        curBoard->notifyObservers();
+        int check = curBoard->clearlines();
 
     } // infinite while
     

@@ -8,7 +8,7 @@ void Subject::attach(Observer *o)
     observers.push_back(o);
 };
 
-void Subject::detatch(Observer *o)
+void Subject::detach(Observer *o)
 {
     for (std::vector<Observer *>::iterator it = observers.begin(); it != observers.end(); it++)
     {
