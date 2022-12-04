@@ -3,13 +3,23 @@
 using namespace std;
 
 char lvl1 :: blockType(bool isRandom){
-    char blockGen[12] = {'i', 'i', 'j', 'j', 'l', 'l', 'o', 'o', 's', 'z', 't', 't'};
-    srand (time(NULL));
-    int index = rand() % 12;
+    if(isRandom){
+        char blockGen[12] = {'i', 'i', 'j', 'j', 'l', 'l', 'o', 'o', 's', 'z', 't', 't'};
+        srand (time(NULL));
+        int index = rand() % 12;
 
-    return blockGen[index];
+        return blockGen[index];
+    }
+    else{
+        char b = blockSequence[counter];
+        counter += 1;
+        if (counter == length) {
+            counter = 0;
+        }
+        return b;
+    }
 }
 
 int lvl1 :: lvlNum(){return 1;}
 
-lvl1 :: lvl1 (bool isRandom) : Level(isRandom){};
+lvl1 :: lvl1 (bool isRandom, string file) : Level(isRandom, file){};

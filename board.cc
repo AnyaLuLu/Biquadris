@@ -216,38 +216,32 @@ void Board ::leveldown()
 void Board ::levelup()
 {
     Level *tmp;
-    if (lvl->lvlNum() == 4)
-    {
+    if (lvl->lvlNum() == 4){
         cout << "Max level is 4, you cannot go any higher";
         return;
     }
-    else if (lvl->lvlNum() == 0)
-    {
+    else if (lvl->lvlNum() == 0){
         tmp = new lvl1{true};
     }
     else if(lvl -> lvlNum() == 1){
         tmp = new lvl2{true};
     }
-    else if (lvl->lvlNum() == 2)
-    {
-        Level *tmp;
+    else if (lvl->lvlNum() == 2){
         if (file == "")
         {
-            Level *tmp = new lvl3{true};
+            tmp = new lvl3{true};
         }
         else{
-            Level* tmp = new lvl3{false, file};
+            tmp = new lvl3{false, file};
         }
     }
-    else
-    {
-        Level *tmp;
+    else{
         if (file == "")
         {
-            Level *tmp = new lvl4{true};
+            tmp = new lvl4{true};
         }
         else{
-            Level* tmp = new lvl4{false, file};
+            tmp = new lvl4{false, file};
         }
     }
 
@@ -255,19 +249,27 @@ void Board ::levelup()
     delete tmp;
 }
 
-/*
-void Board :: newBlock(){
-    if(heavy){
-        this -> newBlock_heavy();
+void Board :: sequence(string newfile){
+    Level *tmp;
+    if (lvl->lvlNum() == 0){
+        tmp = new lvl0{newfile, true};
     }
-    else if(force){
-        this -> newBlock_force();
+    else if (lvl->lvlNum() == 1){
+        tmp = new lvl1{true, newfile};
+    }
+    else if(lvl -> lvlNum() == 2){
+        tmp = new lvl2{true, newfile};
+    }
+    else if (lvl->lvlNum() == 3){
+        tmp = new lvl3{false, file};
     }
     else{
-        this -> newBlock_normal();
+        tmp = new lvl4{false, file};
     }
+
+    swap(lvl, tmp);
+    delete tmp;
 }
-*/
 
 void Board :: left(){currentBlock -> left();}
 void Board :: right(){currentBlock -> right();}
