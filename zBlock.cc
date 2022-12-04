@@ -58,6 +58,7 @@ bool zBlock::clockwise()
     }
 
     // rotating the block
+    this->unset();
     for (int i = 0; i < blockPos.size(); ++i)
     {
         if (isVert)
@@ -119,6 +120,7 @@ bool zBlock::clockwise()
             }
         }
     }
+    this->addBlock();
     return true;
 };
 
@@ -173,6 +175,7 @@ bool zBlock::counterClockwise() // code is the exact same as clockwise cuz it do
     }
 
     // rotating the block
+    this->unset();
     for (int i = 0; i < blockPos.size(); ++i)
     {
         if (isVert)
@@ -234,6 +237,7 @@ bool zBlock::counterClockwise() // code is the exact same as clockwise cuz it do
             }
         }
     }
+    this->addBlock();
     return true;
 };
 /*

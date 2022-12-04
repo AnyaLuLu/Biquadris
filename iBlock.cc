@@ -35,7 +35,7 @@ bool iBlock::clockwise()
     // checking that rotating the block would be in bounds
     if (isVert){
         if (llcCol > (boardWidth - 4)){
-            this->addBlock;
+            this->addBlock();
             return false;
         }
     }
@@ -45,7 +45,7 @@ bool iBlock::clockwise()
     {
         if (playingBoard[llcCol + 1][llcRow] != ' ' || playingBoard[llcCol + 2][llcRow] != ' ' || playingBoard[llcCol + 3][llcRow] != ' ')
         {
-            this->addBlock;
+            this->addBlock();
             return false;
         }
     }
@@ -53,7 +53,7 @@ bool iBlock::clockwise()
     {
         if (playingBoard[llcCol][llcRow - 1] != ' ' || playingBoard[llcCol][llcRow - 2] != ' ' || playingBoard[llcCol][llcRow + 3] != ' ')
         {
-            this->addBlock;
+            this->addBlock();
             return false;
         }
     }
@@ -106,7 +106,7 @@ bool iBlock::clockwise()
             }
         }
     }
-    this->addBlock;
+    this->addBlock();
     return true;
 };
 
@@ -138,7 +138,7 @@ bool iBlock::counterClockwise()
     // checking that rotating the block would be in bounds
     if (isVert){
         if (llcCol > (boardWidth - 4)){
-            this->addBlock;
+            this->addBlock();
             return false;
         }
     }
@@ -148,7 +148,7 @@ bool iBlock::counterClockwise()
     {
         if (playingBoard[llcCol + 1][llcRow + 1] != ' ' || playingBoard[llcCol + 2][llcRow + 2] != ' ' || playingBoard[llcCol + 3][llcRow + 3] != ' ')
         {
-            this->addBlock;
+            this->addBlock();
             return false;
         }
     }
@@ -201,7 +201,7 @@ bool iBlock::counterClockwise()
             }
         }
     }
-    this->addBlock;
+    this->addBlock();
     return true;
 };
 /*

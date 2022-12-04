@@ -265,7 +265,7 @@ void Board ::ccw() { currentBlock->counterClockwise(); }
 void Board ::addBlock()
 { // main calls this to add block on to board
     playingBlocks.emplace_back(currentBlock);
-    currentBlock->addBlock();
+    //currentBlock->addBlock();
 
     currentBlock = nextBlock;
     if (file == "")
