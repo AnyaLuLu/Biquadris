@@ -58,6 +58,7 @@ bool sBlock::clockwise()
     }
 
     // rotating the block
+    this->unset();
     for (int i = 0; i < blockPos.size(); ++i)
     {
         if (isVert)
@@ -119,6 +120,7 @@ bool sBlock::clockwise()
             }
         }
     }
+    this->addBlock();
     return true;
 };
 
@@ -173,6 +175,7 @@ bool sBlock::counterClockwise() // code is the exact same for clockwise cuz it d
     }
 
     // rotating the block
+    this->unset();
     for (int i = 0; i < blockPos.size(); ++i)
     {
         if (isVert)
@@ -234,6 +237,7 @@ bool sBlock::counterClockwise() // code is the exact same for clockwise cuz it d
             }
         }
     }
+    this->addBlock();
     return true;
 };
 /*
