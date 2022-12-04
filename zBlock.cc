@@ -3,6 +3,7 @@ using namespace std;
 
 zBlock::zBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : Block(playingBoard, level, boardWidth)
 {
+    type = 'Z';
     blockPos = {{2, 0}, {2, 1}, {3, 1}, {3, 2}}; // starts on row 3 cuz the rows 0-2 are reserve rows
 };
 zBlock::~zBlock(){};
@@ -235,7 +236,7 @@ bool zBlock::counterClockwise() // code is the exact same as clockwise cuz it do
     }
     return true;
 };
-
+/*
 void zBlock::addBlock()
 {
     for (int i = 0; i < blockPos.size(); ++i)
@@ -244,7 +245,7 @@ void zBlock::addBlock()
         int col = blockPos[i].second;
         playingBoard[col][row] = 'Z';
     }
-};
+};*/
 bool zBlock::canCreate()
 {
     for (int i = 0; i < blockPos.size(); ++i)

@@ -20,40 +20,41 @@
 #include <vector>
 using namespace std;
 
-Board :: Board(int width, int height, int newLvl, string file, vector<vector<char>> playingBoard) : width{width}, height{height}, blind{false}, heavy{false}, force{false}, score{0}, file{file}, singleCount{0}, lost{false}, playingBoard{playingBoard}, playingBlocks{}{
-    
+Board ::Board(int width, int height, int newLvl, string file, vector<vector<char>> playingBoard) : width{width}, height{height}, blind{false}, heavy{false}, force{false}, score{0}, file{file}, singleCount{0}, lost{false}, playingBoard{playingBoard}, playingBlocks{}
+{
+
     /**** If there is no file associated with the lvl, please input empty string for file *****/
     if (newLvl <= 0)
     {
         lvl = new lvl0{file, false};
-        currentBlock = this -> assignBlock(false);
-        nextBlock = this -> assignBlock(false);
+        currentBlock = this->assignBlock(false);
+        nextBlock = this->assignBlock(false);
     }
     else if (newLvl == 1)
     {
         lvl = new lvl1{true};
-        currentBlock = this -> assignBlock(true);
-        nextBlock = this -> assignBlock(true);
+        currentBlock = this->assignBlock(true);
+        nextBlock = this->assignBlock(true);
     }
     else if (newLvl == 2)
     {
         lvl = new lvl2{true};
-        currentBlock = this -> assignBlock(true);
-        nextBlock = this -> assignBlock(true);
+        currentBlock = this->assignBlock(true);
+        nextBlock = this->assignBlock(true);
     }
     else if (newLvl == 3)
     {
         if (file == "")
         {
             lvl = new lvl3{true};
-            currentBlock = this -> assignBlock(true);
-            nextBlock = this -> assignBlock(true);
+            currentBlock = this->assignBlock(true);
+            nextBlock = this->assignBlock(true);
         }
         else
         {
             lvl = new lvl3{false, file};
-            currentBlock = this -> assignBlock(false);
-            nextBlock = this -> assignBlock(false);
+            currentBlock = this->assignBlock(false);
+            nextBlock = this->assignBlock(false);
         }
         heavy = true;
     }
@@ -63,72 +64,72 @@ Board :: Board(int width, int height, int newLvl, string file, vector<vector<cha
         {
             lvl = new lvl4{true};
             currentBlock = this->assignBlock(true);
-            nextBlock = this -> assignBlock(true);
+            nextBlock = this->assignBlock(true);
         }
         else
         {
             lvl = new lvl4{false, file};
             currentBlock = this->assignBlock(false);
-            nextBlock = this -> assignBlock(false);
+            nextBlock = this->assignBlock(false);
         }
         heavy = true;
     }
 }
 
-Block* Board :: assignBlock(bool isRandom){
-    
-    Block* b;
-    char type = lvl -> blockType(isRandom);
+Block *Board ::assignBlock(bool isRandom)
+{
 
-    if(lvl -> lvlNum() == 4 && singleCount % 5 == 0 && singleCount != 0){
-        b = new cube(playingBoard, lvl -> lvlNum(), width); // ig we need a new block to be *
-        b -> drop();
+    Block *b;
+    char type = lvl->blockType(isRandom);
+
+    if (lvl->lvlNum() == 4 && singleCount % 5 == 0 && singleCount != 0)
+    {
+        b = new cube(playingBoard, lvl->lvlNum(), width); // ig we need a new block to be *
+        b->drop();
         // notify observers here to change display
         delete b;
     }
     else if (type == 'i' || type == 'I')
     {
-        b = new iBlock(playingBoard, lvl -> lvlNum(), width);
+        b = new iBlock(playingBoard, lvl->lvlNum(), width);
     }
-    else if (type == 'j'|| type == 'J')
+    else if (type == 'j' || type == 'J')
     {
-        b = new jBlock(playingBoard, lvl -> lvlNum(), width);
+        b = new jBlock(playingBoard, lvl->lvlNum(), width);
     }
-    else if (type == 'l'|| type == 'L')
+    else if (type == 'l' || type == 'L')
     {
-        b = new lBlock(playingBoard, lvl -> lvlNum(), width);
+        b = new lBlock(playingBoard, lvl->lvlNum(), width);
     }
-    else if (type == 'o'|| type == 'O')
+    else if (type == 'o' || type == 'O')
     {
-        b = new oBlock(playingBoard, lvl -> lvlNum(), width);
+        b = new oBlock(playingBoard, lvl->lvlNum(), width);
     }
-    else if (type == 's'|| type == 'S')
+    else if (type == 's' || type == 'S')
     {
-        b = new sBlock(playingBoard, lvl -> lvlNum(), width);
+        b = new sBlock(playingBoard, lvl->lvlNum(), width);
     }
-    else if (type == 'z'|| type == 'Z')
+    else if (type == 'z' || type == 'Z')
     {
-        b = new zBlock(playingBoard, lvl -> lvlNum(), width);
+        b = new zBlock(playingBoard, lvl->lvlNum(), width);
     }
-    else if (type == 't'|| type == 'T')
+    else if (type == 't' || type == 'T')
     {
-        b = new tBlock(playingBoard, lvl -> lvlNum(), width);
+        b = new tBlock(playingBoard, lvl->lvlNum(), width);
     }
-    
 }
 
 int Board ::getScore() { return score; };
 
 bool Board ::getBlind() { return blind; };
 bool Board ::getForce() { return force; };
-bool Board :: getHeavy() { return heavy; };
-int Board :: getLvl(){ return lvl->lvlNum(); };
-string Board :: getFile(){return file;};
-void Board :: setBlind(bool set){blind = set;}
-void Board :: setForce(bool set){force = set;}
-void Board :: setHeavy(bool set){heavy = set;}
-void Board :: setFile(string newFile){file = newFile;};
-
+bool Board ::getHeavy() { return heavy; };
+int Board ::getLvl() { return lvl->lvlNum(); };
+string Board ::getFile() { return file; };
+void Board ::setBlind(bool set) { blind = set; }
+void Board ::setForce(bool set) { force = set; }
+void Board ::setHeavy(bool set) { heavy = set; }
+void Board ::setFile(string newFile) { file = newFile; };
 
 bool Board ::checkLose()
 {
@@ -173,7 +174,8 @@ void Board ::leveldown()
         {
             tmp = new lvl3{true};
         }
-        else{
+        else
+        {
             tmp = new lvl3{false, file};
         }
     }
@@ -185,31 +187,38 @@ void Board ::leveldown()
 void Board ::levelup()
 {
     Level *tmp;
-    if (lvl->lvlNum() == 4){
+    if (lvl->lvlNum() == 4)
+    {
         cout << "Max level is 4, you cannot go any higher";
         return;
     }
-    else if (lvl->lvlNum() == 0){
+    else if (lvl->lvlNum() == 0)
+    {
         tmp = new lvl1{true};
     }
-    else if(lvl -> lvlNum() == 1){
+    else if (lvl->lvlNum() == 1)
+    {
         tmp = new lvl2{true};
     }
-    else if (lvl->lvlNum() == 2){
+    else if (lvl->lvlNum() == 2)
+    {
         if (file == "")
         {
             tmp = new lvl3{true};
         }
-        else{
+        else
+        {
             tmp = new lvl3{false, file};
         }
     }
-    else{
+    else
+    {
         if (file == "")
         {
             tmp = new lvl4{true};
         }
-        else{
+        else
+        {
             tmp = new lvl4{false, file};
         }
     }
@@ -218,21 +227,27 @@ void Board ::levelup()
     delete tmp;
 }
 
-void Board :: sequence(string newfile){
+void Board ::sequence(string newfile)
+{
     Level *tmp;
-    if (lvl->lvlNum() == 0){
+    if (lvl->lvlNum() == 0)
+    {
         tmp = new lvl0{newfile, true};
     }
-    else if (lvl->lvlNum() == 1){
+    else if (lvl->lvlNum() == 1)
+    {
         tmp = new lvl1{true, newfile};
     }
-    else if(lvl -> lvlNum() == 2){
+    else if (lvl->lvlNum() == 2)
+    {
         tmp = new lvl2{false, newfile};
     }
-    else if (lvl->lvlNum() == 3){
+    else if (lvl->lvlNum() == 3)
+    {
         tmp = new lvl3{false, file};
     }
-    else{
+    else
+    {
         tmp = new lvl4{false, file};
     }
 
@@ -240,26 +255,30 @@ void Board :: sequence(string newfile){
     delete tmp;
 }
 
-void Board :: left(){currentBlock -> left();}
-void Board :: right(){currentBlock -> right();}
-void Board :: down(){currentBlock -> down();}
-void Board :: drop(){currentBlock -> drop();}
-void Board :: cw(){currentBlock -> clockwise();}
-void Board :: ccw(){currentBlock -> counterClockwise();}
+void Board ::left() { currentBlock->left(); }
+void Board ::right() { currentBlock->right(); }
+void Board ::down() { currentBlock->down(); }
+void Board ::drop() { currentBlock->drop(); }
+void Board ::cw() { currentBlock->clockwise(); }
+void Board ::ccw() { currentBlock->counterClockwise(); }
 
-void Board :: addBlock(){ // main calls this to add block on to board
+void Board ::addBlock()
+{ // main calls this to add block on to board
     playingBlocks.emplace_back(currentBlock);
-    currentBlock -> addBlock();
+    currentBlock->addBlock();
 
     currentBlock = nextBlock;
-    if(file == ""){
-        nextBlock = this -> assignBlock(true);
+    if (file == "")
+    {
+        nextBlock = this->assignBlock(true);
     }
-    else{
-        nextBlock = this -> assignBlock(false);
+    else
+    {
+        nextBlock = this->assignBlock(false);
     }
 
-    if(!currentBlock -> canCreate()){
+    if (!currentBlock->canCreate())
+    {
         lost = true;
         return;
     }
@@ -317,7 +336,7 @@ void Board :: newBlock_normal()
     else{
         nextBlock = this -> assignBlock(false);
     }
-    
+
 }
 
 void Board :: newBlock_heavy(){
@@ -367,7 +386,7 @@ void Board :: newBlock_heavy(){
         // notify observers here to change display
         // does block mutate playingBoard as it moves?
 
-		currentBlock -> down();
+        currentBlock -> down();
     }
 
     playingBlocks.emplace_back(currentBlock);
@@ -383,15 +402,15 @@ void Board :: newBlock_heavy(){
 }
 
 void Board :: newBlock_force() {
-	char type;
+    char type;
 
     cout << "Choose a Block type: i/j/l/o/s/t/z" << endl;
 
-	cin >> type;
+    cin >> type;
 
-	Block* b;
+    Block* b;
 
-	if (type == 'i')
+    if (type == 'i')
     {
         b = new iBlock(playingBoard, lvl -> lvlNum(), width);
     }
@@ -456,7 +475,7 @@ void Board :: newBlock_force() {
         // notify observers here to change display
         // does block mutate playingBoard as it moves?
 
-		currentBlock -> down();
+        currentBlock -> down();
     }
 
     playingBlocks.emplace_back(currentBlock);
@@ -488,19 +507,22 @@ int Board ::clearlines()
             }
         }
 
-        if(fullLine){
+        if (fullLine)
+        {
             clearedlines++;
-            int l = lvl -> lvlNum();
+            int l = lvl->lvlNum();
             score += (++l) * (++l);
 
             playingBoard.erase(playingBoard.begin() + (i - 1));
             vector<char> blankLine(width, ' ');
             playingBoard.insert(playingBoard.begin(), blankLine);
 
-            for(int k = 0; k < playingBlocks.size(); k++){
-                if(playingBlocks[k] -> deletePos(i)){
-                    Block* tmp = playingBlocks[k];
-                    score += tmp -> worth();
+            for (int k = 0; k < playingBlocks.size(); k++)
+            {
+                if (playingBlocks[k]->deletePos(i))
+                {
+                    Block *tmp = playingBlocks[k];
+                    score += tmp->worth();
                     playingBlocks.erase(playingBlocks.begin() + (k - 1));
                     delete tmp;
                     k--;
@@ -523,39 +545,47 @@ int Board::getHeight()
 
 char Board::getState(int row, int col) const
 {
-    return playingBoard[col][row];
+    return playingBoard[row][col];
 }
 
-void Board::force_set(char type) {
+void Board::force_set(char type)
+{
     Block *b;
     if (type == 'I')
     {
-        b = new iBlock(playingBoard, lvl -> lvlNum(), width);
+        b = new iBlock(playingBoard, lvl->lvlNum(), width);
     }
     else if (type == 'J')
     {
-        b = new jBlock(playingBoard, lvl -> lvlNum(), width);
+        b = new jBlock(playingBoard, lvl->lvlNum(), width);
     }
     else if (type == 'L')
     {
-        b = new lBlock(playingBoard, lvl -> lvlNum(), width);
+        b = new lBlock(playingBoard, lvl->lvlNum(), width);
     }
     else if (type == 'O')
     {
-        b = new oBlock(playingBoard, lvl -> lvlNum(), width);
+        b = new oBlock(playingBoard, lvl->lvlNum(), width);
     }
     else if (type == 'S')
     {
-        b = new sBlock(playingBoard, lvl -> lvlNum(), width);
+        b = new sBlock(playingBoard, lvl->lvlNum(), width);
     }
     else if (type == 'Z')
     {
-        b = new zBlock(playingBoard, lvl -> lvlNum(), width);
+        b = new zBlock(playingBoard, lvl->lvlNum(), width);
     }
     else if (type == 'T')
     {
-        b = new tBlock(playingBoard, lvl -> lvlNum(), width);
+        b = new tBlock(playingBoard, lvl->lvlNum(), width);
     }
 
     currentBlock = b;
+}
+
+Block *Board::getCurrBlock(){
+    return currentBlock;
+}
+Block *Board::getNextBlock(){
+    return nextBlock;
 }

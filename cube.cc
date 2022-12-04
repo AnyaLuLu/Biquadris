@@ -2,6 +2,7 @@
 
 cube::cube(std::vector<std::vector<char>> &playingBoard, int level, int boardWidth) : Block(playingBoard, level, boardWidth){
     blockPos = {{3, boardWidth/2}};
+    type = '*';
 };
 
 cube::~cube(){};
@@ -14,13 +15,13 @@ bool cube::canCreate()
     }
     return true;
 };
-
+/*
 void cube::addBlock()
 {
     int row = blockPos[0].first;
     int col = blockPos[0].second;
     playingBoard[col][row] = '*';
-};
+};*/
 
 bool cube::clockwise(){
     return true;
