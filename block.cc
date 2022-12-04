@@ -6,6 +6,7 @@ Block::~Block(){};
 
 bool Block::left()
 {
+    std::cerr << "charmander";
     this->unset();
     // checking for validity
     for (int i = 0; i < blockPos.size(); ++i)
@@ -39,6 +40,7 @@ bool Block::left()
 
 bool Block::right()
 {
+    std::cerr << "pikachu";
     this->unset();
     // checking for validity
     for (int i = 0; i < blockPos.size(); ++i)
@@ -155,7 +157,8 @@ std::vector<std::pair<int, int>> Block::getPos()
     return retPos;
 };
 
-void Block::addBlock(){
+void Block::addBlock()
+{
     for (int i = 0; i < blockPos.size(); ++i)
     {
         int row = blockPos[i].first;
@@ -163,7 +166,8 @@ void Block::addBlock(){
         playingBoard[row][col] = type;
     }
 };
-void Block::unset(){
+void Block::unset()
+{
     for (int i = 0; i < blockPos.size(); ++i)
     {
         int row = blockPos[i].first;

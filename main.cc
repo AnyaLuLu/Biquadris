@@ -61,10 +61,8 @@ int getNum(string command)
     {
         return 1;
     }
-    else
-    {
-        return retNum;
-    }
+    
+    return retNum;
 }
 
 string removeNum(string command)
@@ -73,10 +71,16 @@ string removeNum(string command)
     ss << command;
 
     int tempNum;
-    ss >> tempNum;
     string retString;
-    ss >> retString;
-    return retString;
+    if (ss >> tempNum) {
+        ss >> retString;
+        cerr << 3 << retString << 3;
+        return retString;
+    } else {
+        return command;
+    }
+    
+    
 }
 
 int main(int argc, char *argv[])
@@ -97,7 +101,7 @@ int main(int argc, char *argv[])
     // create boards, displays, etc. here
     vector<vector<char>> p1board(height, vector<char>(width, ' '));
     vector<vector<char>> p2board(height, vector<char>(width, ' '));
-    
+
     Board *Board1 = new Board{width, height, 0, p1blocks, p1board};
     Board *Board2 = new Board{width, height, 0, p2blocks, p2board};
     Board *curBoard = Board1;
@@ -183,26 +187,25 @@ int main(int argc, char *argv[])
     {
         cout << "Command: ";
         string command;
-        
+
         if (commandSequence.empty())
         {
             cin >> command;
-        }
-        
-        else
+        } else
         {
             command = commandSequence.front();
             commandSequence.erase(commandSequence.begin());
         }
-        
+
         int num = getNum(command);
+        cerr << command << endl;
         command = removeNum(command);
 
         if (cin.eof())
             break;
 
         curPlayer = (turnCount % 2) + 1;
-        
+
         if (curPlayer == 1)
         {
             curBoard = Board1;
@@ -225,37 +228,64 @@ int main(int argc, char *argv[])
             op = convertOp(command);
         }
 
-        if (op == LEFT){
-            curBoard->left();
+        if (op == LEFT)
+        {
+            for (int i = 0; i < num; ++i) {
+                curBoard->left();
+            }
         }
-        else if (op == RIGHT){
-            curBoard->right();
+        else if (op == RIGHT)
+        {
+            std::cerr << "squirtle";
+            for (int i = 0; i < num; ++i) {
+                curBoard->right();
+            }
         }
-        else if (op == DOWN){
-            curBoard->down();
+        else if (op == DOWN)
+        {
+            for (int i = 0; i < num; ++i) {
+                curBoard->down();
+            }
         }
-        
-        else if (op == CLOCKWISE){
-            curBoard->cw();
+
+        else if (op == CLOCKWISE)
+        {
+            for (int i = 0; i < num; ++i) {
+                curBoard->cw();
+            }
         }
-        else if (op == COUNTERCLOCKWISE){
-            curBoard->ccw();
+        else if (op == COUNTERCLOCKWISE)
+        {
+            for (int i = 0; i < num; ++i) {
+                curBoard->ccw();
+            }
         }
-        
-        else if (op == DROP){
-            curBoard->drop();
+
+        else if (op == DROP)
+        {
+            for (int i = 0; i < num; ++i) {
+                curBoard->drop();
+            }
+
             curBoard->addBlock();
             turnCount += 1;
         }
-        
-        else if (op == LEVEL_UP){
-            curBoard->levelup();
+
+        else if (op == LEVEL_UP)
+        {
+            for (int i = 0; i < num; ++i) {
+                curBoard->levelup();
+            }
         }
-        else if (op == LEVEL_DOWN){
-            curBoard->leveldown();
+        else if (op == LEVEL_DOWN)
+        {
+            for (int i = 0; i < num; ++i) {
+                curBoard->leveldown();
+            }
         }
-        
-        else if (op == NO_RANDOM){
+
+        else if (op == NO_RANDOM)
+        {
             string inputfile;
             cin >> inputfile;
             curBoard->setFile(inputfile);
@@ -268,8 +298,8 @@ int main(int argc, char *argv[])
         {
             curBoard->force_set(blockType);
         }
-        
-        else if(op == SEQUENCE)
+
+        else if (op == SEQUENCE)
         {
             string file;
             string fileCommand;
@@ -317,8 +347,6 @@ int main(int argc, char *argv[])
             cerr << "Invalid command." << endl;
         }
 
-
-
         if (curBoard->getScore() >= hiscore)
         {
             hiscore = curBoard->getScore();
@@ -328,5 +356,5 @@ int main(int argc, char *argv[])
         int check = curBoard->clearlines();
 
     } // infinite while
-    
+
 } // main
