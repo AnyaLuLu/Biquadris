@@ -258,7 +258,7 @@ void Board :: sequence(string newfile){
         tmp = new lvl1{true, newfile};
     }
     else if(lvl -> lvlNum() == 2){
-        tmp = new lvl2{true, newfile};
+        tmp = new lvl2{false, newfile};
     }
     else if (lvl->lvlNum() == 3){
         tmp = new lvl3{false, file};

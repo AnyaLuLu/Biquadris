@@ -63,7 +63,8 @@ int main (int argc, char *argv[]) {
     int turnCount = 0;
     int curPlayer = 1;
     int width = 11;
-    int height 18;
+    int height = 18;
+    vector<string> commandSequence;
 
     // create boards, displays, etc. here
     vector<vector<char>> p1board = (height, vector<char> (width, ' '));
@@ -134,7 +135,14 @@ int main (int argc, char *argv[]) {
     while (true) {
         cerr << "Command: ";
         string command;
-        cin >> command;
+
+        if (commandSequence.empty()) {
+            cin >> command;
+        } else {
+            command = commandSequence.front();
+            commandSequence.erase(commandSequence.begin());
+        }
+        
 
         int num = getNum(command);
         command = removeNum(command);
@@ -177,6 +185,8 @@ int main (int argc, char *argv[]) {
                 break;
             case DROP: 
                 curBoard->drop();
+                curBoard->addBlock();
+                turnCount += 1;
                 break;
             case LEVEL_UP: 
                 curBoard->levelup();
@@ -196,7 +206,26 @@ int main (int argc, char *argv[]) {
                 curBoard->force_set(blockType);
                 break;
             case SEQUENCE:
-                
+                string file;
+                string fileCommand;
+                ifstream f;
+
+                if (commandSequence.empty()) {
+                    cin >> file;
+                } else {
+                    file = commandSequence.front();
+                    commandSequence.erase(commandSequence.begin());
+                }
+
+                f.open(file);
+                if (!f.good()) {
+                    cout << "Invalid file: " << file << endl;
+                    continue;
+                }
+
+                while (f >> fileCommand) {
+                    commandSequence.emplace_back(fileCommand);
+                }
                 break;
             case RESTART:
                 int level1 = Board1->getLvl();
@@ -220,10 +249,6 @@ int main (int argc, char *argv[]) {
         if (curBoard->getScore() >= hiscore) {
             hiscore = curBoard->getScore();
         }
-
-        curBoard->addBlock();
-
-        turnCount += 1;
     } // infinite while
 } // main
 
