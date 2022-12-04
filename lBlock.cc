@@ -80,6 +80,7 @@ bool lBlock::clockwise()
         }
     }
 
+    this->unset();
     // rotating the block
     for (int i = 0; i < blockPos.size(); ++i)
     {
@@ -142,6 +143,7 @@ bool lBlock::clockwise()
             }
         }
     }
+    this->addBlock();
     return true;
 };
 
@@ -218,6 +220,7 @@ bool lBlock::counterClockwise()
         }
     }
 
+    this->unset();
     // rotating the block
     for (int i = 0; i < blockPos.size(); ++i)
     {
@@ -282,6 +285,7 @@ bool lBlock::counterClockwise()
             }
         }
     }
+    this->addBlock();
     return true;
 };
 

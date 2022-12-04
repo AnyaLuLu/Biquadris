@@ -112,7 +112,6 @@ bool iBlock::clockwise()
 
 bool iBlock::counterClockwise()
 {
-    this->unset();
     // getting lower left corner
     int llcRow = blockPos[0].first;
     int llcCol = blockPos[0].second;
@@ -138,7 +137,6 @@ bool iBlock::counterClockwise()
     // checking that rotating the block would be in bounds
     if (isVert){
         if (llcCol > (boardWidth - 4)){
-            this->addBlock();
             return false;
         }
     }
@@ -148,11 +146,11 @@ bool iBlock::counterClockwise()
     {
         if (playingBoard[llcCol + 1][llcRow + 1] != ' ' || playingBoard[llcCol + 2][llcRow + 2] != ' ' || playingBoard[llcCol + 3][llcRow + 3] != ' ')
         {
-            this->addBlock();
             return false;
         }
     }
 
+    this->unset();
     // rotating the block
     for (int i = 0; i < blockPos.size(); ++i)
     {
