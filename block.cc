@@ -6,7 +6,7 @@ Block::~Block(){};
 
 bool Block::left()
 {
-    std::cerr << "charmander";
+    //std::cerr << "charmander";
     this->unset();
     // checking for validity
     for (int i = 0; i < blockPos.size(); ++i)
@@ -16,8 +16,8 @@ bool Block::left()
             this->addBlock();
             return false;
         }
-        int curcol = blockPos[i].first;
-        int nextrow = blockPos[i].second - 1;
+        int nextrow = blockPos[i].first;
+        int curcol = blockPos[i].second - 1;
         if (playingBoard[curcol][nextrow] != ' ')
         {
             this->addBlock();
@@ -40,7 +40,7 @@ bool Block::left()
 
 bool Block::right()
 {
-    std::cerr << "pikachu";
+    //std::cerr << "pikachu";
     this->unset();
     // checking for validity
     for (int i = 0; i < blockPos.size(); ++i)
@@ -48,18 +48,21 @@ bool Block::right()
         if (blockPos[i].second == boardWidth - 1)
         {
             this->addBlock();
+            std::cerr << "error1";
             return false;
         }
-        int curcol = blockPos[i].first;
-        int nextrow = blockPos[i].second + 1;
+        int nextrow = blockPos[i].first;
+        int curcol = blockPos[i].second + 1;
         if (playingBoard[curcol][nextrow] != ' ')
         {
             this->addBlock();
+            std::cerr << "error 2";
             return false;
         }
         if (nextrow > boardWidth)
         {
             this->addBlock();
+            std::cerr << "error1";
             return false;
         }
     }
@@ -67,6 +70,7 @@ bool Block::right()
     for (int i = 0; i < blockPos.size(); ++i)
     {
         blockPos[i].second++;
+        std::cerr << blockPos[i].second << std::endl;
     }
     this->addBlock();
     return true;
@@ -80,12 +84,12 @@ bool Block::down()
     {
         int nextcol = blockPos[i].first + 1;
         int currow = blockPos[i].second;
-        if (playingBoard[nextcol][currow] != ' ')
+        if (nextcol > 17)
         {
             this->addBlock();
             return false;
         }
-        if (nextcol > 17)
+        if (playingBoard[nextcol][currow] != ' ')
         {
             this->addBlock();
             return false;
@@ -172,6 +176,6 @@ void Block::unset()
     {
         int row = blockPos[i].first;
         int col = blockPos[i].second;
-        playingBoard[col][row] = ' ';
+        playingBoard[row][col] = ' ';
     }
 };

@@ -266,7 +266,4 @@ bool sBlock::canCreate()
     return true;
 };
 
-char sBlock ::getType()
-{
-    return type;
-}
+char sBlock :: getType(){return type;}

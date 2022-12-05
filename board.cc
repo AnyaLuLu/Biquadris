@@ -29,6 +29,7 @@ Board ::Board(int width, int height, int newLvl, string file, vector<vector<char
         lvl = new lvl0{file, false};
         currentBlock = this->assignBlock(false);
         nextBlock = this->assignBlock(false);
+        //std::cerr << "I've been assigned" << std::endl;
     }
     else if (newLvl == 1)
     {
@@ -117,6 +118,7 @@ Block *Board ::assignBlock(bool isRandom)
     {
         b = new tBlock(playingBoard, lvl->lvlNum(), width);
     }
+    return b;
 }
 
 int Board ::getScore() { return score; };
@@ -158,14 +160,17 @@ void Board ::leveldown()
     }
     else if (lvl->lvlNum() == 1)
     {
+        cout << "Changed to level 0" << endl;
         tmp = new lvl0{file, false};
     }
     else if (lvl->lvlNum() == 2)
     {
+        cout << "Changed to level 1" << endl;
         tmp = new lvl1{true};
     }
     else if (lvl->lvlNum() == 3)
     {
+        cout << "Changed to level 2" << endl;
         tmp = new lvl2{true};
     }
     else if (lvl->lvlNum() == 4)
@@ -178,6 +183,7 @@ void Board ::leveldown()
         {
             tmp = new lvl3{false, file};
         }
+        cout << "Changed to level 3" << endl;
     }
 
     swap(lvl, tmp);
@@ -194,10 +200,12 @@ void Board ::levelup()
     }
     else if (lvl->lvlNum() == 0)
     {
+        cout << "Changed to level 1" << endl;
         tmp = new lvl1{true};
     }
     else if (lvl->lvlNum() == 1)
     {
+        cout << "Changed to level 2" << endl;
         tmp = new lvl2{true};
     }
     else if (lvl->lvlNum() == 2)
@@ -210,6 +218,7 @@ void Board ::levelup()
         {
             tmp = new lvl3{false, file};
         }
+        cout << "Changed to level 3" << endl;
     }
     else
     {
@@ -221,6 +230,7 @@ void Board ::levelup()
         {
             tmp = new lvl4{false, file};
         }
+        cout << "Changed to level 4" << endl;
     }
 
     swap(lvl, tmp);
@@ -255,12 +265,13 @@ void Board ::sequence(string newfile)
     delete tmp;
 }
 
-void Board ::left() { currentBlock->left(); }
-void Board ::right() { currentBlock->right(); }
+void Board ::left() { currentBlock->left();}
+
+void Board ::right() { currentBlock->right();}
 void Board ::down() { currentBlock->down(); }
 void Board ::drop() { currentBlock->drop(); }
 void Board ::cw() { currentBlock->clockwise(); }
-void Board ::ccw() { currentBlock->counterClockwise(); }
+void Board ::ccw() { currentBlock->counterClockwise();}
 
 void Board ::addBlock()
 { // main calls this to add block on to board
@@ -587,7 +598,4 @@ Block *Board::getCurrBlock()
 {
     return currentBlock;
 }*/
-char Board::getNextBlockChar()
-{
-    return nextBlock->getType();
-}
+char Board::getNextBlockChar(){return nextBlock->getType();}
