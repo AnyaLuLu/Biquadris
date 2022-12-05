@@ -288,7 +288,8 @@ void Board ::addBlock()
     playingBlocks.emplace_back(currentBlock);
     // currentBlock->addBlock();
 
-    currentBlock = nextBlock;
+    //currentBlock = nextBlock;
+    swap(currentBlock, nextBlock);
     if (file == "")
     {
         nextBlock = this->assignBlock(true);
@@ -326,8 +327,10 @@ int Board ::clearlines()
         if (fullLine)
         {
             clearedlines++;
+            int l = lvl->lvlNum();
+            score += (++l) * (++l);
 
-            playingBoard.erase(playingBoard.begin() + i);
+            playingBoard.erase(playingBoard.begin() + (i - 1));
             vector<char> blankLine(width, ' ');
             playingBoard.insert(playingBoard.begin(), blankLine);
 
@@ -337,22 +340,15 @@ int Board ::clearlines()
                 {
                     Block *tmp = playingBlocks[k];
                     score += tmp->worth();
-                    playingBlocks.erase(playingBlocks.begin() + k);
+                    playingBlocks.erase(playingBlocks.begin() + (k - 1));
                     delete tmp;
                     k--;
-			std::cout << "a block has been deleted on line " << i <<  std::endl;
                 }
             }
 
             // notify observers to change display
         }
-
     }
-    int l = lvl->lvlNum();
-    std:: cout <<(l + clearedlines) * (l + clearedlines) << endl; 
-    score += (l + clearedlines) * (l + clearedlines);
-
-   return clearedlines;
 }
 
 int Board::getWidth()

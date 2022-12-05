@@ -37,6 +37,7 @@ Op convertOp(string opStr)
             return Op(i);
         }
     }
+    return Op(0);
 } // convertOp
 
 bool isBlock(string command)
@@ -182,6 +183,8 @@ int main(int argc, char *argv[])
             }
         }
     }
+
+    curBoard->notifyObservers();
 
     while (true)
     {

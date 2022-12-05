@@ -99,38 +99,13 @@ bool Block::down()
 
 bool Block::drop()
 {
+    if(!(this -> down())){
+	return false;
+    }
+
     while (this->down()){};
     return true;
 }
-/*
-bool Block::drop()
-{
-    this->unset();
-    while (true)
-    {
-        // checking that it can be dropped
-        for (int i = 0; i < blockPos.size(); ++i)
-        {
-            int nextcol = blockPos[i].first + 1;
-            int currow = blockPos[i].second;
-            if (nextcol > 17)
-            {
-                break;
-            }
-            if (playingBoard[nextcol][currow] != ' ')
-            {
-                break;
-            }
-        }
-        // actual mutation
-        for (int i = 0; i < blockPos.size(); ++i)
-        {
-            blockPos[i].first++;
-        }
-    }
-    this->addBlock();
-    return true; // drop always returns true. the case in which a block cant be dropped means the game ends, and canCreate would be the function to return false
-};*/
 
 int Block::worth()
 {
@@ -145,7 +120,13 @@ bool Block::deletePos(int row)
         {
             blockPos.erase(blockPos.begin() + i);
             --i;
+	    std::cout << "a block pos has been erased" << std::endl;
         }
+
+	else if(blockPos[i].first < row){
+	    blockPos[i].first++;
+	    std::cout << "a block pos has been moved down" << std::endl;
+	}
     }
     if (blockPos.size() == 0)
     {

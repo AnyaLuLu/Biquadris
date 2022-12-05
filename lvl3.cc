@@ -19,6 +19,7 @@ char lvl3 :: blockType(bool isRandom){
         }
         return b;
     }
+    return ' ';
 }
 
 int lvl3 :: lvlNum(){return 3;};
