@@ -1,4 +1,5 @@
 #include "zBlock.h"
+//#include <iostream>
 using namespace std;
 
 zBlock::zBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : Block(playingBoard, level, boardWidth)
@@ -94,28 +95,34 @@ bool zBlock::clockwise()
         {
             if (blockPos[i].first == llcRow && blockPos[i].second == llcCol)
             {
+                //std::cerr<< i << "case 1" << std::endl;
                 blockPos[i].first -= 2;
             }
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 1)
             {
+                //std::cerr<< i << "case 2" << std::endl;
                 blockPos[i].first -= 1;
                 blockPos[i].second -= 1;
             }
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 2)
             {
-                blockPos[i].second -= 1;
+                //std::cerr<< i << "case 3" << std::endl;
+                blockPos[i].second -= 2;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol)
             {
+                //std::cerr<< i << "case 4" << std::endl;
                 blockPos[i].first -= 1;
                 blockPos[i].second += 1;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol + 1)
             {
+                //std::cerr<< i << "case 5" << std::endl;
                 continue;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol + 2)
             {
+                //std::cerr<< i << "case 6" << std::endl;
                 blockPos[i].first += 1;
             }
         }
@@ -220,7 +227,7 @@ bool zBlock::counterClockwise() // code is the exact same as clockwise cuz it do
             }
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 2)
             {
-                blockPos[i].second -= 1;
+                blockPos[i].second -= 2;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol)
             {
