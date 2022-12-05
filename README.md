@@ -1,32 +1,23 @@
 # Biquadris
 CS 246
 
-2022-12-02 Update (Anya)
+Ethan Chan's Update:
 
-Added currentBlock* and nextBlock*
-    Added a new function assignBlock (line 110). Calls lvl -> blockType, which returns a string, then returns a Block* based on that string.
+What's fixed:
+1. clockwise and counterclockwise on all the blocks
+2. drop doesnt seg fault anymore
+3. right and left work past the 11th row
 
-    currentBlock* and nextBlock* called in the ctor to initialize them thru blockType in lvl
+I still need to:
+1. test: testing the guards on block functions (i.e. if there is another block in the way when you try to move it). I will do this later. This shouldnt impact debugging other aspects of the game
 
-    currentBlock* added to Board's vectors in newBlock() (see line 304), then both pointers r updated.
-
-Fixed scoring
-    in clearlines() (see line 334) score i added based on lvl
-    Then playingBlocks is looped thru and all approporiate Block*'s are deleted and score is updated
-
-:DDDDDDDDDDDD
-
-(ig we can use currentBlock* to help with the display)
-
-
-
-
-
-
-
-2022-12-02 Update (Ethan)
-1. i had to change the board ctor to take in the width of the board in order to check for seg faults. but dw i updated this everywhere that needed to be updated, including in board
-
-2. implemented worth and deletepos functions in block. Anya, u initially put these as virtual functions but i didnt really see a point of doing that so i defined it in block.cc
-
-3. implemented getPos. it just makes a copy of the blockPos vector and returns that copy. I wasnt really sure thats what you guys wanted it to do, so i will clarify tmrw
+For Anya and Ethan Liu to work on:
+1. bug: all blocks: if right is the first step, clockwise and counterclockwise dont work on the second step. not sure if this is a problem in block or board. I didn't look too far into it, but if you think the problem is in block you can leave it for me.
+2. test: test score
+3. bug: line clearing. currently, we are clearing the wrong line LOL
+4. add feature: render the board before the first move
+5. bug: the next block isnt always showing the correct block. I think its showing 2 blocks in advance? but im not 100pct sure cuz i didnt look too far into it
+6. add feature: a cerr message when you try to execute an invalid block move (e.g. when you try to go left on the first move)
+7. add feature: make levels print out "new level!" every time we levelup (or leveldown)
+8. add feature: graphics observer
+9. clean up comments (at the end) and probably other things along the way
