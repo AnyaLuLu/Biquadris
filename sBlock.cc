@@ -1,4 +1,5 @@
 #include "sBlock.h"
+//#include <iostream>
 using namespace std;
 
 sBlock::sBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : Block(playingBoard, level, boardWidth)
@@ -96,29 +97,36 @@ bool sBlock::clockwise()
         {
             if (blockPos[i].first == llcRow && blockPos[i].second == llcCol)
             {
+                //std::cerr<< i << "case 1" << std::endl;
                 blockPos[i].first -= 2;
             }
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 1)
             {
+                //std::cerr<< i << "case 2" << std::endl;
                 blockPos[i].first -= 1;
                 blockPos[i].second -= 1;
             }
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 2)
             {
+                //std::cerr<< i << "case 3" << std::endl;
                 blockPos[i].second -= 1;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol)
             {
+                //std::cerr<< i << "case 4" << std::endl;
                 blockPos[i].first -= 1;
                 blockPos[i].second += 1;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol + 1)
             {
+                //std::cerr<< i << "case 5" << std::endl;
                 continue;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol + 2)
             {
+                //std::cerr<< i << "case 6" << std::endl;
                 blockPos[i].first += 1;
+                blockPos[i].second -= 1;
             }
         }
     }
@@ -126,7 +134,7 @@ bool sBlock::clockwise()
     return true;
 };
 
-bool sBlock::counterClockwise() // code is the exact same for clockwise cuz it does the same thing
+bool sBlock::counterClockwise()
 {
     // getting lower left corner
     int llcRow = blockPos[0].first;
@@ -215,29 +223,36 @@ bool sBlock::counterClockwise() // code is the exact same for clockwise cuz it d
         {
             if (blockPos[i].first == llcRow && blockPos[i].second == llcCol)
             {
+                //std::cerr<< i << "case 1" << std::endl;
                 blockPos[i].first -= 2;
             }
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 1)
             {
+                //std::cerr<< i << "case 2" << std::endl;
                 blockPos[i].first -= 1;
                 blockPos[i].second -= 1;
             }
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 2)
             {
+                //std::cerr<< i << "case 3" << std::endl;
                 blockPos[i].second -= 1;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol)
             {
+                //std::cerr<< i << "case 4" << std::endl;
                 blockPos[i].first -= 1;
                 blockPos[i].second += 1;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol + 1)
             {
+                //std::cerr<< i << "case 5" << std::endl;
                 continue;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol + 2)
             {
+                //std::cerr<< i << "case 6" << std::endl;
                 blockPos[i].first += 1;
+                blockPos[i].second -= 1;
             }
         }
     }
