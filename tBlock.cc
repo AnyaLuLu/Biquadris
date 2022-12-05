@@ -126,7 +126,7 @@ bool tBlock::clockwise()
             }
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 2)
             {
-                blockPos[i].second -= 1;
+                blockPos[i].second -= 2;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol)
             {
@@ -140,6 +140,7 @@ bool tBlock::clockwise()
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol + 2)
             {
                 blockPos[i].first += 1;
+                blockPos[i].second -= 1;
             }
         }
     }
@@ -231,7 +232,7 @@ bool tBlock::counterClockwise()
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 1)
             {
                 blockPos[i].first -= 1;
-                blockPos[i].second += 2;
+                blockPos[i].second += 1;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol)
             {
@@ -261,7 +262,6 @@ bool tBlock::counterClockwise()
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 1)
             {
                 blockPos[i].first -= 1;
-                blockPos[i].second += 1;
             }
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 2)
             {

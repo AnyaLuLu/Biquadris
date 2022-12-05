@@ -1,4 +1,5 @@
 #include "oBlock.h"
+//#include <iostream>
 using namespace std;
 
 oBlock::oBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : Block(playingBoard, level, boardWidth)
@@ -9,11 +10,16 @@ oBlock::oBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : 
 oBlock::~oBlock(){};
 bool oBlock::clockwise()
 {
+    //std::cout<<"here"<<std::endl;
+    this->unset();
+    this->addBlock();
     return true; // cuz the oblock can always be rotated
 };
 
 bool oBlock::counterClockwise()
 {
+    this->unset();
+    this->addBlock();
     return true; // cuz the oblock can always be rotated
 };
 /*
