@@ -74,7 +74,7 @@ string removeNum(string command)
     string retString;
     if (ss >> tempNum) {
         ss >> retString;
-        cerr << 3 << retString << 3;
+        //cerr << 3 << retString << 3;
         return retString;
     } else {
         return command;
@@ -236,9 +236,9 @@ int main(int argc, char *argv[])
         }
         else if (op == RIGHT)
         {
-            std::cerr << "squirtle";
             for (int i = 0; i < num; ++i) {
                 curBoard->right();
+                std::cerr << i << "is i" << std::endl;
             }
         }
         else if (op == DOWN)

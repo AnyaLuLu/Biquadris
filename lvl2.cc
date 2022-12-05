@@ -1,6 +1,5 @@
 #include "lvl2.h"
 #include <time.h>
-#include "Level.h"
 using namespace std;
 
 char lvl2 :: blockType(bool isRandom){
