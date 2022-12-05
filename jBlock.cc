@@ -1,4 +1,5 @@
 #include "jBlock.h"
+#include <iostream>
 using namespace std;
 
 jBlock::jBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : Block(playingBoard, level, boardWidth)
@@ -79,7 +80,6 @@ bool jBlock::clockwise()
             return false;
         }
     }
-
     this->unset();
     // rotating the block
     for (int i = 0; i < blockPos.size(); ++i)
@@ -118,28 +118,35 @@ bool jBlock::clockwise()
             if (blockPos[i].first == llcRow && blockPos[i].second == llcCol)
             {
                 blockPos[i].first -= 2;
+                //std::cerr<< i << "case 1" << std::endl;
             }
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 1)
             {
                 blockPos[i].first -= 1;
                 blockPos[i].second -= 1;
+                //std::cerr<< i << "case 2" << std::endl;
             }
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 2)
             {
-                blockPos[i].second -= 1;
+                blockPos[i].second -= 2;
+                //std::cerr<< i << "case 3" << std::endl;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol)
             {
                 blockPos[i].first -= 1;
                 blockPos[i].second += 1;
+                //std::cerr<< i << "case 4" << std::endl;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol + 1)
             {
+                //std::cerr<< i << "case 5" << std::endl;
                 continue;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol + 2)
             {
                 blockPos[i].first += 1;
+                blockPos[i].second -= 1;
+                //std::cerr<< i << "case 6" << std::endl;
             }
         }
     }
@@ -182,19 +189,19 @@ bool jBlock::counterClockwise()
             topCorn = true;
         }
     }
-
     //checking that itll rotate in bounds
     if (isVert){
         if (llcCol > (boardWidth - 3)){
             return false;
         }
     }
-
+    //std::cerr<< "checkpoint 1" << std::endl;
     // checking if it can be rotated. note that playingboard is col, row since it is a vector of vectors
     if (isVert && topCorn)
     {
         if (playingBoard[llcCol + 1][llcRow] != ' ' || playingBoard[llcCol + 2][llcRow] != ' ')
         {
+            //std::cerr<< "case 1" << std::endl;
             return false;
         }
     }
@@ -202,6 +209,7 @@ bool jBlock::counterClockwise()
     {
         if (playingBoard[llcCol][llcRow - 1] != ' ' || playingBoard[llcCol + 2][llcRow] != ' ' || playingBoard[llcCol + 2][llcRow - 1] != ' ')
         {
+            //std::cerr<< "case 2" << std::endl;
             return false;
         }
     }
@@ -209,19 +217,23 @@ bool jBlock::counterClockwise()
     {
         if (playingBoard[llcCol][llcRow] != ' ' || playingBoard[llcCol][llcRow - 2] != ' ' || playingBoard[llcCol + 1][llcRow - 2] != ' ')
         {
+            //std::cerr<< "case 3" << std::endl;
             return false;
         }
     }
     else if (!isVert && !topCorn)
     {
-        if (playingBoard[llcCol + 1][llcRow = 1] != ' ' || playingBoard[llcCol + 1][llcRow - 2] != ' ')
+        if (playingBoard[llcCol + 1][llcRow - 1] != ' ' || playingBoard[llcCol + 1][llcRow - 2] != ' ')
         {
+            //std::cerr<< "case 4" << std::endl;
             return false;
         }
     }
+    //std::cerr<< "checkpoint 2" << std::endl;
 
     this->unset();
     // rotating the block
+    //std::cerr<< "called here" << std::endl;
     for (int i = 0; i < blockPos.size(); ++i)
     {
         if (isVert)
@@ -233,7 +245,7 @@ bool jBlock::counterClockwise()
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 1)
             {
                 blockPos[i].first -= 1;
-                blockPos[i].second += 2;
+                blockPos[i].second += 1;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol)
             {
@@ -263,7 +275,6 @@ bool jBlock::counterClockwise()
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 1)
             {
                 blockPos[i].first -= 1;
-                blockPos[i].second += 1;
             }
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 2)
             {

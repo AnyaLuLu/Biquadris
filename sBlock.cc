@@ -109,7 +109,7 @@ bool sBlock::clockwise()
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 2)
             {
                 //std::cerr<< i << "case 3" << std::endl;
-                blockPos[i].second -= 1;
+                blockPos[i].second -= 2;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol)
             {
@@ -235,7 +235,7 @@ bool sBlock::counterClockwise()
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 2)
             {
                 //std::cerr<< i << "case 3" << std::endl;
-                blockPos[i].second -= 1;
+                blockPos[i].second -= 2;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol)
             {

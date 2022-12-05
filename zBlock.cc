@@ -124,6 +124,7 @@ bool zBlock::clockwise()
             {
                 //std::cerr<< i << "case 6" << std::endl;
                 blockPos[i].first += 1;
+                blockPos[i].second -= 1;
             }
         }
     }
@@ -241,6 +242,7 @@ bool zBlock::counterClockwise() // code is the exact same as clockwise cuz it do
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol + 2)
             {
                 blockPos[i].first += 1;
+                blockPos[i].second -= 1;
             }
         }
     }
