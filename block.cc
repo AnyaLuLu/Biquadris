@@ -42,7 +42,7 @@ bool Block::right()
         if (blockPos[i].second == boardWidth - 1)
         {
             this->addBlock();
-            std::cerr << "error1";
+            //std::cerr << "error1";
             return false;
         }
         int currow = blockPos[i].first;
