@@ -18,12 +18,7 @@ bool Block::left()
         }
         int nextrow = blockPos[i].first;
         int curcol = blockPos[i].second - 1;
-        if (playingBoard[curcol][nextrow] != ' ')
-        {
-            this->addBlock();
-            return false;
-        }
-        if (nextrow < 0)
+        if (playingBoard[nextrow][curcol] != ' ')
         {
             this->addBlock();
             return false;
@@ -40,7 +35,6 @@ bool Block::left()
 
 bool Block::right()
 {
-    // std::cerr << "pikachu";
     this->unset();
     // checking for validity
     for (int i = 0; i < blockPos.size(); ++i)
@@ -51,18 +45,16 @@ bool Block::right()
             std::cerr << "error1";
             return false;
         }
-        int nextrow = blockPos[i].first;
-        int curcol = blockPos[i].second + 1;
-        if (playingBoard[curcol][nextrow] != ' ')
+        int currow = blockPos[i].first;
+        int nextcol = blockPos[i].second + 1;
+        //std::cerr << "currow: "<< currow << std::endl;
+        //std::cerr << "nextcol: "<< nextcol << std::endl;
+        //std::cerr << "char:"<< playingBoard[currow][nextcol] << "|"<< std::endl;
+        if (playingBoard[currow][nextcol] != ' ')
         {
+            //std::cerr << "error 2" << std::endl;;
+            //std::cerr << "i: "<<i << std::endl;
             this->addBlock();
-            std::cerr << "error 2";
-            return false;
-        }
-        if (nextrow > boardWidth)
-        {
-            this->addBlock();
-            std::cerr << "error1";
             return false;
         }
     }
@@ -70,7 +62,8 @@ bool Block::right()
     for (int i = 0; i < blockPos.size(); ++i)
     {
         blockPos[i].second++;
-        std::cerr << blockPos[i].second << std::endl;
+        //std::cerr << "here" << std::endl;
+        // << blockPos[i].second << std::endl;
     }
     this->addBlock();
     return true;

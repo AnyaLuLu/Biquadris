@@ -198,7 +198,7 @@ int main(int argc, char *argv[])
         }
 
         int num = getNum(command);
-        cerr << command << endl;
+        //cerr << command << endl;
         command = removeNum(command);
 
         if (cin.eof())
@@ -238,7 +238,7 @@ int main(int argc, char *argv[])
         {
             for (int i = 0; i < num; ++i) {
                 curBoard->right();
-                std::cerr << i << "is i" << std::endl;
+                //std::cerr << i << "is i" << std::endl;
             }
         }
         else if (op == DOWN)
