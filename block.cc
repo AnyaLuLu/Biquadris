@@ -6,7 +6,7 @@ Block::~Block(){};
 
 bool Block::left()
 {
-    //std::cerr << "charmander";
+    // std::cerr << "charmander";
     this->unset();
     // checking for validity
     for (int i = 0; i < blockPos.size(); ++i)
@@ -40,7 +40,7 @@ bool Block::left()
 
 bool Block::right()
 {
-    //std::cerr << "pikachu";
+    // std::cerr << "pikachu";
     this->unset();
     // checking for validity
     for (int i = 0; i < blockPos.size(); ++i)
@@ -106,6 +106,12 @@ bool Block::down()
 
 bool Block::drop()
 {
+    while (this->down()){};
+    return true;
+}
+/*
+bool Block::drop()
+{
     this->unset();
     while (true)
     {
@@ -114,11 +120,11 @@ bool Block::drop()
         {
             int nextcol = blockPos[i].first + 1;
             int currow = blockPos[i].second;
-            if (playingBoard[nextcol][currow] != ' ')
+            if (nextcol > 17)
             {
                 break;
             }
-            if (nextcol > 17)
+            if (playingBoard[nextcol][currow] != ' ')
             {
                 break;
             }
@@ -131,7 +137,7 @@ bool Block::drop()
     }
     this->addBlock();
     return true; // drop always returns true. the case in which a block cant be dropped means the game ends, and canCreate would be the function to return false
-};
+};*/
 
 int Block::worth()
 {
