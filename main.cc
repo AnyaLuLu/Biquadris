@@ -24,7 +24,8 @@ enum Op
     RANDOM,
     BLOCK,
     RESTART,
-    SEQUENCE
+    SEQUENCE,
+    UNKNOWN
 };
 
 Op convertOp(string opStr)
@@ -38,7 +39,7 @@ Op convertOp(string opStr)
             return Op(i);
         }
     }
-    return Op(0);
+    return Op(13);
 } // convertOp
 
 bool isBlock(string command)
@@ -401,7 +402,7 @@ int main(int argc, char *argv[])
         }
         else
         {
-            cerr << "Invalid command." << endl;
+            cerr << "Command could not be interpreted" << endl;
         }
 
         if (curBoard->getScore() >= hiscore)

@@ -8,8 +8,7 @@ CS 246
 4. Graphics display
 5. Test blind
 6. Test force
-7. Error message for invalid moves
-8. Level 4 * block
+7. Level 4 * block
 
 -- Command line interface stuff --
 8. Test seed
