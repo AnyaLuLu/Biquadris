@@ -1,28 +1,119 @@
 #include "gDisplay.h"
 #include <map>
+#include <sstream>
 
 using namespace std;
 
-map<char, int> m = {{'I', 2}, {'J', 3}, {'L', 4}, {'O', 5}, {'S', 6}, {'Z', 7}, {'T', 8}, {'*', 9}};
+map<char, int> m = {{' ', 0}, {'I', 2}, {'J', 3}, {'L', 4}, {'O', 5}, {'S', 6}, {'Z', 7}, {'T', 8}, {'*', 9}};
 
-void updateSpace(int x, int y) {
-
+void GDisplay::updateSpace(int x_cord, int y) {
+    if (y > 10) {
+        y -= 11;
+        char val = Board2->getState(x_cord, y);
+        int colour = m[val];
+        x->fillRectangle(18*bSize + 10*divider + y*(bSize + divider), 4*bSize + x*(bSize + divider), bSize, bSize, colour);
+    } else {
+        char val = Board1->getState(x_cord, y);
+        int colour = m[val];
+        x->fillRectangle(3*bSize + y*(bSize + divider), 4*bSize + x*(bSize + divider), bSize, bSize, colour);
+    }
 }
 
-void updateScore(int s1, int s2, int hiScore) {
+void GDisplay::updateScore(int s1, int s2, int hiScore) {
+    ostringstream sock1;
+    ostringstream sock2;
+    ostringstream sockhi;
+    sock1 << s1;
+    sock2 << s2;
+    sockhi << hiScore;
 
+    x->fillRectangle(16*bSize+10*divider + 30, bSize + 2, 20, 10, Xwindow::Black);
+    x->fillRectangle(3*bSize + 42, 4*bSize - 26, 20, 10, Xwindow::Black);
+    x->fillRectangle(18*bSize + 10*divider + 42, 4*bSize - 26, 20, 10, Xwindow::Black);
+
+    x->drawString(16*bSize+10*divider + 30, bSize + 12, sockhi.str(), Xwindow::White);
+    x->drawString(3*bSize + 42, 4*bSize - 16, sock1.str(), Xwindow::White);
+    x->drawString(18*bSize + 10*divider + 42, 4*bSize - 16, sock2.str(), Xwindow::White);
 }
-void updateNext(int player, char type) {
+void GDisplay::updateNext(int player, char type) {
+    int colour = m[type];
 
+    int lShift = 0;
+    if (player == 2) {
+        lShift += 15*bSize + 10*divider;
+    }
+
+    if (type == 'I') {
+        x->fillRectangle(8*bSize+5*divider + lShift, 23*bSize + 17*divider, bSize, bSize, colour);
+        x->fillRectangle(9*bSize+6*divider + lShift, 23*bSize + 17*divider, bSize, bSize, colour);
+        x->fillRectangle(10*bSize+7*divider + lShift, 23*bSize + 17*divider, bSize, bSize, colour);
+        x->fillRectangle(11*bSize+8*divider + lShift, 23*bSize + 17*divider, bSize, bSize, colour);
+    } else if (type == 'J') {
+        x->fillRectangle(8*bSize+5*divider + lShift, 23*bSize + 17*divider, bSize, bSize, colour);
+        x->fillRectangle(9*bSize+6*divider + lShift, 24*bSize + 18*divider, bSize, bSize, colour);
+        x->fillRectangle(10*bSize+7*divider + lShift, 24*bSize + 18*divider, bSize, bSize, colour);
+        x->fillRectangle(8*bSize+5*divider + lShift, 24*bSize + 18*divider, bSize, bSize, colour);
+    } else if (type == 'L') {
+        x->fillRectangle(10*bSize+7*divider + lShift, 23*bSize + 17*divider, bSize, bSize, colour);
+        x->fillRectangle(9*bSize+6*divider + lShift, 24*bSize + 18*divider, bSize, bSize, colour);
+        x->fillRectangle(10*bSize+7*divider + lShift, 24*bSize + 18*divider, bSize, bSize, colour);
+        x->fillRectangle(8*bSize+5*divider + lShift, 24*bSize + 18*divider, bSize, bSize, colour);
+    } else if (type == 'O') {
+        x->fillRectangle(8*bSize+5*divider + lShift, 23*bSize + 17*divider, bSize, bSize, colour);
+        x->fillRectangle(9*bSize+6*divider + lShift, 23*bSize + 17*divider, bSize, bSize, colour);
+        x->fillRectangle(9*bSize+6*divider + lShift, 24*bSize + 18*divider, bSize, bSize, colour);
+        x->fillRectangle(8*bSize+5*divider + lShift, 24*bSize + 18*divider, bSize, bSize, colour);
+    } else if (type == 'S') {
+        x->fillRectangle(10*bSize+7*divider + lShift, 23*bSize + 17*divider, bSize, bSize, colour);
+        x->fillRectangle(9*bSize+6*divider + lShift, 24*bSize + 18*divider, bSize, bSize, colour);
+        x->fillRectangle(9*bSize+6*divider + lShift, 23*bSize + 17*divider, bSize, bSize, colour);
+        x->fillRectangle(8*bSize+5*divider + lShift, 24*bSize + 18*divider, bSize, bSize, colour);
+    } else if (type == 'T') {
+        x->fillRectangle(10*bSize+7*divider + lShift, 23*bSize + 17*divider, bSize, bSize, colour);
+        x->fillRectangle(9*bSize+6*divider + lShift, 24*bSize + 18*divider, bSize, bSize, colour);
+        x->fillRectangle(9*bSize+6*divider + lShift, 23*bSize + 17*divider, bSize, bSize, colour);
+        x->fillRectangle(8*bSize+5*divider + lShift, 23*bSize + 17*divider, bSize, bSize, colour);
+    } else if (type == 'Z') {
+        x->fillRectangle(10*bSize+7*divider + lShift, 24*bSize + 18*divider, bSize, bSize, colour);
+        x->fillRectangle(9*bSize+6*divider + lShift, 24*bSize + 18*divider, bSize, bSize, colour);
+        x->fillRectangle(9*bSize+6*divider + lShift, 23*bSize + 17*divider, bSize, bSize, colour);
+        x->fillRectangle(8*bSize+5*divider + lShift, 23*bSize + 17*divider, bSize, bSize, colour);
+    }
 }
-void updateLevel(int player, int level) {
+void GDisplay::updateLevel(int player, int level) {
+    ostringstream sockl;
+    sockl << level;
 
+
+    if (player == 1) {
+        x->fillRectangle(3*bSize + 42, 4*bSize - 13, 20, 10, Xwindow::Black);
+        x->drawString(3*bSize + 42, 4*bSize - 3, sockl.str(), Xwindow::White);
+    } else {
+        x->fillRectangle(18*bSize + 10*divider + 42, 4*bSize - 13, 20, 10, Xwindow::Black);
+        x->drawString(18*bSize + 10*divider + 42, 4*bSize - 3, sockl.str(), Xwindow::White);
+    }
 }
-void blind(int player) {
-
+void GDisplay::blind(int player) {
+    if (player == 1) {
+        x->fillRectangle(5*bSize + 2*divider, 6*bSize + 2*divider, 7*bSize + 6*divider, 10*bSize + 9*divider, Xwindow::Black);
+    } else {
+        x->fillRectangle(20*bSize + 12*divider, 6*bSize + 2*divider, 7*bSize + 6*divider, 10*bSize + 9*divider, Xwindow::Black);
+    }
 }
-void unblind(int player) {
-
+void GDisplay::unblind(int player) {
+    if (player == 1) {
+        for (int i = 2; i < 9; i++) {
+            for (int j = 2; j < 12; j++) {
+                updateSpace(i, j);
+            }
+        }
+    } else {
+        for (int i = 2; i < 9; i++) {
+            for (int j = 13; j < 23; j++) {
+                updateSpace(i, j);
+            }
+        }
+    }
 }
 
 void GDisplay::create() {
@@ -58,6 +149,22 @@ void GDisplay::create() {
 
     updateNext(1, Board1->getNextBlockChar()); 
     updateNext(2, Board2->getNextBlockChar()); 
+
+    updateSpace(3, 0);
+    updateSpace(3, 1);
+    updateSpace(3, 2);
+    updateSpace(3, 3);
+    updateSpace(2, 0);
+    updateSpace(2, 1);
+    updateSpace(2, 2);
+    
+    updateSpace(3, 11);
+    updateSpace(3, 12);
+    updateSpace(3, 13);
+    updateSpace(3, 14);
+    updateSpace(2, 11);
+    updateSpace(2, 12);
+    updateSpace(2, 13);
 }
 
 
