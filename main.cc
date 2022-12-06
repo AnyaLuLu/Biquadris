@@ -188,8 +188,8 @@ int main(int argc, char *argv[])
     int bSize = 15;
     int divider = 2;
     
-    Board1 = new Board{width, height, 0, p1blocks, p1board};
-    Board2 = new Board{width, height, 0, p2blocks, p2board};
+    Board1 = new Board{width, height, startLevel, p1blocks, p1board};
+    Board2 = new Board{width, height, startLevel, p2blocks, p2board};
     curBoard = Board1;
     tDisplay = new txtDisplay{Board1, Board2};
     
