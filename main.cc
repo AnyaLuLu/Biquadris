@@ -330,7 +330,14 @@ int main(int argc, char *argv[])
             else{
                 string inputfile;
                 cin >> inputfile;
-                curBoard->setFile(inputfile);
+                ifstream myfile;
+                myfile.open(inputfile);
+                if(myfile){
+                    curBoard->setFile(inputfile);
+                }
+                else{
+                    cout << "That file does not exist" << endl;
+                }
             }
         }
         else if (op == RANDOM)

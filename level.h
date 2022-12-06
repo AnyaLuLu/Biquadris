@@ -21,6 +21,8 @@ class Level{
         virtual int lvlNum() = 0;
         virtual ~Level() = default;
 
+        void unRandom(string newFile);
+
 };
 
 

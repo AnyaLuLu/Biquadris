@@ -46,7 +46,7 @@ class Board : public Subject{
 
         void levelup();
         void leveldown();
-        void sequence(string newfile);
+        //void sequence(string newfile);
 
         int getWidth();
         int getHeight();
