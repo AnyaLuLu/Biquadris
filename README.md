@@ -40,7 +40,7 @@ To do:
 - Ethan Chan's point 1 (see above)
 - Graphics display
 - Test command line interface stuff (pdf page 5)
-- commands random and norandom file segment fault
+- commands random and norandom file segment fault (FIXED)
 - test restart
 - test blind
 - test heavy
@@ -51,6 +51,9 @@ Update 12/05
 
 Bugs found:
 - After moving down, some turns don't work - Ethan Chan
-- Score not updating properly in higher levels
+- Score not updating properly in higher levels (FIXED)
 
+
+Anya's Update (Dec 6 2am)
+1. random and norandom r working
 
