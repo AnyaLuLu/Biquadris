@@ -75,17 +75,6 @@ Board ::Board(int width, int height, int newLvl, string file, vector<vector<char
         }
         heavy = true;
     }
-    currentBlock -> addBlock();
-}
-
-Board :: ~Board(){
-    delete lvl;
-    delete currentBlock;
-    delete nextBlock;
-    for(auto b : playingBlocks){
-        delete b;
-    }
-    playingBlocks.clear();
 }
 
 Block *Board ::assignBlock(bool isRandom)
@@ -104,40 +93,40 @@ Block *Board ::assignBlock(bool isRandom)
     else if (type == 'i' || type == 'I')
     {
         b = new iBlock(playingBoard, lvl->lvlNum(), width);
-	//cout << "A I block has been assigned" << endl;
+	cout << "A I block has been assigned" << endl;
     }
     else if (type == 'j' || type == 'J')
     {
         b = new jBlock(playingBoard, lvl->lvlNum(), width);
-	//cout << "A J block has been assigned" << endl;
+	cout << "A J block has been assigned" << endl;
     }
     else if (type == 'l' || type == 'L')
     {
         b = new lBlock(playingBoard, lvl->lvlNum(), width);
-	//cout << "A L block has been assigned" << endl;
+	cout << "A L block has been assigned" << endl;
     }
     else if (type == 'o' || type == 'O')
     {
         b = new oBlock(playingBoard, lvl->lvlNum(), width);
-	//cout << "A O block has been assigned" << endl;
+	cout << "A O block has been assigned" << endl;
     }
     else if (type == 's' || type == 'S')
     {
         b = new sBlock(playingBoard, lvl->lvlNum(), width);
-	//cout << "A S block has been assigned" << endl;
+	cout << "A S block has been assigned" << endl;
     }
     else if (type == 'z' || type == 'Z')
     {
         b = new zBlock(playingBoard, lvl->lvlNum(), width);
-	//cout << "A Z block has been assigned" << endl;
+	cout << "A Z block has been assigned" << endl;
     }
     else if (type == 't' || type == 'T')
     {
         b = new tBlock(playingBoard, lvl->lvlNum(), width);
-	//cout << "A T block has been assigned" << endl;
+	cout << "A T block has been assigned" << endl;
     }
     
-    //cout << "If block's type was not specified, we did not assign properly" << endl;
+    cout << "If block's type was not specified, we did not assign properly" << endl;
 
     return b;
 }
@@ -152,21 +141,7 @@ string Board ::getFile() { return file; };
 void Board ::setBlind(bool set) { blind = set; }
 void Board ::setForce(bool set) { force = set; }
 void Board ::setHeavy(bool set) { heavy = set; }
-void Board ::setFile(string newFile){
-    if(file == "" && newFile == ""){
-        std:: cout << "Blocks are already being generated randomly" << endl;
-        return;
-    }
-    else if(file == newFile){
-        std:: cout << "That file is alreay in use" << endl;
-        return;
-    }
-    else if(newFile != ""){
-        // level was random, now we need to generate a new vector of blocks
-        lvl -> unRandom(newFile);
-    }
-    file = newFile;
-};
+void Board ::setFile(string newFile) { file = newFile; };
 
 bool Board ::checkLose()
 {
@@ -272,7 +247,6 @@ void Board ::levelup()
     delete tmp;
 }
 
-/*
 void Board ::sequence(string newfile)
 {
     Level *tmp;
@@ -300,12 +274,12 @@ void Board ::sequence(string newfile)
     swap(lvl, tmp);
     delete tmp;
 }
-*/
+
 void Board ::left() { currentBlock->left(); cout << "block -> left() works"<< endl;}
 
 void Board ::right() { currentBlock->right();}
-bool Board ::down() { return currentBlock->down(); }
-void Board ::drop() {currentBlock->drop();}
+void Board ::down() { currentBlock->down(); }
+void Board ::drop() { currentBlock->drop(); }
 void Board ::cw() { currentBlock->clockwise(); }
 void Board ::ccw() { currentBlock->counterClockwise();}
 
@@ -314,7 +288,8 @@ void Board ::addBlock()
     playingBlocks.emplace_back(currentBlock);
     // currentBlock->addBlock();
 
-    currentBlock = nextBlock;
+    //currentBlock = nextBlock;
+    swap(currentBlock, nextBlock);
     if (file == "")
     {
         nextBlock = this->assignBlock(true);
@@ -329,7 +304,6 @@ void Board ::addBlock()
         lost = true;
         return;
     }
-    currentBlock -> addBlock();
 }
 
 
@@ -353,8 +327,10 @@ int Board ::clearlines()
         if (fullLine)
         {
             clearedlines++;
+            int l = lvl->lvlNum();
+            score += (++l) * (++l);
 
-            playingBoard.erase(playingBoard.begin() + i);
+            playingBoard.erase(playingBoard.begin() + (i - 1));
             vector<char> blankLine(width, ' ');
             playingBoard.insert(playingBoard.begin(), blankLine);
 
@@ -364,26 +340,15 @@ int Board ::clearlines()
                 {
                     Block *tmp = playingBlocks[k];
                     score += tmp->worth();
-                    playingBlocks.erase(playingBlocks.begin() + k);
+                    playingBlocks.erase(playingBlocks.begin() + (k - 1));
                     delete tmp;
                     k--;
-			        std::cout << "a block has been deleted on line " << i <<  std::endl;
                 }
             }
 
             // notify observers to change display
         }
-
     }
-    int l = lvl->lvlNum();
-    //std:: cout <<(l + clearedlines) * (l + clearedlines) << endl;
-    if(clearedlines > 0){
-        score += (l + clearedlines) * (l + clearedlines );
-        std::cout << "score is updating here dunno y clearedlines > 0" << std::endl;
-    }
-    
-
-   return clearedlines;
 }
 
 int Board::getWidth()

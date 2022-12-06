@@ -8,10 +8,11 @@ class cube : public Block
 public:
     cube(std::vector<std::vector<char>> &boardPtr, int level, int boardWidth);
     bool canCreate();
-    void addBlock();
+    //void addBlock();
     ~cube();
     bool clockwise() override;
     bool counterClockwise() override;
+    char getType() override;
 };
 
 #endif

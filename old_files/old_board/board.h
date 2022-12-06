@@ -7,6 +7,7 @@
 #include "level.h"
 #include "block.h"
 #include "subject.h"
+using namespace std;
 
 class Board : public Subject{
     protected:
@@ -15,7 +16,7 @@ class Board : public Subject{
         bool blind, heavy, force;
         int score;
         Level* lvl;
-        std::string file;
+        string file;
 
         int singleCount;
         bool lost;
@@ -24,13 +25,14 @@ class Board : public Subject{
         Block* nextBlock;
 
     public:
-        std::vector<std::vector<char>> playingBoard;
-        std::vector<Block*> playingBlocks;
+        vector<vector<char>> playingBoard;
+        vector<Block*> playingBlocks;
         // Should be vector<vector<char>> playingBoard (height, vector<char> (width, ' '))
     
     public:
         Block* assignBlock(bool isRandom);
-        Board (int width, int height, int newLvl, std::string file, std::vector<std::vector<char>> playingBoard);
+        Board (int width, int height, int newLvl, string file, vector<vector<char>> playingBoard);
+        void newBlock();
         int getScore();
         bool checkLose();
 
@@ -38,15 +40,12 @@ class Board : public Subject{
         bool getHeavy();
         bool getForce();
         int getLvl();
-        std::string getFile();
         void setBlind(bool set);
         void setHeavy(bool set);
         void setForce(bool set);
-        void setFile(std::string newFile);
 
         void levelup();
         void leveldown();
-        //void sequence(string newfile);
 
         int getWidth();
         int getHeight();
@@ -55,21 +54,10 @@ class Board : public Subject{
 
         int clearlines();
 
-        void left();
-        void right();
-        bool down();
-        void drop();
-        void cw();
-        void ccw();
-
-        void addBlock();
-
-        void force_set(char type);
-
-        //Block *getCurrBlock();
-        char getNextBlockChar();
-
-        ~Board();
+    private:
+        void newBlock_normal();
+        void newBlock_heavy();
+        void newBlock_force();
 };
 
 #endif

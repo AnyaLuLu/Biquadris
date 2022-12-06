@@ -11,7 +11,8 @@ class zBlock : public Block
     bool clockwise() override;
     bool counterClockwise() override;
     bool canCreate() override;
-    void addBlock() override;
+    //void addBlock() override;
+    char getType() override;
 };
 
 #endif

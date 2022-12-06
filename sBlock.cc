@@ -1,8 +1,10 @@
 #include "sBlock.h"
+//#include <iostream>
 using namespace std;
 
 sBlock::sBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : Block(playingBoard, level, boardWidth)
 {
+    type = 'S';
     blockPos = {{3, 0}, {3, 1}, {2, 1}, {2, 2}}; // starts on row 3 cuz the rows 0-2 are reserve rows
 };
 sBlock::~sBlock(){};
@@ -33,9 +35,11 @@ bool sBlock::clockwise()
         }
     }
 
-    //checking that itll rotate in bounds
-    if (isVert){
-        if (llcCol > (boardWidth - 3)){
+    // checking that itll rotate in bounds
+    if (isVert)
+    {
+        if (llcCol > (boardWidth - 3))
+        {
             return false;
         }
     }
@@ -57,6 +61,7 @@ bool sBlock::clockwise()
     }
 
     // rotating the block
+    this->unset();
     for (int i = 0; i < blockPos.size(); ++i)
     {
         if (isVert)
@@ -92,36 +97,44 @@ bool sBlock::clockwise()
         {
             if (blockPos[i].first == llcRow && blockPos[i].second == llcCol)
             {
+                //std::cerr<< i << "case 1" << std::endl;
                 blockPos[i].first -= 2;
             }
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 1)
             {
+                //std::cerr<< i << "case 2" << std::endl;
                 blockPos[i].first -= 1;
                 blockPos[i].second -= 1;
             }
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 2)
             {
-                blockPos[i].second -= 1;
+                //std::cerr<< i << "case 3" << std::endl;
+                blockPos[i].second -= 2;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol)
             {
+                //std::cerr<< i << "case 4" << std::endl;
                 blockPos[i].first -= 1;
                 blockPos[i].second += 1;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol + 1)
             {
+                //std::cerr<< i << "case 5" << std::endl;
                 continue;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol + 2)
             {
+                //std::cerr<< i << "case 6" << std::endl;
                 blockPos[i].first += 1;
+                blockPos[i].second -= 1;
             }
         }
     }
+    this->addBlock();
     return true;
 };
 
-bool sBlock::counterClockwise() // code is the exact same for clockwise cuz it does the same thing
+bool sBlock::counterClockwise()
 {
     // getting lower left corner
     int llcRow = blockPos[0].first;
@@ -148,9 +161,11 @@ bool sBlock::counterClockwise() // code is the exact same for clockwise cuz it d
         }
     }
 
-    //checking that itll rotate in bounds
-    if (isVert){
-        if (llcCol > (boardWidth - 3)){
+    // checking that itll rotate in bounds
+    if (isVert)
+    {
+        if (llcCol > (boardWidth - 3))
+        {
             return false;
         }
     }
@@ -172,6 +187,7 @@ bool sBlock::counterClockwise() // code is the exact same for clockwise cuz it d
     }
 
     // rotating the block
+    this->unset();
     for (int i = 0; i < blockPos.size(); ++i)
     {
         if (isVert)
@@ -207,35 +223,43 @@ bool sBlock::counterClockwise() // code is the exact same for clockwise cuz it d
         {
             if (blockPos[i].first == llcRow && blockPos[i].second == llcCol)
             {
+                //std::cerr<< i << "case 1" << std::endl;
                 blockPos[i].first -= 2;
             }
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 1)
             {
+                //std::cerr<< i << "case 2" << std::endl;
                 blockPos[i].first -= 1;
                 blockPos[i].second -= 1;
             }
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 2)
             {
-                blockPos[i].second -= 1;
+                //std::cerr<< i << "case 3" << std::endl;
+                blockPos[i].second -= 2;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol)
             {
+                //std::cerr<< i << "case 4" << std::endl;
                 blockPos[i].first -= 1;
                 blockPos[i].second += 1;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol + 1)
             {
+                //std::cerr<< i << "case 5" << std::endl;
                 continue;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol + 2)
             {
+                //std::cerr<< i << "case 6" << std::endl;
                 blockPos[i].first += 1;
+                blockPos[i].second -= 1;
             }
         }
     }
+    this->addBlock();
     return true;
 };
-
+/*
 void sBlock::addBlock()
 {
     for (int i = 0; i < blockPos.size(); ++i)
@@ -244,7 +268,7 @@ void sBlock::addBlock()
         int col = blockPos[i].second;
         playingBoard[col][row] = 'S';
     }
-};
+};*/
 bool sBlock::canCreate()
 {
     for (int i = 0; i < blockPos.size(); ++i)
@@ -256,3 +280,5 @@ bool sBlock::canCreate()
     }
     return true;
 };
+
+char sBlock :: getType(){return type;}

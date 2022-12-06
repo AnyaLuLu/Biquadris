@@ -4,6 +4,7 @@ using namespace std;
 
 tBlock::tBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : Block(playingBoard, level, boardWidth)
 {
+    type = 'T';
     blockPos = {{3, 1}, {2, 0}, {2, 1}, {2, 2}}; // starts on row 3 cuz the rows 0-2 are reserve rows
 };
 tBlock::~tBlock(){};
@@ -80,6 +81,7 @@ bool tBlock::clockwise()
     }
 
     // rotating the block
+    this->unset();
     for (int i = 0; i < blockPos.size(); ++i)
     {
         if (facing == 'r' || facing == 'l')
@@ -124,7 +126,7 @@ bool tBlock::clockwise()
             }
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 2)
             {
-                blockPos[i].second -= 1;
+                blockPos[i].second -= 2;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol)
             {
@@ -138,9 +140,11 @@ bool tBlock::clockwise()
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol + 2)
             {
                 blockPos[i].first += 1;
+                blockPos[i].second -= 1;
             }
         }
     }
+    this->addBlock();
     return true;
 };
 bool tBlock::counterClockwise()
@@ -216,6 +220,7 @@ bool tBlock::counterClockwise()
     }
 
     // rotating the block
+    this->unset();
     for (int i = 0; i < blockPos.size(); ++i)
     {
         if (facing == 'r' || facing == 'l')
@@ -227,7 +232,7 @@ bool tBlock::counterClockwise()
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 1)
             {
                 blockPos[i].first -= 1;
-                blockPos[i].second += 2;
+                blockPos[i].second += 1;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol)
             {
@@ -257,7 +262,6 @@ bool tBlock::counterClockwise()
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 1)
             {
                 blockPos[i].first -= 1;
-                blockPos[i].second += 1;
             }
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 2)
             {
@@ -279,8 +283,10 @@ bool tBlock::counterClockwise()
             }
         }
     }
+    this->addBlock();
     return true;
 };
+/*
 void tBlock::addBlock()
 {
     for (int i = 0; i < blockPos.size(); ++i)
@@ -289,7 +295,7 @@ void tBlock::addBlock()
         int col = blockPos[i].second;
         playingBoard[col][row] = 'T';
     }
-};
+};*/
 bool tBlock::canCreate()
 {
     for (int i = 0; i < blockPos.size(); ++i)
@@ -301,3 +307,5 @@ bool tBlock::canCreate()
     }
     return true;
 };
+
+char tBlock :: getType(){return 'T';}

@@ -4,6 +4,7 @@ using namespace std;
 iBlock::iBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : Block(playingBoard, level, boardWidth)
 {
     blockPos = {{3, 0}, {3, 1}, {3, 2}, {3, 3}}; // starts on row 3 cuz the rows 0-2 are reserve rows
+    type = 'I';
 };
 iBlock::~iBlock(){};
 bool iBlock::clockwise()
@@ -53,6 +54,7 @@ bool iBlock::clockwise()
         }
     }
 
+    this->unset();
     // rotating the block
     for (int i = 0; i < blockPos.size(); ++i)
     {
@@ -101,6 +103,7 @@ bool iBlock::clockwise()
             }
         }
     }
+    this->addBlock();
     return true;
 };
 
@@ -144,6 +147,7 @@ bool iBlock::counterClockwise()
         }
     }
 
+    this->unset();
     // rotating the block
     for (int i = 0; i < blockPos.size(); ++i)
     {
@@ -192,9 +196,10 @@ bool iBlock::counterClockwise()
             }
         }
     }
+    this->addBlock();
     return true;
 };
-
+/*
 void iBlock::addBlock()
 {
     for (int i = 0; i < blockPos.size(); ++i)
@@ -203,7 +208,7 @@ void iBlock::addBlock()
         int col = blockPos[i].second;
         playingBoard[col][row] = 'I';
     }
-};
+};*/
 bool iBlock::canCreate()
 {
     for (int i = 0; i < blockPos.size(); ++i)
@@ -215,3 +220,5 @@ bool iBlock::canCreate()
     }
     return true;
 };
+
+char iBlock :: getType(){return 'I';}
