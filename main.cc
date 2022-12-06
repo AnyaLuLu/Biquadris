@@ -6,6 +6,7 @@
 #include "block.h"
 #include "level.h"
 #include "txtDisplay.h"
+#include "gDisplay.h"
 
 using namespace std;
 
@@ -108,6 +109,10 @@ int main(int argc, char *argv[])
     Board *curBoard = Board1;
 
     txtDisplay *tDisplay = new txtDisplay{Board1, Board2};
+    int bSize = 15;
+    int divider = 2;
+    Xwindow *x = new Xwindow{32*bSize+20*divider, 26*bSize+17*divider};
+    GDisplay *gDisplay = new GDisplay{Board1, Board2, x, bSize, divider};
 
     bool graphicsOn = true;
     for (int i = 1; i < argc; i++)
@@ -236,12 +241,26 @@ int main(int argc, char *argv[])
             for (int i = 0; i < num; ++i) {
                 curBoard->left();
             }
+
+            if (curBoard->getHeavy()) {
+                curBoard->down();
+                curBoard->down();
+            } else if (curBoard->getLvl() >= 3) {
+                curBoard->down();
+            }
         }
         else if (op == RIGHT)
         {
             for (int i = 0; i < num; ++i) {
                 curBoard->right();
                 //std::cerr << i << "is i" << std::endl;
+            }
+
+            if (curBoard->getHeavy()) {
+                curBoard->down();
+                curBoard->down();
+            } else if (curBoard->getLvl() >= 3) {
+                curBoard->down();
             }
         }
         else if (op == DOWN)
@@ -256,11 +275,19 @@ int main(int argc, char *argv[])
             for (int i = 0; i < num; ++i) {
                 curBoard->cw();
             }
+
+            if (curBoard->getLvl() >= 3) {
+                curBoard->down();
+            }
         }
         else if (op == COUNTERCLOCKWISE)
         {
             for (int i = 0; i < num; ++i) {
                 curBoard->ccw();
+            }
+
+            if (curBoard->getLvl() >= 3) {
+                curBoard->down();
             }
         }
 
@@ -272,6 +299,14 @@ int main(int argc, char *argv[])
 
             curBoard->addBlock();
             turnCount += 1;
+
+            if (curBoard->getBlind()) {
+                curBoard->setBlind(false);
+            } 
+
+            if (curBoard->getHeavy()) {
+                curBoard->setHeavy(false);
+            }
         }
 
         else if (op == LEVEL_UP)
@@ -372,6 +407,30 @@ int main(int argc, char *argv[])
             hiscore = curBoard->getScore();
         }
         int check = curBoard->clearlines();
+
+        if (check >= 2) {
+            cout << "Pick an effect: blind/heavy/force" << endl;
+
+            string effect;
+            cin >> effect;
+            Board *otherBoard;
+
+            if (curBoard == Board1) {
+                otherBoard = Board2;
+            } else {
+                otherBoard = Board1;
+            }
+
+            if (effect == "blind") {
+                otherBoard->setBlind(true);
+            } else if (effect == "heavy") {
+                otherBoard->setHeavy(true);
+            } else if (effect == "force") {
+                char block_type;
+                cin >> block_type;
+                otherBoard->force_set(block_type);
+            }
+        }
 
         curBoard -> notifyObservers("text", 0, 0);
     } // infinite while
