@@ -302,16 +302,7 @@ int main(int argc, char *argv[])
                 curBoard->drop();
             }
 
-            curBoard->addBlock();
-            turnCount += 1;
-
-            if (curBoard->getBlind()) {
-                curBoard->setBlind(false);
-            } 
-
-            if (curBoard->getHeavy()) {
-                curBoard->setHeavy(false);
-            }
+            turnOver = false;
         }
 
         else if (op == LEVEL_UP)
@@ -319,11 +310,23 @@ int main(int argc, char *argv[])
             for (int i = 0; i < num; ++i) {
                 curBoard->levelup();
             }
+
+            if (curPlayer == 1) {
+                curBoard->notifyObservers("g_level", 1, 0);
+            } else {
+                curBoard->notifyObservers("g_level", 2, 0);
+            }
         }
         else if (op == LEVEL_DOWN)
         {
             for (int i = 0; i < num; ++i) {
                 curBoard->leveldown();
+            }
+            
+            if (curPlayer == 1) {
+                curBoard->notifyObservers("g_level", 1, 0);
+            } else {
+                curBoard->notifyObservers("g_level", 2, 0);
             }
         }
 
@@ -410,37 +413,56 @@ int main(int argc, char *argv[])
         if (curBoard->getScore() >= hiscore)
         {
             hiscore = curBoard->getScore();
-        }
-        int check = curBoard->clearlines();
-
-        if (check >= 2) {
-            cout << "Pick an effect: blind/heavy/force" << endl;
-
-            string effect;
-            cin >> effect;
-            Board *otherBoard;
-
-            if (curBoard == Board1) {
-                otherBoard = Board2;
-            } else {
-                otherBoard = Board1;
-            }
-
-            if (effect == "blind") {
-                otherBoard->setBlind(true);
-            } else if (effect == "heavy") {
-                otherBoard->setHeavy(true);
-            } else if (effect == "force") {
-                char block_type;
-                cin >> block_type;
-                otherBoard->force_set(block_type);
-            }
+            curBoard->notifyObservers("g_score", hiscore, 0);
         }
 
         curBoard -> notifyObservers("text", 0, 0);
+
         if(!turnOver){
             curBoard -> addBlock();
             turnCount++;
+
+            if (curBoard->getBlind()) {
+                curBoard->setBlind(false);
+                curBoard->notifyObservers("unblind", curPlayer, 0);
+            } 
+
+            if (curBoard->getHeavy()) {
+                curBoard->setHeavy(false);
+            }
+
+            int check = curBoard->clearlines();
+
+            if (check >= 1) {
+                curBoard->notifyObservers("g_score", hiscore, 0);
+            }
+
+            if (check >= 2) {
+                cout << "Pick an effect: blind/heavy/force" << endl;
+
+                string effect;
+                cin >> effect;
+                Board *otherBoard;
+
+                if (curBoard == Board1) {
+                    otherBoard = Board2;
+                } else {
+                    otherBoard = Board1;
+                }
+
+                if (effect == "blind") {
+                    otherBoard->setBlind(true);
+
+                    int otherPlayer = curPlayer % 2 + 1;
+                    otherBoard->notifyObservers("blind", otherPlayer, 0);
+                } else if (effect == "heavy") {
+                    otherBoard->setHeavy(true);
+                } else if (effect == "force") {
+                    char block_type;
+                    cin >> block_type;
+                    otherBoard->force_set(block_type);
+                }
+            }
         }
     } // infinite while
 
