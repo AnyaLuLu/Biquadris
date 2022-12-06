@@ -8,7 +8,7 @@ using namespace std;
 Level :: Level(bool random, string file) : random{random}, file{file}, counter{0}{
     blockSequence = {};
 
-    if(!random){
+    if(!random && file != ""){
         ifstream myfile;
         myfile.open(file);
 

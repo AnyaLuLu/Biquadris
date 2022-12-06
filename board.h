@@ -57,7 +57,7 @@ class Board : public Subject{
 
         void left();
         void right();
-        void down();
+        bool down();
         void drop();
         void cw();
         void ccw();

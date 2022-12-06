@@ -3,13 +3,12 @@
 using namespace std;
 
 char lvl2 :: blockType(bool isRandom){
-    if(isRandom){
-        char blockGen[7] = {'i', 'j', 'l', 'o', 's', 'z', 't'};
-        srand (time(NULL));
-        int index = rand() % 7;
-
-        return blockGen[index];
-    }
+    char blockGen[7] = {'i', 'j', 'l', 'o', 's', 'z', 't'};
+    srand (time(NULL));
+    int index = rand() % 7;
+    
+    return blockGen[index];
+    /*
     else if (blockSequence.size() != 0){
         char b = blockSequence[counter];
         counter += 1;
@@ -18,6 +17,7 @@ char lvl2 :: blockType(bool isRandom){
         }
         return b;
     }
+    */
     return ' ';
 }
 
