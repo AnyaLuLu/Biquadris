@@ -30,7 +30,12 @@ void txtDisplay::notify(string type, int i1, int i2)
             out << '|';
             for (int j = 0; j < Board1->getWidth(); ++j)
             {
-                out << Board1->getState(i, j);
+                if (Board1->getBlind() && i >= 2 && i < 12 && j >= 2 && j < 9) {
+                    out << '?';
+                }
+                else {
+                    out << Board1->getState(i, j);
+                }
             }
             out << '|';
 
@@ -39,7 +44,11 @@ void txtDisplay::notify(string type, int i1, int i2)
             out << '|';
             for (int j = 0; j < Board2->getWidth(); ++j)
             {
-                out << Board2->getState(i, j);
+                if (Board2->getBlind() && i >= 2 && i < 12 && j >= 2 && j < 9) {
+                    out << '?';
+                } else {
+                    out << Board2->getState(i, j);
+                }
             }
             out << '|' << std::endl;
         }
