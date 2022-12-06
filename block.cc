@@ -120,12 +120,12 @@ bool Block::deletePos(int row)
         {
             blockPos.erase(blockPos.begin() + i);
             --i;
-	    std::cout << "a block pos has been erased" << std::endl;
+	    //std::cout << "a block pos has been erased" << std::endl;
         }
 
 	else if(blockPos[i].first < row){
 	    blockPos[i].first++;
-	    std::cout << "a block pos has been moved down" << std::endl;
+	    //std::cout << "a block pos has been moved down" << std::endl;
 	}
     }
     if (blockPos.size() == 0)

@@ -357,6 +357,9 @@ int main(int argc, char *argv[])
 
         curBoard->notifyObservers();
         int check = curBoard->clearlines();
+	if(check > 0){
+	    curBoard -> notifyObservers();
+	}
 
     } // infinite while
 

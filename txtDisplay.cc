@@ -88,7 +88,7 @@ void txtDisplay::notify()
         newblockb1s1 = "        SS   ";
         newblockb1s2 = " Next: SS    ";
     }
-    /*
+   
     else if (Board1->getNextBlockChar() == 'T'){
         newblockb1s1 = "       TTT   ";
         newblockb1s2 = " Next:  T    ";
@@ -127,7 +127,7 @@ void txtDisplay::notify()
         newblockb2s1 = "       ZZ    ";
         newblockb2s2 = " Next:  ZZ   ";
     }
-    */
+    
     out << newblockb1s1 << "      " << newblockb2s1 << std::endl;
     out << newblockb1s2 << "      " << newblockb2s2 << std::endl;
 }

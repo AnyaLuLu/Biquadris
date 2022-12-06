@@ -75,6 +75,7 @@ Board ::Board(int width, int height, int newLvl, string file, vector<vector<char
         }
         heavy = true;
     }
+    currentBlock -> addBlock();
 }
 
 Block *Board ::assignBlock(bool isRandom)
@@ -93,40 +94,40 @@ Block *Board ::assignBlock(bool isRandom)
     else if (type == 'i' || type == 'I')
     {
         b = new iBlock(playingBoard, lvl->lvlNum(), width);
-	cout << "A I block has been assigned" << endl;
+	//cout << "A I block has been assigned" << endl;
     }
     else if (type == 'j' || type == 'J')
     {
         b = new jBlock(playingBoard, lvl->lvlNum(), width);
-	cout << "A J block has been assigned" << endl;
+	//cout << "A J block has been assigned" << endl;
     }
     else if (type == 'l' || type == 'L')
     {
         b = new lBlock(playingBoard, lvl->lvlNum(), width);
-	cout << "A L block has been assigned" << endl;
+	//cout << "A L block has been assigned" << endl;
     }
     else if (type == 'o' || type == 'O')
     {
         b = new oBlock(playingBoard, lvl->lvlNum(), width);
-	cout << "A O block has been assigned" << endl;
+	//cout << "A O block has been assigned" << endl;
     }
     else if (type == 's' || type == 'S')
     {
         b = new sBlock(playingBoard, lvl->lvlNum(), width);
-	cout << "A S block has been assigned" << endl;
+	//cout << "A S block has been assigned" << endl;
     }
     else if (type == 'z' || type == 'Z')
     {
         b = new zBlock(playingBoard, lvl->lvlNum(), width);
-	cout << "A Z block has been assigned" << endl;
+	//cout << "A Z block has been assigned" << endl;
     }
     else if (type == 't' || type == 'T')
     {
         b = new tBlock(playingBoard, lvl->lvlNum(), width);
-	cout << "A T block has been assigned" << endl;
+	//cout << "A T block has been assigned" << endl;
     }
     
-    cout << "If block's type was not specified, we did not assign properly" << endl;
+    //cout << "If block's type was not specified, we did not assign properly" << endl;
 
     return b;
 }
@@ -279,7 +280,7 @@ void Board ::left() { currentBlock->left(); cout << "block -> left() works"<< en
 
 void Board ::right() { currentBlock->right();}
 void Board ::down() { currentBlock->down(); }
-void Board ::drop() { currentBlock->drop(); }
+void Board ::drop() {currentBlock->drop();}
 void Board ::cw() { currentBlock->clockwise(); }
 void Board ::ccw() { currentBlock->counterClockwise();}
 
@@ -303,6 +304,7 @@ void Board ::addBlock()
         lost = true;
         return;
     }
+    currentBlock -> addBlock();
 }
 
 
