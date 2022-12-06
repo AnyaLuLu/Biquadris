@@ -46,3 +46,8 @@ To do:
 - test force
 - error message for invalid moves
 
+Update 12/05
+
+Bug found:
+- After moving down, some turns don't work - Ethan Chan
+
