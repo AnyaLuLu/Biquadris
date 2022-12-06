@@ -6,7 +6,7 @@
 #include "block.h"
 #include "level.h"
 #include "txtDisplay.h"
-//#include "gDisplay.h"
+#include "gDisplay.h"
 
 using namespace std;
 
@@ -111,8 +111,8 @@ int main(int argc, char *argv[])
     txtDisplay *tDisplay = new txtDisplay{Board1, Board2};
     int bSize = 15;
     int divider = 2;
-    //Xwindow *x = new Xwindow{32*bSize+20*divider, 26*bSize+17*divider};
-    //GDisplay *gDisplay = new GDisplay{Board1, Board2, x, bSize, divider};
+    Xwindow *x = new Xwindow{32*bSize+20*divider, 26*bSize+17*divider};
+    GDisplay *gDisplay = new GDisplay{Board1, Board2, x, bSize, divider};
 
     bool graphicsOn = true;
     for (int i = 1; i < argc; i++)
