@@ -353,7 +353,7 @@ int Board ::clearlines()
     int l = lvl->lvlNum();
     //std:: cout <<(l + clearedlines) * (l + clearedlines) << endl;
     if(clearedlines > 0){
-        score += (l + clearedlines + 1) * (l + clearedlines + 1);
+        score += (l + clearedlines) * (l + clearedlines );
     }
     
 
