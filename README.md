@@ -48,6 +48,8 @@ To do:
 
 Update 12/05
 
-Bug found:
+Bugs found:
 - After moving down, some turns don't work - Ethan Chan
+- Score not updating properly in higher levels
+
 
