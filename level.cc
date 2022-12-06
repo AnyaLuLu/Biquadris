@@ -3,12 +3,13 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <time.h>
 using namespace std;
 
-Level :: Level(bool random, string file) : random{random}, file{file}, counter{0}{
+Level :: Level(bool isSeeded, int seed, bool random, string file) : isSeeded{isSeeded}, seed{seed}, random{random}, file{file}, counter{0}{
     blockSequence = {};
 
-    if(!random && file != ""){
+    if((!random && file != "")){
         ifstream myfile;
         myfile.open(file);
 
@@ -22,6 +23,7 @@ Level :: Level(bool random, string file) : random{random}, file{file}, counter{0
 
         length = blockSequence.size();
     }
+
 }
 
 void Level :: unRandom(string newFile){

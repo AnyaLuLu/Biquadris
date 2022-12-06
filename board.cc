@@ -53,7 +53,7 @@ Board ::Board(int width, int height, int newLvl, string file, vector<vector<char
         }
         else
         {
-            lvl = new lvl3{false, file};
+            lvl = new lvl3{false, 0, false, file};
             currentBlock = this->assignBlock(false);
             nextBlock = this->assignBlock(false);
         }
@@ -69,7 +69,7 @@ Board ::Board(int width, int height, int newLvl, string file, vector<vector<char
         }
         else
         {
-            lvl = new lvl4{false, file};
+            lvl = new lvl4{false, 0, false, file};
             currentBlock = this->assignBlock(false);
             nextBlock = this->assignBlock(false);
         }
@@ -216,7 +216,7 @@ void Board ::leveldown()
         }
         else
         {
-            tmp = new lvl3{false, file};
+            tmp = new lvl3{false, 0, false, file};
         }
         cout << "Changed to level 3" << endl;
     }
@@ -251,7 +251,7 @@ void Board ::levelup()
         }
         else
         {
-            tmp = new lvl3{false, file};
+            tmp = new lvl3{false, 0, false, file};
         }
         cout << "Changed to level 3" << endl;
     }
@@ -263,7 +263,7 @@ void Board ::levelup()
         }
         else
         {
-            tmp = new lvl4{false, file};
+            tmp = new lvl4{false, 0, false, file};
         }
         cout << "Changed to level 4" << endl;
     }

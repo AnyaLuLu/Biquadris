@@ -14,9 +14,12 @@ class Level{
         int counter;
         int length;
         vector <char> blockSequence;
+
+        bool isSeeded;
+        int seed;
     
     public:
-        Level(bool random = false, string file = "");
+        Level(bool isSeeded = false, int seed = 0, bool random = false, string file = "");
         virtual char blockType(bool isRandom) = 0;
         virtual int lvlNum() = 0;
         virtual ~Level() = default;

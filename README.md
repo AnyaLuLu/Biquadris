@@ -9,6 +9,7 @@ CS 246
 5. Test blind
 6. Test force
 7. Level 4 * block
+8. People need to lose
 
 -- Command line interface stuff --
 

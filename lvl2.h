@@ -8,7 +8,7 @@ class lvl2 : public Level{
     char blockType(bool isRandom) override;
     int lvlNum();
     public:
-        lvl2(bool isRandom, string file = "");
+        lvl2(bool isSeeded = false, int seed = 0, bool isRandom = true, string file = "");
 };
 
 

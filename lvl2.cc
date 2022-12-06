@@ -3,13 +3,14 @@
 using namespace std;
 
 char lvl2 :: blockType(bool isRandom){
-    char blockGen[7] = {'i', 'j', 'l', 'o', 's', 'z', 't'};
-    srand (time(NULL));
-    int index = rand() % 7;
-    
-    return blockGen[index];
-    /*
-    else if (blockSequence.size() != 0){
+    if(isRandom && !isSeeded){
+        char blockGen[7] = {'i', 'j', 'l', 'o', 's', 'z', 't'};
+        srand (time(NULL));
+        int index = rand() % 7;
+        
+        return blockGen[index];
+    }
+    else if (isRandom && isSeeded && blockSequence.size() != 0){
         char b = blockSequence[counter];
         counter += 1;
         if (counter == length) {
@@ -17,10 +18,21 @@ char lvl2 :: blockType(bool isRandom){
         }
         return b;
     }
-    */
     return ' ';
 }
 
 int lvl2 :: lvlNum(){return 2;};
 
-lvl2 :: lvl2(bool isRandom, string file) : Level{isRandom, file}{};
+lvl2 :: lvl2(bool isSeeded, int seed, bool isRandom, string file) : Level(isSeeded, seed, isRandom, file){
+    if(isRandom && isSeeded){
+        char newBlock;
+        char blockGen[7] = {'i', 'j', 'l', 'o', 's', 'z', 't'};
+        srand(seed);
+        for(int i = 1; i <= 50; i++){
+            int index = rand() % 7;
+            blockSequence.emplace_back(blockGen[i]);
+        }
+
+        length = 50;
+    }
+}
