@@ -109,10 +109,6 @@ int main(int argc, char *argv[])
     Board *curBoard = Board1;
 
     txtDisplay *tDisplay = new txtDisplay{Board1, Board2};
-    int bSize = 15;
-    int divider = 2;
-    //Xwindow *x = new Xwindow{32*bSize+20*divider, 26*bSize+17*divider};
-    //GDisplay *gDisplay = new GDisplay{Board1, Board2, x, bSize, divider};
 
     bool graphicsOn = true;
     for (int i = 1; i < argc; i++)
@@ -188,6 +184,14 @@ int main(int argc, char *argv[])
             }
         }
     }
+
+    int bSize = 15;
+    int divider = 2;
+    if (graphicsOn == true) {
+        //Xwindow *x = new Xwindow{32*bSize+20*divider, 26*bSize+17*divider};
+        //GDisplay *gDisplay = new GDisplay{Board1, Board2, x, bSize, divider};
+    }
+   
 
     curBoard->notifyObservers("text", 0, 0);
 

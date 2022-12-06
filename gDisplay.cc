@@ -6,16 +6,16 @@ using namespace std;
 
 map<char, int> m = {{' ', 0}, {'I', 2}, {'J', 3}, {'L', 4}, {'O', 5}, {'S', 6}, {'Z', 7}, {'T', 8}, {'*', 9}};
 
-void GDisplay::updateSpace(int x_cord, int y) {
-    if (y > 10) {
-        y -= 11;
-        char val = Board2->getState(x_cord, y);
+void GDisplay::updateSpace(int row, int col) {
+    if (col > 10) {
+        col -= 11;
+        char val = Board2->getState(row, col);
         int colour = m[val];
-        x->fillRectangle(18*bSize + 10*divider + y*(bSize + divider), 4*bSize + x*(bSize + divider), bSize, bSize, colour);
+        x->fillRectangle(18*bSize + 10*divider + col*(bSize + divider), 4*bSize + row*(bSize + divider), bSize, bSize, colour);
     } else {
-        char val = Board1->getState(x_cord, y);
+        char val = Board1->getState(row, col);
         int colour = m[val];
-        x->fillRectangle(3*bSize + y*(bSize + divider), 4*bSize + x*(bSize + divider), bSize, bSize, colour);
+        x->fillRectangle(3*bSize + col*(bSize + divider), 4*bSize + row*(bSize + divider), bSize, bSize, colour);
     }
 }
 
@@ -27,9 +27,9 @@ void GDisplay::updateScore(int s1, int s2, int hiScore) {
     sock2 << s2;
     sockhi << hiScore;
 
-    x->fillRectangle(16*bSize+10*divider + 30, bSize + 2, 20, 10, Xwindow::Black);
-    x->fillRectangle(3*bSize + 42, 4*bSize - 26, 20, 10, Xwindow::Black);
-    x->fillRectangle(18*bSize + 10*divider + 42, 4*bSize - 26, 20, 10, Xwindow::Black);
+    x->fillRectangle(16*bSize+10*divider + 30, bSize + 2, 30, 10, Xwindow::Black);
+    x->fillRectangle(3*bSize + 42, 4*bSize - 26, 30, 10, Xwindow::Black);
+    x->fillRectangle(18*bSize + 10*divider + 42, 4*bSize - 26, 30, 10, Xwindow::Black);
 
     x->drawString(16*bSize+10*divider + 30, bSize + 12, sockhi.str(), Xwindow::White);
     x->drawString(3*bSize + 42, 4*bSize - 16, sock1.str(), Xwindow::White);
