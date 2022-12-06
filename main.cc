@@ -250,11 +250,11 @@ int main(int argc, char *argv[])
 
         if (op == LEFT)
         {
-            curBoard->undraw();
+            curBoard->undraw(curPlayer);
             for (int i = 0; i < num; ++i) {
                 curBoard->left();
             }
-            curBoard->draw();
+            curBoard->draw(curPlayer);
 
             if (curBoard->getHeavy()) {
                 curBoard->down();
@@ -265,12 +265,12 @@ int main(int argc, char *argv[])
         }
         else if (op == RIGHT)
         {
-            curBoard->undraw();
+            curBoard->undraw(curPlayer);
             for (int i = 0; i < num; ++i) {
                 curBoard->right();
                 //std::cerr << i << "is i" << std::endl;
             }
-            curBoard->draw();
+            curBoard->draw(curPlayer);
 
             if (curBoard->getHeavy()) {
                 curBoard->down();
@@ -281,19 +281,20 @@ int main(int argc, char *argv[])
         }
         else if (op == DOWN)
         {
-            curBoard->undraw();
+            curBoard->undraw(curPlayer);
             for (int i = 0; i < num; ++i) {
                 turnOver = curBoard->down();
             }
+            curBoard->draw(curPlayer);
         }
 
         else if (op == CLOCKWISE)
         {
-            curBoard->undraw();
+            curBoard->undraw(curPlayer);
             for (int i = 0; i < num; ++i) {
                 curBoard->cw();
             }
-            curBoard->draw();
+            curBoard->draw(curPlayer);
 
             if (curBoard->getLvl() >= 3) {
                 turnOver = curBoard->down();
@@ -301,11 +302,11 @@ int main(int argc, char *argv[])
         }
         else if (op == COUNTERCLOCKWISE)
         {
-            curBoard->undraw();
+            curBoard->undraw(curPlayer);
             for (int i = 0; i < num; ++i) {
                 curBoard->ccw();
             }
-            curBoard->draw();
+            curBoard->draw(curPlayer);
 
             if (curBoard->getLvl() >= 3) {
                 turnOver = curBoard->down();
@@ -314,11 +315,11 @@ int main(int argc, char *argv[])
 
         else if (op == DROP)
         {
-            curBoard->undraw();
+            curBoard->undraw(curPlayer);
             for (int i = 0; i < num; ++i) {
                 curBoard->drop();
             }
-            curBoard->draw();
+            curBoard->draw(curPlayer);
 
             turnOver = false;
         }

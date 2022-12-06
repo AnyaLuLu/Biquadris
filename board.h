@@ -61,8 +61,8 @@ class Board : public Subject{
         void drop();
         void cw();
         void ccw();
-        void undraw();
-        void draw();
+        void undraw(int player);
+        void draw(int player);
 
         void addBlock();
 

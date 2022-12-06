@@ -47,12 +47,17 @@ void GDisplay::updateScore(int s1, int s2, int hiScore) {
     x->drawString(18*bSize + 10*divider + 42, 4*bSize - 16, sock2.str(), Xwindow::White);
 }
 void GDisplay::updateNext(int player, char type) {
+    
     int colour = m[type];
+    cerr << "Type is " << type << endl;
+    cerr << "player" << player << endl;
 
     int lShift = 0;
     if (player == 2) {
         lShift += 15*bSize + 10*divider;
     }
+
+    x->fillRectangle(8*bSize+5*divider + lShift, 23*bSize + 17*divider, 4*bSize + 3*divider, 2*bSize + divider, Xwindow::Black);
 
     if (type == 'I') {
         x->fillRectangle(8*bSize+5*divider + lShift, 23*bSize + 17*divider, bSize, bSize, colour);
@@ -89,6 +94,24 @@ void GDisplay::updateNext(int player, char type) {
         x->fillRectangle(9*bSize+6*divider + lShift, 24*bSize + 18*divider, bSize, bSize, colour);
         x->fillRectangle(9*bSize+6*divider + lShift, 23*bSize + 17*divider, bSize, bSize, colour);
         x->fillRectangle(8*bSize+5*divider + lShift, 23*bSize + 17*divider, bSize, bSize, colour);
+    }
+
+    if (player == 1) {
+        updateSpace(3, 0);
+        updateSpace(3, 1);
+        updateSpace(3, 2);
+        updateSpace(3, 3);
+        updateSpace(2, 0);
+        updateSpace(2, 1);
+        updateSpace(2, 2);
+    } else if (player == 2) {
+        updateSpace(3, 11);
+        updateSpace(3, 12);
+        updateSpace(3, 13);
+        updateSpace(3, 14);
+        updateSpace(2, 11);
+        updateSpace(2, 12);
+        updateSpace(2, 13);
     }
 }
 void GDisplay::updateLevel(int player, int level) {
@@ -164,22 +187,6 @@ void GDisplay::create() {
 
     updateNext(1, Board1->getNextBlockChar()); 
     updateNext(2, Board2->getNextBlockChar()); 
-
-    updateSpace(3, 0);
-    updateSpace(3, 1);
-    updateSpace(3, 2);
-    updateSpace(3, 3);
-    updateSpace(2, 0);
-    updateSpace(2, 1);
-    updateSpace(2, 2);
-    
-    updateSpace(3, 11);
-    updateSpace(3, 12);
-    updateSpace(3, 13);
-    updateSpace(3, 14);
-    updateSpace(2, 11);
-    updateSpace(2, 12);
-    updateSpace(2, 13);
 }
 
 
@@ -205,7 +212,7 @@ void GDisplay::notify(string type, int i1, int i2)
         if (i1 == 1) {
             updateNext(1, Board1->getNextBlockChar()); 
         } else if (i1 == 2) {
-            updateNext(1, Board2->getNextBlockChar());
+            updateNext(2, Board2->getNextBlockChar());
         }
 
     } else if (type == "g_level") {

@@ -302,16 +302,27 @@ void Board ::sequence(string newfile)
 }
 */
 
-void Board ::undraw() {
+void Board ::undraw(int player) {
+    int shift = 0;
+    if (player == 2) {
+        shift = 11;
+    }
+
     std::vector<std::pair<int, int>> pos = currentBlock->getPos();
     for (int i = 0; i < pos.size(); ++i) {
-        notifyObservers("g_blank", pos[i].first, pos[i].first);
+        notifyObservers("g_blank", pos[i].first, pos[i].second + shift);
     }
 }
-void Board ::draw() {
+void Board ::draw(int player) {
     std::vector<std::pair<int, int>> pos = currentBlock->getPos();
+    int shift = 0;
+    if (player == 2) {
+        shift = 11;
+    }
+
     for (int i = 0; i < pos.size(); ++i) {
-        notifyObservers("g_space", pos[i].first, pos[i].first);
+        cerr << pos[i].first << " and " << pos[i].second << endl;
+        notifyObservers("g_space", pos[i].first, pos[i].second + shift);
     }
 }
 
