@@ -19,6 +19,7 @@ class Level{
         Level(bool random = false, string file = "");
         virtual char blockType(bool isRandom) = 0;
         virtual int lvlNum() = 0;
+        virtual ~Level() = default;
 
 };
 
