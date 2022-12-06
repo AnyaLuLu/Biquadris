@@ -68,6 +68,8 @@ class Board : public Subject{
 
         //Block *getCurrBlock();
         char getNextBlockChar();
+
+        ~Board();
 };
 
 #endif
