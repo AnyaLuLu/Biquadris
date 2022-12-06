@@ -78,6 +78,16 @@ Board ::Board(int width, int height, int newLvl, string file, vector<vector<char
     currentBlock -> addBlock();
 }
 
+Board :: ~Board(){
+    delete lvl;
+    delete currentBlock;
+    delete nextBlock;
+    for(auto b : playingBlocks){
+        delete b;
+    }
+    playingBlocks.clear();
+}
+
 Block *Board ::assignBlock(bool isRandom)
 {
 
