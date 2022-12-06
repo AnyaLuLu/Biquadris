@@ -184,7 +184,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    curBoard->notifyObservers();
+    curBoard->notifyObservers("text", 0, 0);
 
     while (true)
     {
@@ -354,13 +354,9 @@ int main(int argc, char *argv[])
         {
             hiscore = curBoard->getScore();
         }
-
-        curBoard->notifyObservers();
         int check = curBoard->clearlines();
-	if(check > 0){
-	    curBoard -> notifyObservers();
-	}
 
+        curBoard -> notifyObservers("text", 0, 0);
     } // infinite while
 
 } // main

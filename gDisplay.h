@@ -7,12 +7,24 @@
 
 class GDisplay : public Observer
 {
-    Board *myBoard;
-    Xwindow *myXwindow;
+    Board *Board1;
+    Board *Board2;
+    Xwindow *x;
+    int bSize;
+    int divider;
 
 public:
-    void notify() override;
-    GDisplay(Board *myStudio, Xwindow *myXwindow);
+    void notify(std::string type, int i1, int i2) override;
+    GDisplay(Board *Board1, Board *Board2, Xwindow *x, int bSize, int divider);
+
+private:
+    void create();
+    void updateSpace(int x, int y);
+    void updateScore(int s1, int s2, int hiScore);
+    void updateNext(int player, char type);
+    void updateLevel(int player, int level);
+    void blind(int player);
+    void unblind(int player);
 };
 
 #endif

@@ -1,7 +1,7 @@
 #include "subject.h"
 #include "observer.h"
 
-//copied from ethan chan's a4. will have the change this a bit before submission
+using namespace std;
 
 void Subject::attach(Observer *o)
 {
@@ -10,7 +10,7 @@ void Subject::attach(Observer *o)
 
 void Subject::detach(Observer *o)
 {
-    for (std::vector<Observer *>::iterator it = observers.begin(); it != observers.end(); it++)
+    for (vector<Observer *>::iterator it = observers.begin(); it != observers.end(); it++)
     {
         if (*it == o)
         {
@@ -19,10 +19,10 @@ void Subject::detach(Observer *o)
     }
 };
 
-void Subject::notifyObservers()
+void Subject::notifyObservers(string type, int i1, int i2)
 {
     for (auto o : observers)
     {
-        o->notify();
+        o->notify(type, i1, i2);
     }
 };
