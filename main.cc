@@ -6,7 +6,7 @@
 #include "block.h"
 #include "level.h"
 #include "txtDisplay.h"
-//#include "gDisplay.h"
+#include "gDisplay.h"
 
 using namespace std;
 
@@ -188,19 +188,19 @@ int main(int argc, char *argv[])
     int bSize = 15;
     int divider = 2;
     
-    /*
-    if (graphicsOn) {
-        Xwindow *x = new Xwindow{32*bSize+20*divider, 26*bSize+17*divider};
-        GDisplay *gDisplay = new GDisplay{Board1, Board2, x, bSize, divider};
-    }
-    */
     Board1 = new Board{width, height, 0, p1blocks, p1board};
     Board2 = new Board{width, height, 0, p2blocks, p2board};
     curBoard = Board1;
     tDisplay = new txtDisplay{Board1, Board2};
+    
+    if (graphicsOn) {
+        Xwindow *x = new Xwindow{32*bSize+20*divider, 26*bSize+17*divider};
+        GDisplay *gDisplay = new GDisplay{Board1, Board2, x, bSize, divider};
+    }
 
     curBoard->notifyObservers("text", 0, 0);
 
+    
     while (true)
     {
         bool turnOver = true;
@@ -250,9 +250,11 @@ int main(int argc, char *argv[])
 
         if (op == LEFT)
         {
+            curBoard->undraw();
             for (int i = 0; i < num; ++i) {
                 curBoard->left();
             }
+            curBoard->draw();
 
             if (curBoard->getHeavy()) {
                 curBoard->down();
@@ -263,10 +265,12 @@ int main(int argc, char *argv[])
         }
         else if (op == RIGHT)
         {
+            curBoard->undraw();
             for (int i = 0; i < num; ++i) {
                 curBoard->right();
                 //std::cerr << i << "is i" << std::endl;
             }
+            curBoard->draw();
 
             if (curBoard->getHeavy()) {
                 curBoard->down();
@@ -277,6 +281,7 @@ int main(int argc, char *argv[])
         }
         else if (op == DOWN)
         {
+            curBoard->undraw();
             for (int i = 0; i < num; ++i) {
                 turnOver = curBoard->down();
             }
@@ -284,9 +289,11 @@ int main(int argc, char *argv[])
 
         else if (op == CLOCKWISE)
         {
+            curBoard->undraw();
             for (int i = 0; i < num; ++i) {
                 curBoard->cw();
             }
+            curBoard->draw();
 
             if (curBoard->getLvl() >= 3) {
                 turnOver = curBoard->down();
@@ -294,9 +301,11 @@ int main(int argc, char *argv[])
         }
         else if (op == COUNTERCLOCKWISE)
         {
+            curBoard->undraw();
             for (int i = 0; i < num; ++i) {
                 curBoard->ccw();
             }
+            curBoard->draw();
 
             if (curBoard->getLvl() >= 3) {
                 turnOver = curBoard->down();
@@ -305,9 +314,11 @@ int main(int argc, char *argv[])
 
         else if (op == DROP)
         {
+            curBoard->undraw();
             for (int i = 0; i < num; ++i) {
                 curBoard->drop();
             }
+            curBoard->draw();
 
             turnOver = false;
         }
@@ -427,11 +438,12 @@ int main(int argc, char *argv[])
 
         if(!turnOver){
             curBoard -> addBlock();
+            curBoard->notifyObservers("g_next", curPlayer, 0);
             turnCount++;
 
             if (curBoard->getBlind()) {
                 curBoard->setBlind(false);
-                curBoard->notifyObservers("unblind", curPlayer, 0);
+                curBoard->notifyObservers("g_unblind", curPlayer, 0);
             } 
 
             if (curBoard->getHeavy()) {
@@ -461,7 +473,7 @@ int main(int argc, char *argv[])
                     otherBoard->setBlind(true);
 
                     int otherPlayer = curPlayer % 2 + 1;
-                    otherBoard->notifyObservers("blind", otherPlayer, 0);
+                    otherBoard->notifyObservers("g_blind", otherPlayer, 0);
                 } else if (effect == "heavy") {
                     otherBoard->setHeavy(true);
                 } else if (effect == "force") {
@@ -472,5 +484,6 @@ int main(int argc, char *argv[])
             }
         }
     } // infinite while
+    
 
 } // main

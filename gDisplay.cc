@@ -19,6 +19,17 @@ void GDisplay::updateSpace(int row, int col) {
     }
 }
 
+void GDisplay::updateSpaceBlank(int row, int col) {
+    int colour = Xwindow::White;
+
+    if (col > 10) {
+        col -= 11;
+        x->fillRectangle(18*bSize + 10*divider + col*(bSize + divider), 4*bSize + row*(bSize + divider), bSize, bSize, colour);
+    } else {
+        x->fillRectangle(3*bSize + col*(bSize + divider), 4*bSize + row*(bSize + divider), bSize, bSize, colour);
+    }
+}
+
 void GDisplay::updateScore(int s1, int s2, int hiScore) {
     ostringstream sock1;
     ostringstream sock2;
@@ -117,6 +128,8 @@ void GDisplay::unblind(int player) {
 }
 
 void GDisplay::create() {
+    
+    
     x->fillRectangle(0, 0, 32*bSize+20*divider, 26*bSize+17*divider, Xwindow::Black);
 
     for (int i = 0; i < 18; i++) {
@@ -146,6 +159,8 @@ void GDisplay::create() {
     x->drawString(18*bSize + 10*divider + 42, 4*bSize - 3, "0", Xwindow::White);
     x->drawString(3*bSize + 42, 4*bSize - 16, "0", Xwindow::White);
     x->drawString(18*bSize + 10*divider + 42, 4*bSize - 16, "0", Xwindow::White);
+
+    
 
     updateNext(1, Board1->getNextBlockChar()); 
     updateNext(2, Board2->getNextBlockChar()); 
@@ -179,6 +194,9 @@ void GDisplay::notify(string type, int i1, int i2)
 {
     if (type == "g_space") {
         updateSpace(i1, i2);
+
+    } else if (type == "g_blank") {
+        updateSpaceBlank(i1, i2);
 
     } else if (type == "g_score") {
         updateScore(Board1->getScore(), Board2->getScore(), i1);

@@ -301,8 +301,21 @@ void Board ::sequence(string newfile)
     delete tmp;
 }
 */
-void Board ::left() { currentBlock->left(); cout << "block -> left() works"<< endl;}
 
+void Board ::undraw() {
+    std::vector<std::pair<int, int>> pos = currentBlock->getPos();
+    for (int i = 0; i < pos.size(); ++i) {
+        notifyObservers("g_blank", pos[i].first, pos[i].first);
+    }
+}
+void Board ::draw() {
+    std::vector<std::pair<int, int>> pos = currentBlock->getPos();
+    for (int i = 0; i < pos.size(); ++i) {
+        notifyObservers("g_space", pos[i].first, pos[i].first);
+    }
+}
+
+void Board ::left() { currentBlock->left(); cout << "block -> left() works"<< endl;}
 void Board ::right() { currentBlock->right();}
 bool Board ::down() { return currentBlock->down(); }
 void Board ::drop() {currentBlock->drop();}

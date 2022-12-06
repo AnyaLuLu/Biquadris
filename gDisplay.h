@@ -20,6 +20,7 @@ public:
 private:
     void create();
     void updateSpace(int x, int y);
+    void updateSpaceBlank(int x, int y);
     void updateScore(int s1, int s2, int hiScore);
     void updateNext(int player, char type);
     void updateLevel(int player, int level);
