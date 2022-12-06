@@ -11,6 +11,7 @@ CS 246
 7. Level 4 * block
 
 -- Command line interface stuff --
+
 8. Test seed
 9. Test text
 10. Test -scriptfile1 xxx
@@ -19,6 +20,7 @@ CS 246
 
 
 -- Command Interpreter stuff--
+
 13. sequence file (test)
 14. I, J, L (implement)
 15. restart (test)
