@@ -289,9 +289,14 @@ int main(int argc, char *argv[])
 
         else if (op == NO_RANDOM)
         {
-            string inputfile;
-            cin >> inputfile;
-            curBoard->setFile(inputfile);
+            if(curBoard -> getLvl() < 3){
+                cout << "Randomness can only be set for level 3 and 4, you are on level " << curBoard -> getLvl() << endl;
+            }
+            else{
+                string inputfile;
+                cin >> inputfile;
+                curBoard->setFile(inputfile);
+            }
         }
         else if (op == RANDOM)
         {
