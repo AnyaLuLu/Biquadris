@@ -142,7 +142,21 @@ string Board ::getFile() { return file; };
 void Board ::setBlind(bool set) { blind = set; }
 void Board ::setForce(bool set) { force = set; }
 void Board ::setHeavy(bool set) { heavy = set; }
-void Board ::setFile(string newFile) { file = newFile; };
+void Board ::setFile(string newFile){
+    if(file == "" && newFile == ""){
+        std:: cout << "Blocks are already being generated randomly" << endl;
+        return;
+    }
+    else if(file == newFile){
+        std:: cout << "That file is alreay in use" << endl;
+        return;
+    }
+    else if(newFile != ""){
+        // level was random, now we need to generate a new vector of blocks
+        lvl -> unRandom(newFile);
+    }
+    file = newFile;
+};
 
 bool Board ::checkLose()
 {
@@ -248,6 +262,7 @@ void Board ::levelup()
     delete tmp;
 }
 
+/*
 void Board ::sequence(string newfile)
 {
     Level *tmp;
@@ -275,7 +290,7 @@ void Board ::sequence(string newfile)
     swap(lvl, tmp);
     delete tmp;
 }
-
+*/
 void Board ::left() { currentBlock->left(); cout << "block -> left() works"<< endl;}
 
 void Board ::right() { currentBlock->right();}
