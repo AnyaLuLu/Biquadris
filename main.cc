@@ -295,7 +295,12 @@ int main(int argc, char *argv[])
         }
         else if (op == RANDOM)
         {
-            curBoard->setFile("");
+            if(curBoard -> getLvl() < 3){
+                cout << "Randomness can only be restored to level 3 and 4, you are on level " << curBoard -> getLvl() << endl;
+            }
+            else{
+                curBoard->setFile("");
+            }
         }
         else if (op == BLOCK)
         {

@@ -26,7 +26,7 @@ For Anya and Ethan Liu to work on:
 
 
 
-Anya's update (Dec 5, 7:30pm):
+Anya's update (Dec 5):
 
 Whats been fixed / added:
 1. clearline() now deletes the right line
@@ -34,6 +34,7 @@ Whats been fixed / added:
 3. Score has been fixed and now displays correct score
 4. Fixed displays so next block appears right
 5. Levels print out what a level has been changed
+6. Protection added around "random" command
 
 To do:
 - Ethan Chan's point 1 (see above)
