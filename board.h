@@ -20,6 +20,9 @@ class Board : public Subject{
         int singleCount;
         bool lost;
 
+        bool isSeeded;
+        int seed;
+
         Block* currentBlock;
         Block* nextBlock;
 
@@ -30,7 +33,7 @@ class Board : public Subject{
     
     public:
         Block* assignBlock(bool isRandom);
-        Board (int width, int height, int newLvl, std::string file, std::vector<std::vector<char>> playingBoard);
+        Board (int width, int height, int newLvl, std::string file, std::vector<std::vector<char>> playingBoard, bool isSeeded, int seed);
         int getScore();
         bool checkLose();
 

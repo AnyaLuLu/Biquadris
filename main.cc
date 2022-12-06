@@ -100,6 +100,9 @@ int main(int argc, char *argv[])
     int height = 18;
     vector<string> commandSequence;
 
+    bool isSeeded = false;
+    int seed = 0;
+
     // create boards, displays, etc. here
     vector<vector<char>> p1board(height, vector<char>(width, ' '));
     vector<vector<char>> p2board(height, vector<char>(width, ' '));
@@ -133,7 +136,10 @@ int main(int argc, char *argv[])
             {
                 try
                 {
+                    int s = atoi(argv[i]);
                     srand(stoi(extra));
+                    isSeeded = true;
+                    seed = s;
                 }
                 catch (...)
                 {
@@ -188,8 +194,8 @@ int main(int argc, char *argv[])
     int bSize = 15;
     int divider = 2;
     
-    Board1 = new Board{width, height, startLevel, p1blocks, p1board};
-    Board2 = new Board{width, height, startLevel, p2blocks, p2board};
+    Board1 = new Board{width, height, startLevel, p1blocks, p1board, isSeeded, seed};
+    Board2 = new Board{width, height, startLevel, p2blocks, p2board, isSeeded, seed};
     curBoard = Board1;
     tDisplay = new txtDisplay{Board1, Board2};
     
@@ -421,8 +427,8 @@ int main(int argc, char *argv[])
             vector<vector<char>> newBoard1(height, vector<char>(width, ' '));
             vector<vector<char>> newBoard2(height, vector<char>(width, ' '));
 
-            Board1 = new Board{width, height, level1, file1, newBoard1};
-            Board2 = new Board{width, height, level2, file2, newBoard2};
+            Board1 = new Board{width, height, level1, file1, newBoard1, isSeeded, seed};
+            Board2 = new Board{width, height, level2, file2, newBoard2, isSeeded, seed};
         }
         else
         {

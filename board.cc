@@ -20,7 +20,7 @@
 #include <vector>
 using namespace std;
 
-Board ::Board(int width, int height, int newLvl, string file, vector<vector<char>> playingBoard) : width{width}, height{height}, blind{false}, heavy{false}, force{false}, score{0}, file{file}, singleCount{0}, lost{false}, playingBoard{playingBoard}, playingBlocks{}
+Board ::Board(int width, int height, int newLvl, string file, vector<vector<char>> playingBoard, bool isSeeded, int seed) : width{width}, height{height}, blind{false}, heavy{false}, force{false}, score{0}, file{file}, singleCount{0}, lost{false}, isSeeded{isSeeded}, seed{seed}, playingBoard{playingBoard}, playingBlocks{}
 {
 
     /**** If there is no file associated with the lvl, please input empty string for file *****/
@@ -33,13 +33,13 @@ Board ::Board(int width, int height, int newLvl, string file, vector<vector<char
     }
     else if (newLvl == 1)
     {
-        lvl = new lvl1{true};
+        lvl = new lvl1{isSeeded, seed, true};
         currentBlock = this->assignBlock(true);
         nextBlock = this->assignBlock(true);
     }
     else if (newLvl == 2)
     {
-        lvl = new lvl2{true};
+        lvl = new lvl2{isSeeded, seed, true};
         currentBlock = this->assignBlock(true);
         nextBlock = this->assignBlock(true);
     }
@@ -47,7 +47,7 @@ Board ::Board(int width, int height, int newLvl, string file, vector<vector<char
     {
         if (file == "")
         {
-            lvl = new lvl3{true};
+            lvl = new lvl3{isSeeded, seed, true};
             currentBlock = this->assignBlock(true);
             nextBlock = this->assignBlock(true);
         }
@@ -63,7 +63,7 @@ Board ::Board(int width, int height, int newLvl, string file, vector<vector<char
     {
         if (file == "")
         {
-            lvl = new lvl4{true};
+            lvl = new lvl4{isSeeded, seed, true};
             currentBlock = this->assignBlock(true);
             nextBlock = this->assignBlock(true);
         }
