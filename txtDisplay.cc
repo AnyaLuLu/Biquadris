@@ -39,8 +39,6 @@ void txtDisplay::notify(string type, int i1, int i2)
             }
             out << '|';
 
-            // hi
-
             out << "      ";
 
             out << '|';
