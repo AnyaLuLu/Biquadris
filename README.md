@@ -13,7 +13,6 @@ CS 246
 -- Command line interface stuff --
 
 8. Test seed
-12. Test -startlevel n
 
 
 -- Command Interpreter stuff--
