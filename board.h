@@ -69,7 +69,7 @@ class Board : public Subject{
 
         void addBlock();
 
-        void force_set(char type);
+        void force_set(char type, int player);
 
         //Block *getCurrBlock();
         char getNextBlockChar();

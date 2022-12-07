@@ -29,7 +29,6 @@ public:
 
     virtual char getType() = 0;
     void addBlock();
-protected:
     void unset();
 };
 

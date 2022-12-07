@@ -384,7 +384,7 @@ int main(int argc, char *argv[])
         }
         else if (op == BLOCK)
         {
-            curBoard->force_set(blockType);
+            curBoard->force_set(blockType, curPlayer);
         }
 
         else if (op == SEQUENCE)
@@ -486,7 +486,8 @@ int main(int argc, char *argv[])
                 } else if (effect == "force") {
                     char block_type;
                     cin >> block_type;
-                    otherBoard->force_set(block_type);
+                    int otherPlayer = curPlayer % 2 + 1;
+                    otherBoard->force_set(block_type, otherPlayer);
                 }
             }
         }

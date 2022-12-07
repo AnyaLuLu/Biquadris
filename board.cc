@@ -447,7 +447,7 @@ char Board::getState(int row, int col) const
     return playingBoard[row][col]; 
 }
 
-void Board::force_set(char type)
+void Board::force_set(char type, int player)
 {
     Block *b;
     if (type == 'I')
@@ -479,7 +479,11 @@ void Board::force_set(char type)
         b = new tBlock(playingBoard, lvl->lvlNum(), width);
     }
 
+    currentBlock->unset();
+    undraw(player);
     currentBlock = b;
+    currentBlock->addBlock();
+    draw(player);
 }
 /*
 Block *Board::getCurrBlock()
