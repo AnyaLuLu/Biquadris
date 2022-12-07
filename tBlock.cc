@@ -43,9 +43,11 @@ bool tBlock::clockwise()
         }
     }
 
-    //checking that itll rotate in bounds
-    if (facing == 'l' || facing == 'r'){
-        if (llcCol > (boardWidth - 3)){
+    // checking that itll rotate in bounds
+    if (facing == 'l' || facing == 'r')
+    {
+        if (llcCol > (boardWidth - 3))
+        {
             return false;
         }
     }
@@ -53,28 +55,28 @@ bool tBlock::clockwise()
     // checking if it can be rotated. note that playingboard is col, row since it is a vector of vectors
     if (facing == 'u')
     {
-        if (playingBoard[llcCol][llcRow - 2] != ' ' || playingBoard[llcCol][llcRow - 1] != ' ')
+        if (playingBoard[llcRow - 2][llcCol] != ' ' || playingBoard[llcRow - 1][llcCol] != ' ')
         {
             return false;
         }
     }
     else if (facing == 'r')
     {
-        if (playingBoard[llcCol + 2][llcRow - 1] != ' ' || playingBoard[llcCol + 1][llcRow] != ' ')
+        if (playingBoard[llcRow - 1][llcCol + 2] != ' ' || playingBoard[llcRow][llcCol + 1] != ' ')
         {
             return false;
         }
     }
     else if (facing == 'd')
     {
-        if (playingBoard[llcCol+1][llcRow-2] != ' ')
+        if (playingBoard[llcRow - 2][llcCol + 1] != ' ')
         {
             return false;
         }
     }
     else if (facing == 'l')
     {
-        if (playingBoard[llcCol][llcRow] != ' ' || playingBoard[llcCol + 2][llcRow] != ' ')
+        if (playingBoard[llcRow][llcCol] != ' ' || playingBoard[llcRow][llcCol + 2] != ' ')
         {
             return false;
         }
@@ -182,9 +184,11 @@ bool tBlock::counterClockwise()
         }
     }
 
-    //checking that itll rotate in bounds
-    if (facing == 'l' || facing == 'r'){
-        if (llcCol > (boardWidth - 3)){
+    // checking that itll rotate in bounds
+    if (facing == 'l' || facing == 'r')
+    {
+        if (llcCol > (boardWidth - 3))
+        {
             return false;
         }
     }
@@ -192,28 +196,28 @@ bool tBlock::counterClockwise()
     // checking if it can be rotated. note that playingboard is col, row since it is a vector of vectors
     if (facing == 'u')
     {
-        if (playingBoard[llcCol + 1][llcRow - 2] != ' ' || playingBoard[llcCol][llcRow - 1] != ' ')
+        if (playingBoard[llcRow - 2][llcCol + 1] != ' ' || playingBoard[llcRow - 1][llcCol] != ' ')
         {
             return false;
         }
     }
     else if (facing == 'l')
     {
-        if (playingBoard[llcCol + 2][llcRow - 1] != ' ')
+        if (playingBoard[llcRow - 1][llcCol + 2] != ' ')
         {
             return false;
         }
     }
     else if (facing == 'd')
     {
-        if (playingBoard[llcCol][llcRow] != ' ' || playingBoard[llcCol][llcRow - 2] != ' ')
+        if (playingBoard[llcRow][llcCol] != ' ' || playingBoard[llcRow - 2][llcCol] != ' ')
         {
             return false;
         }
     }
     else if (facing == 'r')
     {
-        if (playingBoard[llcCol + 1][llcRow] != ' ' || playingBoard[llcCol + 2][llcRow] != ' ')
+        if (playingBoard[llcRow][llcCol + 1] != ' ' || playingBoard[llcRow][llcCol + 2] != ' ')
         {
             return false;
         }
@@ -300,7 +304,7 @@ bool tBlock::canCreate()
 {
     for (int i = 0; i < blockPos.size(); ++i)
     {
-        if (playingBoard[0][2] != ' ' || playingBoard[1][2] != ' ' || playingBoard[2][2] != ' ' || playingBoard[1][3] != ' ')
+        if (playingBoard[2][0] != ' ' || playingBoard[2][1] != ' ' || playingBoard[2][2] != ' ' || playingBoard[3][1] != ' ')
         {
             return false;
         }
@@ -308,4 +312,4 @@ bool tBlock::canCreate()
     return true;
 };
 
-char tBlock :: getType(){return 'T';}
+char tBlock ::getType() { return 'T'; }
