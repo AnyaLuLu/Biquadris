@@ -35,9 +35,11 @@ bool zBlock::clockwise()
         }
     }
 
-    //checking that itll rotate in bounds
-    if (isVert){
-        if (llcCol > (boardWidth - 3)){
+    // checking that itll rotate in bounds
+    if (isVert)
+    {
+        if (llcCol > (boardWidth - 3))
+        {
             return false;
         }
     }
@@ -45,14 +47,14 @@ bool zBlock::clockwise()
     // checking if it can be rotated. note that playingboard is col, row since it is a vector of vectors
     if (isVert)
     {
-        if (playingBoard[llcCol + 1][llcRow] != ' ' || playingBoard[llcCol + 2][llcRow] != ' ')
+        if (playingBoard[llcRow][llcCol + 1] != ' ' || playingBoard[llcRow][llcCol + 2] != ' ')
         {
             return false;
         }
     }
     else
     {
-        if (playingBoard[llcCol][llcRow] != ' ' || playingBoard[llcCol + 1][llcRow - 2] != ' ')
+        if (playingBoard[llcRow][llcCol] != ' ' || playingBoard[llcRow - 2][llcCol + 1] != ' ')
         {
             return false;
         }
@@ -95,34 +97,34 @@ bool zBlock::clockwise()
         {
             if (blockPos[i].first == llcRow && blockPos[i].second == llcCol)
             {
-                //std::cerr<< i << "case 1" << std::endl;
+                // std::cerr<< i << "case 1" << std::endl;
                 blockPos[i].first -= 2;
             }
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 1)
             {
-                //std::cerr<< i << "case 2" << std::endl;
+                // std::cerr<< i << "case 2" << std::endl;
                 blockPos[i].first -= 1;
                 blockPos[i].second -= 1;
             }
             else if (blockPos[i].first == llcRow && blockPos[i].second == llcCol + 2)
             {
-                //std::cerr<< i << "case 3" << std::endl;
+                // std::cerr<< i << "case 3" << std::endl;
                 blockPos[i].second -= 2;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol)
             {
-                //std::cerr<< i << "case 4" << std::endl;
+                // std::cerr<< i << "case 4" << std::endl;
                 blockPos[i].first -= 1;
                 blockPos[i].second += 1;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol + 1)
             {
-                //std::cerr<< i << "case 5" << std::endl;
+                // std::cerr<< i << "case 5" << std::endl;
                 continue;
             }
             else if (blockPos[i].first == llcRow - 1 && blockPos[i].second == llcCol + 2)
             {
-                //std::cerr<< i << "case 6" << std::endl;
+                // std::cerr<< i << "case 6" << std::endl;
                 blockPos[i].first += 1;
                 blockPos[i].second -= 1;
             }
@@ -159,9 +161,11 @@ bool zBlock::counterClockwise() // code is the exact same as clockwise cuz it do
         }
     }
 
-    //checking that itll rotate in bounds
-    if (isVert){
-        if (llcCol > (boardWidth - 3)){
+    // checking that itll rotate in bounds
+    if (isVert)
+    {
+        if (llcCol > (boardWidth - 3))
+        {
             return false;
         }
     }
@@ -169,14 +173,14 @@ bool zBlock::counterClockwise() // code is the exact same as clockwise cuz it do
     // checking if it can be rotated. note that playingboard is col, row since it is a vector of vectors
     if (isVert)
     {
-        if (playingBoard[llcCol + 1][llcRow] != ' ' || playingBoard[llcCol + 2][llcRow] != ' ')
+        if (playingBoard[llcRow][llcCol + 1] != ' ' || playingBoard[llcRow][llcCol + 2] != ' ')
         {
             return false;
         }
     }
     else
     {
-        if (playingBoard[llcCol][llcRow] != ' ' || playingBoard[llcCol + 1][llcRow - 2] != ' ')
+        if (playingBoard[llcRow][llcCol] != ' ' || playingBoard[llcRow - 2][llcCol + 1] != ' ')
         {
             return false;
         }
@@ -263,7 +267,7 @@ bool zBlock::canCreate()
 {
     for (int i = 0; i < blockPos.size(); ++i)
     {
-        if (playingBoard[0][2] != ' ' || playingBoard[1][2] != ' ' || playingBoard[1][3] != ' ' || playingBoard[2][3] != ' ')
+        if (playingBoard[2][0] != ' ' || playingBoard[2][1] != ' ' || playingBoard[3][1] != ' ' || playingBoard[3][2] != ' ')
         {
             return false;
         }
@@ -271,4 +275,4 @@ bool zBlock::canCreate()
     return true;
 };
 
-char zBlock::getType(){return 'Z';}
+char zBlock::getType() { return 'Z'; }

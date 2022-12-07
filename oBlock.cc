@@ -36,7 +36,7 @@ bool oBlock::canCreate()
 {
     for (int i = 0; i < blockPos.size(); ++i)
     {
-        if (playingBoard[0][3] != ' ' || playingBoard[1][3] != ' ' || playingBoard[0][2] != ' ' || playingBoard[1][2] != ' ')
+        if (playingBoard[3][0] != ' ' || playingBoard[3][1] != ' ' || playingBoard[2][0] != ' ' || playingBoard[2][1] != ' ')
         {
             return false;
         }

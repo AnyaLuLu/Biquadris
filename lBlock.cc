@@ -54,28 +54,28 @@ bool lBlock::clockwise()
     // checking if it can be rotated. note that playingboard is col, row since it is a vector of vectors
     if (isVert && rightCorn)
     {
-        if (playingBoard[llcCol][llcRow] != ' ' || playingBoard[llcCol + 2][llcRow] != ' ' || playingBoard[llcCol + 2][llcRow - 1] != ' ')
+        if (playingBoard[llcRow][llcCol] != ' ' || playingBoard[llcRow][llcCol + 2] != ' ' || playingBoard[llcRow - 1][llcCol + 2] != ' ')
         {
             return false;
         }
     }
     else if (!isVert && !rightCorn)
     {
-        if (playingBoard[llcCol + 1][llcRow] != ' ' || playingBoard[llcCol + 1][llcRow - 2] != ' ' || playingBoard[llcCol][llcRow - 2] != ' ')
+        if (playingBoard[llcRow][llcCol + 1] != ' ' || playingBoard[llcRow - 2][llcCol + 1] != ' ' || playingBoard[llcRow - 2][llcCol] != ' ')
         {
             return false;
         }
     }
     else if (isVert && !rightCorn)
     {
-        if (playingBoard[llcCol + 1][llcRow - 1] != ' ' || playingBoard[llcCol + 2][llcRow - 1] != ' ')
+        if (playingBoard[llcRow - 1][llcCol + 1] != ' ' || playingBoard[llcRow - 1][llcCol + 2] != ' ')
         {
             return false;
         }
     }
     else if (!isVert && rightCorn)
     {
-        if (playingBoard[llcCol][llcRow - 1] != ' ' || playingBoard[llcCol][llcRow - 2] != ' ')
+        if (playingBoard[llcRow - 1][llcCol] != ' ' || playingBoard[llcRow - 2][llcCol] != ' ')
         {
             return false;
         }
@@ -201,28 +201,28 @@ bool lBlock::counterClockwise()
     // checking if it can be rotated. note that playingboard is col, row since it is a vector of vectors
     if (isVert && rightCorn)
     {
-        if (playingBoard[llcCol][llcRow] != ' ' || playingBoard[llcCol][llcRow - 1] != ' ' || playingBoard[llcCol + 2][llcRow - 1] != ' ')
+        if (playingBoard[llcRow][llcCol] != ' ' || playingBoard[llcRow - 1][llcCol] != ' ' || playingBoard[llcRow - 1][llcCol + 2] != ' ')
         {
             return false;
         }
     }
     else if (isVert && !rightCorn)
     {
-        if (playingBoard[llcCol + 2][llcRow - 1] != ' ' || playingBoard[llcCol + 2][llcRow] != ' ')
+        if (playingBoard[llcRow - 1][llcCol + 2] != ' ' || playingBoard[llcRow][llcCol + 2] != ' ')
         {
             return false;
         }
     }
     else if (!isVert && rightCorn)
     {
-        if (playingBoard[llcCol][llcRow - 2] != ' ' || playingBoard[llcCol + 1][llcRow - 2] != ' ' || playingBoard[llcCol + 1][llcRow - 1] != ' ')
+        if (playingBoard[llcRow - 2][llcCol] != ' ' || playingBoard[llcRow - 2][llcCol + 1] != ' ' || playingBoard[llcRow - 1][llcCol + 1] != ' ')
         {
             return false;
         }
     }
     else if (!isVert && !rightCorn)
     {
-        if (playingBoard[llcCol + 1][llcRow] != ' ' || playingBoard[llcCol][llcRow - 2] != ' ')
+        if (playingBoard[llcRow][llcCol + 1] != ' ' || playingBoard[llcRow - 2][llcCol] != ' ')
         {
             return false;
         }
@@ -313,7 +313,7 @@ bool lBlock::canCreate()
 {
     for (int i = 0; i < blockPos.size(); ++i)
     {
-        if (playingBoard[0][3] != ' ' || playingBoard[1][3] != ' ' || playingBoard[2][3] != ' ' || playingBoard[2][2] != ' ')
+        if (playingBoard[3][0] != ' ' || playingBoard[3][1] != ' ' || playingBoard[3][2] != ' ' || playingBoard[2][2] != ' ')
         {
             return false;
         }
