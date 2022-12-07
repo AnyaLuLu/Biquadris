@@ -1,5 +1,6 @@
 #include "lvl2.h"
 #include <time.h>
+#include <iostream>
 using namespace std;
 
 char lvl2 :: blockType(bool isRandom){
@@ -35,4 +36,5 @@ lvl2 :: lvl2(bool isSeeded, int seed, bool isRandom, string file) : Level(isSeed
 
         length = 50;
     }
+    cout << "finished lvl2 ctor" << endl;
 }

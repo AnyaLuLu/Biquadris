@@ -175,6 +175,10 @@ int main(int argc, char *argv[])
                 try
                 {
                     startLevel = stoi(extra);
+		    if(startLevel == 1 || startLevel == 2){
+			p1blocks = "";
+			p2blocks = "";
+		    }
                 }
                 catch (...)
                 {

@@ -23,6 +23,7 @@ Level :: Level(bool isSeeded, int seed, bool random, string file) : isSeeded{isS
 
         length = blockSequence.size();
     }
+   cout << "got to bottom of lvl ctor" << endl;
 
 }
 
