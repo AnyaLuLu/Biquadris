@@ -69,7 +69,7 @@ class Board : public Subject{
 
         bool addBlock();
         bool starBlock();
-        void addStar();
+        void addStar(int player);
 
         void force_set(char type, int player);
 

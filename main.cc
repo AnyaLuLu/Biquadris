@@ -213,8 +213,9 @@ int main(int argc, char *argv[])
             cout << "You lost" << endl;
             break;
         }
-        if(curBoard -> starBlock()){ // add graphics stuff later
-            curBoard -> addStar();
+        if(curBoard -> starBlock()){
+            curBoard -> addStar(curPlayer);
+            curBoard->notifyObservers("text", 0, 0);
         }
 
         bool turnOver = false;

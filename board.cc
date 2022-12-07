@@ -361,12 +361,23 @@ bool Board :: starBlock(){
     return (lvl->lvlNum() == 4 && singleCount % 5 == 0 && singleCount != 0)? true : false;
 }
 
-void Board :: addStar(){
+void Board :: addStar(int player){
     Block* star = new cube(playingBoard, lvl->lvlNum(), width);
     star -> drop();
     star -> addBlock();
     singleCount = 0;
     playingBlocks.emplace_back(star);
+
+    int shift = 0;
+    if (player == 2) {
+        shift = 11;
+    }
+
+    for (int i = 0; i < height; i++) {
+        notifyObservers("g_space", i, 5 + shift);
+    }
+
+    clearlines(player);
 }
 
 
