@@ -68,6 +68,8 @@ class Board : public Subject{
         void draw(int player);
 
         bool addBlock();
+        bool starBlock();
+        void addStar();
 
         void force_set(char type, int player);
 

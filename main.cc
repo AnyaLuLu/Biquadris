@@ -125,7 +125,7 @@ int main(int argc, char *argv[])
         {
             if (command != "-seed" && command != "-scriptfile1" && command != "-scriptfile2" && command != "-startlevel")
             {
-                cerr << "Invalid Argument: " << command << endl;
+                cout << "Invalid Argument: " << command << endl;
                 return 1;
             }
 
@@ -143,7 +143,7 @@ int main(int argc, char *argv[])
                 }
                 catch (...)
                 {
-                    cerr << "Invalid seed: " << extra << endl;
+                    cout << "Invalid seed: " << extra << endl;
                 }
             }
             else if (command == "-scriptfile1")
@@ -152,7 +152,7 @@ int main(int argc, char *argv[])
 
                 if (!testfile.good())
                 {
-                    cerr << "Invalid file: " << extra << endl;
+                    cout << "Invalid file: " << extra << endl;
                     return 1;
                 }
 
@@ -164,7 +164,7 @@ int main(int argc, char *argv[])
 
                 if (!testfile.good())
                 {
-                    cerr << "Invalid file: " << extra << endl;
+                    cout << "Invalid file: " << extra << endl;
                     return 1;
                 }
 
@@ -178,13 +178,13 @@ int main(int argc, char *argv[])
                 }
                 catch (...)
                 {
-                    cerr << "Invalid level (not an integer): " << extra << endl;
+                    cout << "Invalid level (not an integer): " << extra << endl;
                     return 1;
                 }
 
                 if (!(0 <= startLevel && startLevel <= maxLevel))
                 {
-                    cerr << "Invalid level (out of bounds): " << extra << endl;
+                    cout << "Invalid level (out of bounds): " << extra << endl;
                     return 1;
                 }
             }
@@ -209,9 +209,16 @@ int main(int argc, char *argv[])
     
     while (true)
     {
+        if(curBoard -> checkLose()){
+            cout << "You lost" << endl;
+            break;
+        }
+        if(curBoard -> starBlock()){ // add graphics stuff later
+            curBoard -> addStar();
+        }
+
         bool turnOver = false;
 
-        cout << "Command: ";
         string command;
 
         if (commandSequence.empty())
@@ -433,7 +440,7 @@ int main(int argc, char *argv[])
         }
         else
         {
-            cerr << "Invalid command." << endl;
+            cout << "Invalid command." << endl;
         }
 
         curBoard -> notifyObservers("text", 0, 0);
@@ -442,6 +449,8 @@ int main(int argc, char *argv[])
             //turnOver = true;
         }
         */
+
+        
 
         if(turnOver){
             if(curBoard -> addBlock()){
@@ -493,11 +502,11 @@ int main(int argc, char *argv[])
                 }
             }
 
-            cerr << curBoard->getScore() << endl;
+            cout << curBoard->getScore() << endl;
             if (curBoard->getScore() > hiscore)
             {
                 hiscore = curBoard->getScore();
-                cerr << "New High Score! " << hiscore << endl;
+                cout << "New High Score! " << hiscore << endl;
                 curBoard->notifyObservers("g_score", hiscore, 0);
             }
         }

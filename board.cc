@@ -338,12 +338,6 @@ bool Board ::addBlock()
     playingBlocks.emplace_back(currentBlock);
     // currentBlock->addBlock();
 
-    if(lvl->lvlNum() == 4 && singleCount % 5 == 0 && singleCount != 0){
-        Block* star = new cube(playingBoard, lvl->lvlNum(), width);
-        star -> drop();
-        star -> addBlock();
-        singleCount = 0;
-    }
     currentBlock = nextBlock;
     singleCount++;
 
@@ -361,6 +355,18 @@ bool Board ::addBlock()
         lost = true;
     }
     currentBlock -> addBlock();
+}
+
+bool Board :: starBlock(){
+    return (lvl->lvlNum() == 4 && singleCount % 5 == 0 && singleCount != 0)? true : false;
+}
+
+void Board :: addStar(){
+    Block* star = new cube(playingBoard, lvl->lvlNum(), width);
+    star -> drop();
+    star -> addBlock();
+    singleCount = 0;
+    playingBlocks.emplace_back(star);
 }
 
 
