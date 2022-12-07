@@ -11,10 +11,6 @@ CS 246
 7. Level 4 * block
 8. People need to lose
 
--- Command line interface stuff --
-
-8. Test seed
-
 
 -- Command Interpreter stuff--
 
@@ -25,6 +21,5 @@ CS 246
 
 
 - After moving down, some turns don't work - Ethan Chan
-
 
 

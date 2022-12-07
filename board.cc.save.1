@@ -20,7 +20,7 @@
 #include <vector>
 using namespace std;
 
-Board ::Board(int width, int height, int newLvl, string file, vector<vector<char>> playingBoard, bool isSeeded, int seed) : width{width}, height{height}, blind{false}, heavy{false}, force{false}, score{0}, file{file}, singleCount{0}, lost{false}, isSeeded{isSeeded}, seed{seed}, playingBoard{playingBoard}, playingBlocks{}
+Board ::Board(int width, int height, int newLvl, string file, vector<vector<char>> playingBoard) : width{width}, height{height}, blind{false}, heavy{false}, force{false}, score{0}, file{file}, singleCount{0}, lost{false}, playingBoard{playingBoard}, playingBlocks{}
 {
 
     /**** If there is no file associated with the lvl, please input empty string for file *****/
@@ -33,13 +33,13 @@ Board ::Board(int width, int height, int newLvl, string file, vector<vector<char
     }
     else if (newLvl == 1)
     {
-        lvl = new lvl1{isSeeded, seed, true};
+        lvl = new lvl1{true};
         currentBlock = this->assignBlock(true);
         nextBlock = this->assignBlock(true);
     }
     else if (newLvl == 2)
     {
-        lvl = new lvl2{isSeeded, seed, true};
+        lvl = new lvl2{true};
         currentBlock = this->assignBlock(true);
         nextBlock = this->assignBlock(true);
     }
@@ -47,13 +47,13 @@ Board ::Board(int width, int height, int newLvl, string file, vector<vector<char
     {
         if (file == "")
         {
-            lvl = new lvl3{isSeeded, seed, true};
+            lvl = new lvl3{true};
             currentBlock = this->assignBlock(true);
             nextBlock = this->assignBlock(true);
         }
         else
         {
-            lvl = new lvl3{false, 0, false, file};
+            lvl = new lvl3{false, file};
             currentBlock = this->assignBlock(false);
             nextBlock = this->assignBlock(false);
         }
@@ -63,29 +63,19 @@ Board ::Board(int width, int height, int newLvl, string file, vector<vector<char
     {
         if (file == "")
         {
-            lvl = new lvl4{isSeeded, seed, true};
+            lvl = new lvl4{true};
             currentBlock = this->assignBlock(true);
             nextBlock = this->assignBlock(true);
         }
         else
         {
-            lvl = new lvl4{false, 0, false, file};
+            lvl = new lvl4{false, file};
             currentBlock = this->assignBlock(false);
             nextBlock = this->assignBlock(false);
         }
         heavy = true;
     }
     currentBlock -> addBlock();
-}
-
-Board :: ~Board(){
-    delete lvl;
-    delete currentBlock;
-    delete nextBlock;
-    for(auto b : playingBlocks){
-        delete b;
-    }
-    playingBlocks.clear();
 }
 
 Block *Board ::assignBlock(bool isRandom)
@@ -166,6 +156,7 @@ void Board ::setFile(string newFile){
         lvl -> unRandom(newFile);
     }
     file = newFile;
+    cout << "file is not set to " << file << endl;
 };
 
 bool Board ::checkLose()
@@ -216,7 +207,7 @@ void Board ::leveldown()
         }
         else
         {
-            tmp = new lvl3{false, 0, false, file};
+            tmp = new lvl3{false, file};
         }
         cout << "Changed to level 3" << endl;
     }
@@ -251,7 +242,7 @@ void Board ::levelup()
         }
         else
         {
-            tmp = new lvl3{false, 0, false, file};
+            tmp = new lvl3{false, file};
         }
         cout << "Changed to level 3" << endl;
     }
@@ -263,7 +254,7 @@ void Board ::levelup()
         }
         else
         {
-            tmp = new lvl4{false, 0, false, file};
+            tmp = new lvl4{false, file};
         }
         cout << "Changed to level 4" << endl;
     }
@@ -301,34 +292,10 @@ void Board ::sequence(string newfile)
     delete tmp;
 }
 */
+void Board ::left() { currentBlock->left(); cout << "block -> left() works"<< endl;}
 
-void Board ::undraw(int player) {
-    int shift = 0;
-    if (player == 2) {
-        shift = 11;
-    }
-
-    std::vector<std::pair<int, int>> pos = currentBlock->getPos();
-    for (int i = 0; i < pos.size(); ++i) {
-        notifyObservers("g_blank", pos[i].first, pos[i].second + shift);
-    }
-}
-void Board ::draw(int player) {
-    std::vector<std::pair<int, int>> pos = currentBlock->getPos();
-    int shift = 0;
-    if (player == 2) {
-        shift = 11;
-    }
-
-    for (int i = 0; i < pos.size(); ++i) {
-        cerr << pos[i].first << " and " << pos[i].second << endl;
-        notifyObservers("g_space", pos[i].first, pos[i].second + shift);
-    }
-}
-
-void Board ::left() { currentBlock->left();}
 void Board ::right() { currentBlock->right();}
-bool Board ::down() { return currentBlock->down(); }
+void Board ::down() { currentBlock->down(); }
 void Board ::drop() {currentBlock->drop();}
 void Board ::cw() { currentBlock->clockwise(); }
 void Board ::ccw() { currentBlock->counterClockwise();}
@@ -341,12 +308,13 @@ void Board ::addBlock()
     currentBlock = nextBlock;
     if (file == "")
     {
-	cout << "random block assigned";
         nextBlock = this->assignBlock(true);
     }
     else
     {
-        nextBlock = this->assignBlock(false);
+	cout << "well file is not random, so we try to assign a nextBlock" << endl;
+        nextBlock = this->assignBloccck(false);
+	cout << "if this isnt the pro idk what is" << endl;
     }
 
     if (!currentBlock->canCreate())
@@ -359,35 +327,24 @@ void Board ::addBlock()
 
 
 
-int Board ::clearlines(int player)
+int Board ::clearlines()
 {
     // change score
     int clearedlines = 0;
-    int topLine = 0;
-    int botLine = 0;
-    bool topSet = false;
 
     for (int i = 0; i < height; i++)
     {
         bool fullLine = true;
-        
         for (int j = 0; j < width; j++)
         {
             if (playingBoard[i][j] == ' ')
             {
                 fullLine = false;
             }
-            if (playingBoard[i][j] != ' ' && !topSet)
-            {
-                topSet = true;
-                topLine = i;
-            }
         }
 
         if (fullLine)
         {
-            botLine = i;
-
             clearedlines++;
 
             playingBoard.erase(playingBoard.begin() + i);
@@ -403,26 +360,16 @@ int Board ::clearlines(int player)
                     playingBlocks.erase(playingBlocks.begin() + k);
                     delete tmp;
                     k--;
+			std::cout << "a block has been deleted on line " << i <<  std::endl;
                 }
             }
 
-            i -= 1;
+            // notify observers to change display
         }
 
     }
-
-    int shift = 0;
-    if (player == 2) {
-        shift = 11;
-    }
-
-    for (int i = topLine; i <= botLine; i++) {
-        for (int j = 0; j < width; j++) {
-            notifyObservers("g_space", i, j + shift);
-        }
-    }
-
     int l = lvl->lvlNum();
+    //std:: cout <<(l + clearedlines) * (l + clearedlines) << endl;
     if(clearedlines > 0){
         score += (l + clearedlines) * (l + clearedlines );
     }
