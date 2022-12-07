@@ -1,4 +1,5 @@
 #include "iBlock.h"
+#include <iostream>
 using namespace std;
 
 iBlock::iBlock(vector<vector<char>> &playingBoard, int level, int boardWidth) : Block(playingBoard, level, boardWidth)
@@ -30,14 +31,14 @@ bool iBlock::clockwise()
     {
         isVert = false;
     }
-
     // checking that rotating the block would be in bounds
-    if (isVert){
-        if (llcCol > (boardWidth - 4)){
+    if (isVert)
+    {
+        if (llcCol > (boardWidth - 4))
+        {
             return false;
         }
     }
-
     // checking if it can be rotated. note that playingboard is col, row since it is a vector of vectors
     if (isVert)
     {
@@ -48,12 +49,12 @@ bool iBlock::clockwise()
     }
     else
     {
-        if (playingBoard[llcRow - 1][llcCol] != ' ' || playingBoard[llcRow - 2][llcCol] != ' ' || playingBoard[llcRow + 3][llcCol] != ' ')
+        if (playingBoard[llcRow - 1][llcCol] != ' ' || playingBoard[llcRow - 2][llcCol] != ' ' || playingBoard[llcRow - 3][llcCol] != ' ')
         {
             return false;
         }
     }
-
+    std::cerr << "here" << std::endl;
     this->unset();
     // rotating the block
     for (int i = 0; i < blockPos.size(); ++i)
@@ -132,8 +133,10 @@ bool iBlock::counterClockwise()
     }
 
     // checking that rotating the block would be in bounds
-    if (isVert){
-        if (llcCol > (boardWidth - 4)){
+    if (isVert)
+    {
+        if (llcCol > (boardWidth - 4))
+        {
             return false;
         }
     }
@@ -148,7 +151,7 @@ bool iBlock::counterClockwise()
     }
     else
     {
-        if (playingBoard[llcRow - 1][llcCol] != ' ' || playingBoard[llcRow - 2][llcCol] != ' ' || playingBoard[llcRow + 3][llcCol] != ' ')
+        if (playingBoard[llcRow - 1][llcCol] != ' ' || playingBoard[llcRow - 2][llcCol] != ' ' || playingBoard[llcRow - 3][llcCol] != ' ')
         {
             return false;
         }
@@ -228,4 +231,4 @@ bool iBlock::canCreate()
     return true;
 };
 
-char iBlock :: getType(){return 'I';}
+char iBlock ::getType() { return 'I'; }

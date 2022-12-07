@@ -10,23 +10,16 @@ Added currentBlock* and nextBlock*
 
     currentBlock* added to Board's vectors in newBlock() (see line 304), then both pointers r updated.
 
-Fixed scoring
-    in clearlines() (see line 334) score i added based on lvl
-    Then playingBlocks is looped thru and all approporiate Block*'s are deleted and score is updated
+
+2. clean up comments (at the end) and probably other things along the way
+3. Test memory
+4. Graphics display
+5. Test blind
+6. Test force
+7. Level 4 * block
+8. People need to lose
 
 :DDDDDDDDDDDD
 
 (ig we can use currentBlock* to help with the display)
 
-
-
-
-
-
-
-2022-12-02 Update (Ethan)
-1. i had to change the board ctor to take in the width of the board in order to check for seg faults. but dw i updated this everywhere that needed to be updated, including in board
-
-2. implemented worth and deletepos functions in block. Anya, u initially put these as virtual functions but i didnt really see a point of doing that so i defined it in block.cc
-
-3. implemented getPos. it just makes a copy of the blockPos vector and returns that copy. I wasnt really sure thats what you guys wanted it to do, so i will clarify tmrw
