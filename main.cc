@@ -198,10 +198,12 @@ int main(int argc, char *argv[])
     Board2 = new Board{width, height, startLevel, p2blocks, p2board, isSeeded, seed};
     curBoard = Board1;
     tDisplay = new txtDisplay{Board1, Board2};
+    GDisplay *gDisplay;
+    Xwindow *x;
     
     if (graphicsOn) {
-        Xwindow *x = new Xwindow{32*bSize+20*divider, 26*bSize+17*divider};
-        GDisplay *gDisplay = new GDisplay{Board1, Board2, x, bSize, divider};
+        x = new Xwindow{32*bSize+20*divider, 26*bSize+17*divider};
+        gDisplay = new GDisplay{Board1, Board2, x, bSize, divider};
     }
 
     curBoard->notifyObservers("text", 0, 0);
@@ -502,8 +504,7 @@ int main(int argc, char *argv[])
                     otherBoard->force_set(block_type, otherPlayer);
                 }
             }
-
-            cout << curBoard->getScore() << endl;
+            
             if (curBoard->getScore() > hiscore)
             {
                 hiscore = curBoard->getScore();
@@ -512,4 +513,13 @@ int main(int argc, char *argv[])
             }
         }
     } // infinite while
+
+    if (graphicsOn) {
+        delete gDisplay;
+        delete x;
+    }
+
+    delete Board1;
+    delete Board2;
+    delete tDisplay;
 } // main

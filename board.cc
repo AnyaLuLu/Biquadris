@@ -436,10 +436,9 @@ int Board ::clearlines(int player)
                 {
                     Block *tmp = playingBlocks[k];
                     score += tmp->worth();
-                    playingBlocks.erase(playingBlocks.begin() + k);
                     delete tmp;
+                    playingBlocks.erase(playingBlocks.begin() + k);
                     k--;
-			        std::cout << "a block has been deleted on line " << i <<  std::endl;
                 }
             }
 
@@ -463,7 +462,6 @@ int Board ::clearlines(int player)
     //std:: cout <<(l + clearedlines) * (l + clearedlines) << endl;
     if(clearedlines > 0){
         score += (l + clearedlines) * (l + clearedlines );
-        std::cout << "score is updating here dunno y clearedlines > 0" << std::endl;
     }
     
 
