@@ -209,7 +209,13 @@ int main(int argc, char *argv[])
     
     while (true)
     {
+<<<<<<< Updated upstream
         bool turnOver = true;
+=======
+        bool turnOver = false;
+
+        cout << "Command: ";
+>>>>>>> Stashed changes
         string command;
 
         if (commandSequence.empty())
@@ -263,9 +269,9 @@ int main(int argc, char *argv[])
 
             if (curBoard->getHeavy()) {
                 curBoard->down();
-                turnOver = curBoard->down();
+                turnOver = !curBoard->down();
             } else if (curBoard->getLvl() >= 3) {
-                turnOver = curBoard->down();
+                turnOver = !curBoard->down();
             }
         }
         else if (op == RIGHT)
@@ -279,7 +285,7 @@ int main(int argc, char *argv[])
 
             if (curBoard->getHeavy()) {
                 curBoard->down();
-                turnOver = curBoard->down();
+                turnOver = !curBoard->down();
             } else if (curBoard->getLvl() >= 3) {
                 curBoard->down();
             }
@@ -288,7 +294,7 @@ int main(int argc, char *argv[])
         {
             curBoard->undraw(curPlayer);
             for (int i = 0; i < num; ++i) {
-                turnOver = curBoard->down();
+                turnOver = !curBoard->down();
             }
             curBoard->draw(curPlayer);
         }
@@ -302,7 +308,7 @@ int main(int argc, char *argv[])
             curBoard->draw(curPlayer);
 
             if (curBoard->getLvl() >= 3) {
-                turnOver = curBoard->down();
+                turnOver = !curBoard->down();
             }
         }
         else if (op == COUNTERCLOCKWISE)
@@ -314,7 +320,7 @@ int main(int argc, char *argv[])
             curBoard->draw(curPlayer);
 
             if (curBoard->getLvl() >= 3) {
-                turnOver = curBoard->down();
+                turnOver = !curBoard->down();
             }
         }
 
@@ -326,7 +332,7 @@ int main(int argc, char *argv[])
             }
             curBoard->draw(curPlayer);
 
-            turnOver = false;
+            turnOver = true;
         }
 
         else if (op == LEVEL_UP)
@@ -435,9 +441,16 @@ int main(int argc, char *argv[])
         }
 
         curBoard -> notifyObservers("text", 0, 0);
+        /*
+        if(curBoard -> addBlock()){
+            //turnOver = true;
+        }
+        */
 
-        if(!turnOver){
-            curBoard -> addBlock();
+        if(turnOver){
+            if(curBoard -> addBlock()){
+                continue;
+            }
             curBoard->notifyObservers("g_next", curPlayer, 0);
             turnCount++;
 
