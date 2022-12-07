@@ -180,7 +180,19 @@ bool Board ::checkLose()
     {
         if (playingBoard[2][i] != ' ')
         {
-            return true;
+            bool badPos = true;
+            std::vector<std::pair<int, int>> pos = currentBlock->getPos();
+            for (int j = 0; j < pos.size(); j++) {
+                if(pos[j].first == 2  && pos[j].second == i){
+                    badPos = false;
+                }
+            }
+            if(badPos){
+                cout << "lost because blocks piled too high" << endl;
+                return false; // tmp
+            }
+
+            
         }
     }
     return false;
@@ -353,6 +365,7 @@ bool Board ::addBlock()
     if (!currentBlock->canCreate())
     {
         lost = true;
+        cout <<"lost because cannot create current block" << endl;
     }
     currentBlock -> addBlock();
 }
