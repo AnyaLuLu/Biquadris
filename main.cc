@@ -451,7 +451,7 @@ int main(int argc, char *argv[])
         */
 
         
-
+        curBoard -> checkLose();
         if(turnOver){
             if(curBoard -> addBlock()){
                 continue;
