@@ -358,24 +358,35 @@ void Board ::addBlock()
 
 
 
-int Board ::clearlines()
+int Board ::clearlines(int player)
 {
     // change score
     int clearedlines = 0;
+    int topLine = 0;
+    int botLine = 0;
+    bool topSet = false;
 
     for (int i = 0; i < height; i++)
     {
         bool fullLine = true;
+        
         for (int j = 0; j < width; j++)
         {
             if (playingBoard[i][j] == ' ')
             {
                 fullLine = false;
             }
+            if (playingBoard[i][j] != ' ' && !topSet)
+            {
+                topSet = true;
+                topLine = i;
+            }
         }
 
         if (fullLine)
         {
+            botLine = i;
+
             clearedlines++;
 
             playingBoard.erase(playingBoard.begin() + i);
@@ -395,10 +406,22 @@ int Board ::clearlines()
                 }
             }
 
-            // notify observers to change display
+            i -= 1;
         }
 
     }
+
+    int shift = 0;
+    if (player == 2) {
+        shift = 11;
+    }
+
+    for (int i = topLine; i <= botLine; i++) {
+        for (int j = 0; j < width; j++) {
+            notifyObservers("g_space", i, j + shift);
+        }
+    }
+
     int l = lvl->lvlNum();
     //std:: cout <<(l + clearedlines) * (l + clearedlines) << endl;
     if(clearedlines > 0){

@@ -56,7 +56,7 @@ class Board : public Subject{
 
         char getState(int row, int col) const override;
 
-        int clearlines();
+        int clearlines(int player);
 
         void left();
         void right();

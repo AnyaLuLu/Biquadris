@@ -457,7 +457,7 @@ int main(int argc, char *argv[])
                 curBoard->setHeavy(false);
             }
 
-            int check = curBoard->clearlines();
+            int check = curBoard->clearlines(curPlayer);
 
             if (check >= 1) {
                 curBoard->notifyObservers("g_score", hiscore, 0);
