@@ -93,7 +93,7 @@ Block *Board ::assignBlock(bool isRandom)
 
     Block *b;
     char type = lvl->blockType(isRandom);
-
+    /*
     if (lvl->lvlNum() == 4 && singleCount % 5 == 0 && singleCount != 0)
     {
         b = new cube(playingBoard, lvl->lvlNum(), width); // ig we need a new block to be *
@@ -101,7 +101,8 @@ Block *Board ::assignBlock(bool isRandom)
         // notify observers here to change display
         delete b;
     }
-    else if (type == 'i' || type == 'I')
+    */
+    if (type == 'i' || type == 'I')
     {
         b = new iBlock(playingBoard, lvl->lvlNum(), width);
 	//cout << "A I block has been assigned" << endl;
@@ -332,12 +333,20 @@ void Board ::drop() {currentBlock->drop();}
 void Board ::cw() { currentBlock->clockwise(); }
 void Board ::ccw() { currentBlock->counterClockwise();}
 
-void Board ::addBlock()
+bool Board ::addBlock()
 { // main calls this to add block on to board
     playingBlocks.emplace_back(currentBlock);
     // currentBlock->addBlock();
 
+    if(lvl->lvlNum() == 4 && singleCount % 5 == 0 && singleCount != 0){
+        Block* star = new cube(playingBoard, lvl->lvlNum(), width);
+        star -> drop();
+        star -> addBlock();
+        singleCount = 0;
+    }
     currentBlock = nextBlock;
+    singleCount++;
+
     if (file == "")
     {
         nextBlock = this->assignBlock(true);
@@ -350,7 +359,6 @@ void Board ::addBlock()
     if (!currentBlock->canCreate())
     {
         lost = true;
-        return;
     }
     currentBlock -> addBlock();
 }
@@ -476,6 +484,9 @@ void Board::force_set(char type, int player)
     else if (type == 'T')
     {
         b = new tBlock(playingBoard, lvl->lvlNum(), width);
+    }
+    else if(type == '*'){
+        b = new cube(playingBoard, lvl->lvlNum(), width);
     }
 
     currentBlock->unset();
