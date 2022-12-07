@@ -326,7 +326,7 @@ void Board ::draw(int player) {
     }
 }
 
-void Board ::left() { currentBlock->left();}
+void Board ::left() { currentBlock->left(); cout << "block -> left() works"<< endl;}
 void Board ::right() { currentBlock->right();}
 bool Board ::down() { return currentBlock->down(); }
 void Board ::drop() {currentBlock->drop();}
@@ -341,7 +341,6 @@ void Board ::addBlock()
     currentBlock = nextBlock;
     if (file == "")
     {
-	cout << "random block assigned";
         nextBlock = this->assignBlock(true);
     }
     else
@@ -403,6 +402,7 @@ int Board ::clearlines(int player)
                     playingBlocks.erase(playingBlocks.begin() + k);
                     delete tmp;
                     k--;
+			        std::cout << "a block has been deleted on line " << i <<  std::endl;
                 }
             }
 
@@ -423,8 +423,10 @@ int Board ::clearlines(int player)
     }
 
     int l = lvl->lvlNum();
+    //std:: cout <<(l + clearedlines) * (l + clearedlines) << endl;
     if(clearedlines > 0){
         score += (l + clearedlines) * (l + clearedlines );
+        std::cout << "score is updating here dunno y clearedlines > 0" << std::endl;
     }
     
 
