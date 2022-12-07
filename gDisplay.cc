@@ -11,11 +11,17 @@ void GDisplay::updateSpace(int row, int col) {
         col -= 11;
         char val = Board2->getState(row, col);
         int colour = m[val];
-        x->fillRectangle(18*bSize + 10*divider + col*(bSize + divider), 4*bSize + row*(bSize + divider), bSize, bSize, colour);
+
+        if (!(Board2->getBlind() && row >= 2 && col >= 2 && row < 12 && col < 9)) {
+            x->fillRectangle(18*bSize + 10*divider + col*(bSize + divider), 4*bSize + row*(bSize + divider), bSize, bSize, colour);
+        }
     } else {
         char val = Board1->getState(row, col);
         int colour = m[val];
-        x->fillRectangle(3*bSize + col*(bSize + divider), 4*bSize + row*(bSize + divider), bSize, bSize, colour);
+
+        if (!(Board1->getBlind() && row >= 2 && col >= 2 && row < 12 && col < 9)) {
+            x->fillRectangle(3*bSize + col*(bSize + divider), 4*bSize + row*(bSize + divider), bSize, bSize, colour);
+        } 
     }
 }
 
@@ -24,9 +30,13 @@ void GDisplay::updateSpaceBlank(int row, int col) {
 
     if (col > 10) {
         col -= 11;
-        x->fillRectangle(18*bSize + 10*divider + col*(bSize + divider), 4*bSize + row*(bSize + divider), bSize, bSize, colour);
+        if (!(Board2->getBlind() && row >= 2 && col >= 2 && row < 12 && col < 9)) {
+            x->fillRectangle(18*bSize + 10*divider + col*(bSize + divider), 4*bSize + row*(bSize + divider), bSize, bSize, colour);
+        }
     } else {
-        x->fillRectangle(3*bSize + col*(bSize + divider), 4*bSize + row*(bSize + divider), bSize, bSize, colour);
+        if (!(Board1->getBlind() && row >= 2 && col >= 2 && row < 12 && col < 9)) {
+            x->fillRectangle(3*bSize + col*(bSize + divider), 4*bSize + row*(bSize + divider), bSize, bSize, colour);
+        }
     }
 }
 
@@ -49,8 +59,6 @@ void GDisplay::updateScore(int s1, int s2, int hiScore) {
 void GDisplay::updateNext(int player, char type) {
     
     int colour = m[type];
-    cerr << "Type is " << type << endl;
-    cerr << "player" << player << endl;
 
     int lShift = 0;
     if (player == 2) {
@@ -136,14 +144,14 @@ void GDisplay::blind(int player) {
 }
 void GDisplay::unblind(int player) {
     if (player == 1) {
-        for (int i = 2; i < 9; i++) {
-            for (int j = 2; j < 12; j++) {
+        for (int i = 2; i < 12; i++) {
+            for (int j = 2; j < 9; j++) {
                 updateSpace(i, j);
             }
         }
     } else {
-        for (int i = 2; i < 9; i++) {
-            for (int j = 13; j < 23; j++) {
+        for (int i = 13; i < 23; i++) {
+            for (int j = 2; j < 9; j++) {
                 updateSpace(i, j);
             }
         }

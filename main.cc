@@ -210,12 +210,11 @@ int main(int argc, char *argv[])
     while (true)
     {
         bool turnOver = true;
-
-        cout << "Command: ";
         string command;
 
         if (commandSequence.empty())
         {
+            cout << "Command: ";
             cin >> command;
         } else
         {
@@ -435,12 +434,6 @@ int main(int argc, char *argv[])
             cerr << "Invalid command." << endl;
         }
 
-        if (curBoard->getScore() >= hiscore)
-        {
-            hiscore = curBoard->getScore();
-            curBoard->notifyObservers("g_score", hiscore, 0);
-        }
-
         curBoard -> notifyObservers("text", 0, 0);
 
         if(!turnOver){
@@ -490,8 +483,14 @@ int main(int argc, char *argv[])
                     otherBoard->force_set(block_type, otherPlayer);
                 }
             }
+
+            cerr << curBoard->getScore() << endl;
+            if (curBoard->getScore() > hiscore)
+            {
+                hiscore = curBoard->getScore();
+                cerr << "New High Score! " << hiscore << endl;
+                curBoard->notifyObservers("g_score", hiscore, 0);
+            }
         }
     } // infinite while
-    
-
 } // main

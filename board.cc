@@ -321,7 +321,6 @@ void Board ::draw(int player) {
     }
 
     for (int i = 0; i < pos.size(); ++i) {
-        cerr << pos[i].first << " and " << pos[i].second << endl;
         notifyObservers("g_space", pos[i].first, pos[i].second + shift);
     }
 }
