@@ -209,13 +209,9 @@ int main(int argc, char *argv[])
     
     while (true)
     {
-<<<<<<< Updated upstream
-        bool turnOver = true;
-=======
         bool turnOver = false;
 
         cout << "Command: ";
->>>>>>> Stashed changes
         string command;
 
         if (commandSequence.empty())
